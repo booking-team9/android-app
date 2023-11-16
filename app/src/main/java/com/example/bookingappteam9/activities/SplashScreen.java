@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
 
-        long SPLASH_TIMEOUT = 5000;
+        long SPLASH_TIMEOUT = 3000;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
