@@ -5,4 +5,6 @@
     <string name="text_label_2">Account</string>
     <string name="text_label_1">Reservations</string>
     <string name="profile">Profile</string>
+    <string name="dont_have_account">You don\'t have an account?</string>
+    <string name="accommodations">Accommodations</string>
 </resources>
