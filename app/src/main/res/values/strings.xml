@@ -7,4 +7,10 @@
     <string name="profile">Profile</string>
     <string name="dont_have_account">You don\'t have an account?</string>
     <string name="accommodations">Accommodations</string>
+    <string name="someUsername">usernameqm</string>
+    <string name="phone">Phone</string>
+    <string name="_1_202_555_0157">+1-202-555-0157</string>
+    <string name="alex_godfather">Alex Godfather</string>
+    <string name="alexqm_email">alexqm@email.com</string>
+    <string name="email">Email</string>
 </resources>
