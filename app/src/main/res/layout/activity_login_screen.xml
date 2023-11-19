@@ -19,7 +19,7 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:tooltipText="Email"
+            android:hint="Email"
             tools:layout_editor_absoluteX="103dp"
             tools:layout_editor_absoluteY="302dp" />
 
@@ -30,7 +30,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:tooltipText="Password"
+            android:hint="Password"
             tools:layout_editor_absoluteX="103dp"
             tools:layout_editor_absoluteY="372dp" />
 
@@ -56,7 +56,8 @@
             android:layout_marginTop="5dp"
             android:text="Register"
             tools:layout_editor_absoluteX="152dp"
-            tools:layout_editor_absoluteY="529dp" />
+            tools:layout_editor_absoluteY="529dp"
+            />
     </LinearLayout>
 
 
