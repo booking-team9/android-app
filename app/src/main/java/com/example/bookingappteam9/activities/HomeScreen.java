@@ -70,4 +70,14 @@ public class HomeScreen extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.bottom_navigation_menu, menu);
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        if (navigation.getSelectedItemId() == R.id.home) {
+            super.onBackPressed();
+        } else {
+            navigation.setSelectedItemId(R.id.home);
+        }
+    }
+
 }
