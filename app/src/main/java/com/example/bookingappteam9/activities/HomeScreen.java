@@ -1,13 +1,23 @@
 package com.example.bookingappteam9.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static android.app.PendingIntent.getActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.databinding.ActivityHomeScreenBinding;
 import com.example.bookingappteam9.fragments.BlankFragment;
+import com.example.bookingappteam9.fragments.EditProfileFragment;
 import com.example.bookingappteam9.fragments.FragmentTransition;
 import com.example.bookingappteam9.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,8 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomeScreen extends AppCompatActivity {
-
-
     private ActivityHomeScreenBinding binding;
     private BottomNavigationView navigation;
     @Override
@@ -44,7 +52,7 @@ public class HomeScreen extends AppCompatActivity {
                      if (currentItem.get() == R.id.profile)
                          return true;
                      currentItem.set(R.id.profile);
-                     FragmentTransition.to(ProfileFragment.newInstance("Profile fragment", "Profile"), HomeScreen.this, false, R.id.navigationView);
+                     FragmentTransition.to(ProfileFragment.newInstance(HomeScreen.this, "Profile"), HomeScreen.this, false, R.id.navigationView);
                      return true;
              }
             return false;

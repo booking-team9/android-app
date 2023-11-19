@@ -50,6 +50,7 @@
 
 
         <ImageView
+            android:id="@+id/edit_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
@@ -57,7 +58,8 @@
             android:layout_marginRight="15dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_edit" />
+            android:src="@drawable/icon_edit"
+            android:clickable="true" />
 
     </RelativeLayout>
 
