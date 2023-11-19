@@ -12,13 +12,13 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="203dp"
-            android:layout_height="55dp"
-            android:text="Booking"
-            android:textAlignment="center"
-            android:textSize="42dp" />
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo" />
 
 
     </LinearLayout>
