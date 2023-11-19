@@ -18,10 +18,12 @@
             android:exported="false" />
         <activity
             android:name=".activities.RegisterScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activities.LoginScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true">
