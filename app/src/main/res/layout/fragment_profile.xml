@@ -142,7 +142,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="@string/address"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -150,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Despota Stefana 5A"
+                    android:text="@string/despota_stefana_5a"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -171,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Account Type"
+                    android:text="@string/account_type"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Guest"
+                    android:text="@string/guest"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -203,7 +203,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Log Out"
+                    android:text="@string/log_out"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
 

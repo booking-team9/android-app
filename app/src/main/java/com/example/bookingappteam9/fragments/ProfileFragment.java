@@ -73,7 +73,8 @@ public class ProfileFragment extends Fragment {
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransition.to(EditProfileFragment.newInstance("Edit fragment", "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+
             }
         });
         return view;

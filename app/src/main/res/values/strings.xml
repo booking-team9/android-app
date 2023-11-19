@@ -13,4 +13,18 @@
     <string name="alex_godfather">Alex Godfather</string>
     <string name="alexqm_email">alexqm@email.com</string>
     <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="alex">Alex</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="godfather">GodFather</string>
+    <string name="account_type">Account Type</string>
+    <string name="guest">Guest</string>
+    <string name="address">Address</string>
+    <string name="despota_stefana_5a">Despota Stefana 5A</string>
+    <string name="account_type2">Account Type</string>
+    <string name="log_out">Log Out</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="change_photo">Change photo</string>
+    <string name="submit">Submit</string>
 </resources>
