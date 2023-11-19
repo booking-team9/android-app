@@ -22,8 +22,8 @@
             android:background="@color/cardview_shadow_start_color">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="152dp"
+                android:layout_height="152dp"
                 android:layout_marginStart="9dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="9dp"
