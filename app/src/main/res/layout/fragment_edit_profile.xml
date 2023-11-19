@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.EditProfileFragment">
 
     <RelativeLayout
@@ -35,18 +36,35 @@
             android:layout_marginTop="20dp"
             android:background="@color/cardview_shadow_start_color">
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                >
 
-            <ImageView
-                android:layout_width="152dp"
-                android:layout_height="152dp"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="9dp"
-                android:adjustViewBounds="true"
-                android:padding="3dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/roki" />
+                <ImageView
+                    android:id="@+id/roundedimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/roki" />
+            </androidx.cardview.widget.CardView>
+
+<!--            <ImageView-->
+<!--                android:layout_width="120dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                android:layout_marginStart="9dp"-->
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:layout_marginEnd="9dp"-->
+<!--                android:layout_marginBottom="9dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:padding="3dp"-->
+<!--                android:scaleType="centerInside"-->
+<!--                android:src="@drawable/roki" />-->
 
 
 
