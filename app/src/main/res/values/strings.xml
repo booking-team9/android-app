@@ -35,4 +35,8 @@
     <string name="apartment">Apartment</string>
     <string name="host">Host</string>
     <string name="sort">Sort</string>
+    <string name="petar_perovi">Petar Perović</string>
+    <string name="perovic_gmail_com">perovic@gmail.com</string>
+    <string name="petar">Petar</string>
+    <string name="perovi">Perović</string>
 </resources>

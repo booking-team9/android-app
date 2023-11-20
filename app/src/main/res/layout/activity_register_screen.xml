@@ -6,105 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".activities.RegisterScreen">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:background="@drawable/register_background"
-        android:orientation="vertical">
+<!--    <ScrollView-->
+<!--        android:id="@+id/nsScroll"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!--        -->
+<!--    </ScrollView>-->
 
-        <EditText
-            android:id="@+id/registerName"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="First Name"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:tooltipText="Email"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerLastName"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:tooltipText="Email"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerEmail"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:hint = "Email"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerAdress"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPostalAddress"
-            android:minHeight="48dp"
-            android:hint="Adress"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerPassword"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:hint="Password"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerConfirmPassword"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:hint="Confirm password"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="302dp" />
-
-        <EditText
-            android:id="@+id/registerPhone"
-            android:layout_width="332dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            android:hint="Phone"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="372dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/register_background"
+            android:orientation="vertical">
 
 
+            <EditText
+                android:id="@+id/registerName"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="First Name"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:tooltipText="Email"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
 
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Register"
-            tools:layout_editor_absoluteX="152dp"
-            tools:layout_editor_absoluteY="529dp" />
+            <EditText
+                android:id="@+id/registerLastName"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:tooltipText="Email"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
+
+            <EditText
+                android:id="@+id/registerEmail"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
+                android:hint = "Email"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
+
+            <EditText
+                android:id="@+id/registerAdress"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPostalAddress"
+                android:minHeight="48dp"
+                android:hint="Adress"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
+
+            <EditText
+                android:id="@+id/registerPassword"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:hint="Password"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
+
+            <EditText
+                android:id="@+id/registerConfirmPassword"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:hint="Confirm password"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="302dp" />
+
+            <EditText
+                android:id="@+id/registerPhone"
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                android:hint="Phone"
+                tools:layout_editor_absoluteX="103dp"
+                tools:layout_editor_absoluteY="372dp" />
 
 
-    </LinearLayout>
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Register"
+                tools:layout_editor_absoluteX="152dp"
+                tools:layout_editor_absoluteY="529dp" />
+
+
+        </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
