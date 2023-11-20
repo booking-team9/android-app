@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.example.bookingappteam9.R;
 
@@ -18,6 +21,11 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        ImageView logoImage = findViewById(R.id.logoImage);
+        Animation slideAnimation = AnimationUtils.loadAnimation(this,R.anim.rotation);
+        logoImage.startAnimation(slideAnimation);
+
         getSupportActionBar().hide();
 
         long SPLASH_TIMEOUT = 3000;
