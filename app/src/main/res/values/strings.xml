@@ -27,6 +27,14 @@
     <string name="delete_account">Delete Account</string>
     <string name="change_photo">Change photo</string>
     <string name="submit">Submit</string>
+    <string name="hotel_desc">Hotel desc</string>
+    <string name="accommodation_more_info">More information</string>
+    <string name="filters">Filters</string>
+    <string name="category">Category</string>
+    <string name="hotel">Hotel</string>
+    <string name="apartment">Apartment</string>
+    <string name="host">Host</string>
+    <string name="sort">Sort</string>
     <string name="petar_perovi">Petar Perović</string>
     <string name="perovic_gmail_com">perovic@gmail.com</string>
     <string name="petar">Petar</string>

@@ -20,6 +20,7 @@ import com.example.bookingappteam9.fragments.BlankFragment;
 import com.example.bookingappteam9.fragments.EditProfileFragment;
 import com.example.bookingappteam9.fragments.FragmentTransition;
 import com.example.bookingappteam9.fragments.ProfileFragment;
+import com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -35,7 +36,7 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
-        FragmentTransition.to(BlankFragment.newInstance("Home fragment", "Ovo je home!"), HomeScreen.this, false, R.id.navigationView);
+        FragmentTransition.to(AccommodationsPageFragment.newInstance(), HomeScreen.this, false, R.id.navigationView);
         AtomicInteger currentItem = new AtomicInteger(R.id.home);
 
         navigation = binding.bottomNavigation;
@@ -46,7 +47,7 @@ public class HomeScreen extends AppCompatActivity {
                      if (currentItem.get() == R.id.home)
                          return true;
                      currentItem.set(R.id.home);
-                     FragmentTransition.to(BlankFragment.newInstance("Home fragment", "Ovo je home!"), HomeScreen.this, false, R.id.navigationView);
+                     FragmentTransition.to(AccommodationsPageFragment.newInstance(), HomeScreen.this, false, R.id.navigationView);
                      return true;
                  case R.id.profile:
                      if (currentItem.get() == R.id.profile)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort_array">
+        <item>Rating Descending</item>
+        <item>Rating Ascending</item>
+        <item>Price Ascending</item>
+        <item>Price Descending</item>
+    </string-array>
+</resources>
