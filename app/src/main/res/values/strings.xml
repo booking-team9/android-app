@@ -27,4 +27,8 @@
     <string name="delete_account">Delete Account</string>
     <string name="change_photo">Change photo</string>
     <string name="submit">Submit</string>
+    <string name="petar_perovi">Petar Perović</string>
+    <string name="perovic_gmail_com">perovic@gmail.com</string>
+    <string name="petar">Petar</string>
+    <string name="perovi">Perović</string>
 </resources>
