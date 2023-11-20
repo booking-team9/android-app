@@ -20,6 +20,7 @@
             android:background="@drawable/register_background"
             android:orientation="vertical">
 
+
             <EditText
                 android:id="@+id/registerName"
                 android:layout_width="332dp"

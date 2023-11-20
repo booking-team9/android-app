@@ -16,11 +16,11 @@
         <activity
             android:name=".activities.HomeScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.RegisterScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize|stateUnchanged"/>
         <activity
             android:name=".activities.LoginScreen"
             android:exported="false"

@@ -173,7 +173,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/alexqm_email"
+                    android:text="@string/perovic_gmail_com"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
