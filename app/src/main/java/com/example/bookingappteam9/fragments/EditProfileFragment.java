@@ -29,16 +29,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EditProfileFragment extends Fragment {
     private FragmentEditProfileBinding binding;
     private Host host;
     private Button confirmButton;
     private Button deleteAccountButton;
+    private Button changePasswordButton;
     private EditText firstNameText;
     private EditText lastNameText;
     private EditText emailText;
@@ -90,7 +86,7 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("ShopApp", "onCreate Products List Fragment");
+        Log.i("Booking", "edit account");
         firstNameText = binding.editFirstName;
         lastNameText = binding.editLastName;
         emailText = binding.editEmail;
@@ -100,6 +96,7 @@ public class EditProfileFragment extends Fragment {
         cityText = binding.editCity;
         confirmButton = binding.submitButton;
         deleteAccountButton = binding.deleteAccountButton;
+        changePasswordButton = binding.changePasswordButton;
         getDataFromClient();
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +199,19 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("email", host.getEmail());
+                ChangePasswordFragment changePasswordFragment = ChangePasswordFragment.newInstance(ARG_PARAM1, "Changing password");
+                changePasswordFragment.setArguments(bundle);
+
+                FragmentTransition.to(changePasswordFragment, ARG_PARAM1, false, R.id.navigationView);
+
+            }
+        });
+
     }
     @Override
     public void onResume() {
@@ -212,7 +222,6 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         binding = null;
     }
 

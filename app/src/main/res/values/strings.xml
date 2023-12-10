@@ -43,4 +43,6 @@
     <string name="number">Number</string>
     <string name="despota_stefana">Despota Stefana</string>
     <string name="novi_sad">Novi Sad</string>
+    <string name="old_password">Old Password</string>
+    <string name="change">Change</string>
 </resources>
