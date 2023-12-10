@@ -39,4 +39,6 @@
     <string name="perovic_gmail_com">perovic@gmail.com</string>
     <string name="petar">Petar</string>
     <string name="perovi">Perović</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Password</string>
 </resources>

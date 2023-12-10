@@ -1,6 +1,8 @@
 package com.example.bookingappteam9.clients;
 
 import com.example.bookingappteam9.model.Account;
+import com.example.bookingappteam9.model.Login;
+import com.example.bookingappteam9.model.Token;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,15 @@ public interface AccountService {
     })
     @GET("accounts/{id}")
     Call<Account> getById(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @POST("login")
+    Call<Token> login(@Body Login login);
+
+
 /*
 
     @Headers({
