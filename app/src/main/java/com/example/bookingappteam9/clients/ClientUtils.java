@@ -13,7 +13,7 @@ public class ClientUtils {
     public static final String SERVICE_API_PATH = "http://"+ BuildConfig.IP_ADDR +":8080/api/";
     public static OkHttpClient test(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(120, TimeUnit.SECONDS)
@@ -31,4 +31,6 @@ public class ClientUtils {
             .build();
 
     public static AccountService accountService = retrofit.create(AccountService.class);
+    public static HostService hostService = retrofit.create(HostService.class);
+
 }

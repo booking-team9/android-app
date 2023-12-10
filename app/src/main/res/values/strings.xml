@@ -39,4 +39,8 @@
     <string name="perovic_gmail_com">perovic@gmail.com</string>
     <string name="petar">Petar</string>
     <string name="perovi">Perović</string>
+    <string name="city">City</string>
+    <string name="number">Number</string>
+    <string name="despota_stefana">Despota Stefana</string>
+    <string name="novi_sad">Novi Sad</string>
 </resources>

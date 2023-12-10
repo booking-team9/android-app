@@ -1,16 +1,33 @@
 package com.example.bookingappteam9.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeScreen;
+import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.databinding.FragmentEditProfileBinding;
+import com.example.bookingappteam9.model.Address;
+import com.example.bookingappteam9.model.Host;
+import com.google.gson.Gson;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,29 +35,27 @@ import com.example.bookingappteam9.activities.HomeScreen;
  * create an instance of this fragment.
  */
 public class EditProfileFragment extends Fragment {
+    private FragmentEditProfileBinding binding;
+    private Host host;
+    private Button confirmButton;
+    private Button deleteAccountButton;
+    private EditText firstNameText;
+    private EditText lastNameText;
+    private EditText emailText;
+    private EditText phoneText;
+    private EditText streetText;
+    private EditText numberText;
+    private EditText cityText;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static HomeScreen ARG_PARAM1 = new HomeScreen();
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    private Gson gson = new Gson();
     private HomeScreen mParam1;
     private String mParam2;
 
     public EditProfileFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static EditProfileFragment newInstance(HomeScreen param1, String param2) {
         EditProfileFragment fragment = new EditProfileFragment();
         Bundle args = new Bundle();
@@ -61,9 +76,8 @@ public class EditProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_profile,
-                container, false);
+        binding = FragmentEditProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         ImageView backImage = (ImageView) view.findViewById(R.id.back_icon);
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,5 +86,181 @@ public class EditProfileFragment extends Fragment {
             }
         });
         return view;
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("ShopApp", "onCreate Products List Fragment");
+        firstNameText = binding.editFirstName;
+        lastNameText = binding.editLastName;
+        emailText = binding.editEmail;
+        phoneText = binding.editPhone;
+        streetText = binding.editStreet;
+        numberText = binding.editNumber;
+        cityText = binding.editCity;
+        confirmButton = binding.submitButton;
+        deleteAccountButton = binding.deleteAccountButton;
+        getDataFromClient();
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Call<Host> call;
+                        Log.d("Booking", "Edit profile call");
+                        editAccout();
+                        call = ClientUtils.hostService.edit(host);
+
+                        call.enqueue(new Callback<Host>() {
+                            @Override
+                            public void onResponse(Call<Host> call, Response<Host> response) {
+                                if (response.code() == 200){
+                                    Log.d("REZ","Meesage recieved");
+                                    System.out.println(response.body());
+                                    Host host = response.body();
+                                    System.out.println(host);
+                                    getActivity().getSupportFragmentManager().popBackStack();
+                                }else{
+                                    Log.d("REZ","Meesage recieved: "+response.code());
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<Host> call, Throwable t) {
+                                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                            }
+                        });
+
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+            }
+
+
+        });
+
+        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        Call<ResponseBody> call;
+                        Log.d("Booking", "Deleting account call");
+                        call = ClientUtils.hostService.deleteHost(14L);
+
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Log.d("REZ","Meesage recieved");
+                                System.out.println(response.body());
+                                Toast.makeText(getActivity(),"Account deleted",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                            }
+                        });
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+            }
+        });
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDataFromClient();
+
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        binding = null;
+    }
+
+
+
+    private void getDataFromClient(){
+        Call<Host> call = ClientUtils.hostService.getById(5L);
+        call.enqueue(new Callback<Host>() {
+            @Override
+            public void onResponse(Call<Host> call, Response<Host> response) {
+                if (response.code() == 200){
+                    Log.d("REZ","Meesage recieved");
+                    Log.d("REZ", String.valueOf(response.body()));
+                    System.out.println(response.body());
+                    host = response.body();
+                    setData();
+
+                }else{
+                    Log.d("REZ","Meesage recieved: "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Host> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+            }
+        });
+
+    }
+
+    private void setData(){
+        firstNameText.setText(host.getFirstName());
+        lastNameText.setText(host.getLastName());
+        emailText.setText(host.getEmail());
+        phoneText.setText(host.getPhone());
+        streetText.setText(host.getAddress().getStreet());
+        numberText.setText(host.getAddress().getNumber());
+        cityText.setText(host.getAddress().getCity());
+        Log.i("Jabuka",gson.toJson(host) );
+    }
+
+    private void editAccout(){
+        host.setId(5L);
+        host.setFirstName(String.valueOf(firstNameText.getText()));
+        host.setLastName(String.valueOf(lastNameText.getText()));
+        host.setEmail(String.valueOf(emailText.getText()));
+        host.setPhone(String.valueOf(phoneText.getText()));
+        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()));
+        host.setAddress(address);
     }
 }

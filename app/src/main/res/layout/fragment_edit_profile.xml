@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/md_theme_light_inversePrimary"
-        android:paddingBottom="20dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:id="@+id/back_icon"
@@ -20,7 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:adjustViewBounds="true"
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@color/cardview_shadow_start_color">
 
             <androidx.cardview.widget.CardView
@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/topView"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
 
         <LinearLayout
@@ -118,6 +118,7 @@
                     android:textSize="13sp" />
 
                 <EditText
+                    android:id="@+id/edit_first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/petar"
@@ -144,6 +145,7 @@
                     android:textSize="13sp" />
 
                 <EditText
+                    android:id="@+id/edit_last_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/perovi"
@@ -171,6 +173,7 @@
                     android:textSize="13sp" />
 
                 <EditText
+                    android:id="@+id/edit_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/perovic_gmail_com"
@@ -198,6 +201,7 @@
                     android:textSize="13sp" />
 
                 <EditText
+                    android:id="@+id/edit_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/_1_202_555_0157"
@@ -214,28 +218,91 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/address"
-                    android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/despota_stefana_5a"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/md_theme_dark_onSecondaryContainer" />
+                    <EditText
+                        android:id="@+id/edit_street"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/despota_stefana"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/md_theme_dark_onSecondaryContainer" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"/>
+
+                    <EditText
+                        android:id="@+id/edit_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10A"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/md_theme_dark_onSecondaryContainer" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/city"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:id="@+id/edit_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/novi_sad"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/md_theme_dark_onSecondaryContainer" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -259,7 +326,7 @@
                     tools:layout_editor_absoluteY="446dp;" />
 
                 <Button
-                    android:id="@+id/logoutButton"
+                    android:id="@+id/delete_account_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -269,9 +336,24 @@
                     android:textColor="@color/black"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
-
-
-
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/change_password_button"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:textSize="9sp"
+                    android:text="Change password"
+                    android:backgroundTint="@color/cardview_shadow_start_color"
+                    tools:layout_editor_absoluteX="161dp"
+                    tools:layout_editor_absoluteY="446dp;" />
             </LinearLayout>
 
         </LinearLayout>
