@@ -6,113 +6,219 @@
     android:layout_height="match_parent"
     tools:context=".activities.RegisterScreen">
 
-<!--    <ScrollView-->
-<!--        android:id="@+id/nsScroll"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--        -->
-<!--    </ScrollView>-->
+    <!--    <ScrollView-->
+    <!--        android:id="@+id/nsScroll"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+    <!--        -->
+    <!--    </ScrollView>-->
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="@drawable/register_background"
+            android:layout_height="wrap_content"
+            android:background="@drawable/scaled_register_background"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-
-            <EditText
-                android:id="@+id/registerName"
-                android:layout_width="332dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginTop="30dp"
+                android:id="@+id/registerFirstName"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="First Name"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:tooltipText="Email"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:hint="@string/first_name"
+                app:startIconDrawable="@drawable/baseline_person_24">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerLastName"
-                android:layout_width="332dp"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="Last Name"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:tooltipText="Email"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:hint="@string/last_name"
+                app:startIconDrawable="@drawable/baseline_person_24">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="textPersonName" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerEmail"
-                android:layout_width="332dp"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:hint = "Email"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:hint="@string/email_login"
+                app:startIconDrawable="@drawable/baseline_alternate_email_24">
 
-            <EditText
-                android:id="@+id/registerAdress"
-                android:layout_width="332dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerCountry"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPostalAddress"
-                android:minHeight="48dp"
-                android:hint="Adress"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:hint="@string/country"
+                app:startIconDrawable="@drawable/baseline_flag_24">
 
-            <EditText
-                android:id="@+id/registerPassword"
-                android:layout_width="332dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerCity"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:hint="Password"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:hint="@string/city"
+                app:startIconDrawable="@drawable/baseline_location_city_24">
 
-            <EditText
-                android:id="@+id/registerConfirmPassword"
-                android:layout_width="332dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:hint="Confirm password"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="302dp" />
+                android:orientation="horizontal">
 
-            <EditText
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/registerStreet"
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:hint="@string/street"
+                    app:startIconDrawable="@drawable/baseline_alternate_email_24">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/registerNumber"
+                    style="?attr/textInputOutlinedStyle"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Number">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registerPhone"
-                android:layout_width="332dp"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:minHeight="48dp"
-                android:hint="Phone"
-                tools:layout_editor_absoluteX="103dp"
-                tools:layout_editor_absoluteY="372dp" />
+                android:hint="@string/phone"
+                app:startIconDrawable="@drawable/baseline_local_phone_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerPassword"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_login"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/baseline_password_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerConfirmPassword"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="300dp"
+                app:errorEnabled="true"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/baseline_password_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <RadioGroup
+                android:id="@+id/role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/role_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:text="@string/guest"></RadioButton>
+                <RadioButton
+                    android:id="@+id/role_host"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/host"></RadioButton>
+            </RadioGroup>
+
 
 
 
             <Button
                 android:id="@+id/registerButton"
+                android:layout_marginBottom="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Register"
-                tools:layout_editor_absoluteX="152dp"
-                tools:layout_editor_absoluteY="529dp" />
+                android:text="Register" />
 
 
         </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
