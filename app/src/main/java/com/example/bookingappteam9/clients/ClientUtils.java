@@ -1,7 +1,6 @@
 package com.example.bookingappteam9.clients;
 
 import com.example.bookingappteam9.BuildConfig;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
@@ -35,5 +34,7 @@ public class ClientUtils {
 
     public static AccountService accountService = retrofit.create(AccountService.class);
     public static HostService hostService = retrofit.create(HostService.class);
+    public static GuestService guestService = retrofit.create(GuestService.class);
+
 
 }

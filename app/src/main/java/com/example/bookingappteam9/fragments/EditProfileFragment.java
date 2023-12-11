@@ -21,7 +21,9 @@ import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentEditProfileBinding;
 import com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment;
 import com.example.bookingappteam9.model.Address;
+import com.example.bookingappteam9.model.Guest;
 import com.example.bookingappteam9.model.Host;
+import com.example.bookingappteam9.model.Role;
 import com.google.gson.Gson;
 
 import okhttp3.ResponseBody;
@@ -31,7 +33,11 @@ import retrofit2.Response;
 
 public class EditProfileFragment extends Fragment {
     private FragmentEditProfileBinding binding;
+    private Guest guest;
     private Host host;
+    private Long id;
+    private Role role;
+    private String email;
     private Button confirmButton;
     private Button deleteAccountButton;
     private Button changePasswordButton;
@@ -74,19 +80,6 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        ImageView backImage = (ImageView) view.findViewById(R.id.back_icon);
-        backImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransition.to(ProfileFragment.newInstance(ARG_PARAM1, "Ovo je profile review!"), ARG_PARAM1, false, R.id.navigationView);
-            }
-        });
-        return view;
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("Booking", "edit account");
         firstNameText = binding.editFirstName;
         lastNameText = binding.editLastName;
         emailText = binding.editEmail;
@@ -97,7 +90,37 @@ public class EditProfileFragment extends Fragment {
         confirmButton = binding.submitButton;
         deleteAccountButton = binding.deleteAccountButton;
         changePasswordButton = binding.changePasswordButton;
-        getDataFromClient();
+        ImageView backImage = (ImageView) view.findViewById(R.id.back_icon);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getLong("id");
+            role = Role.valueOf(bundle.getString("type"));
+        }
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("id", id);
+                if (role==Role.Host){
+                    HostProfileFragment hostProfileFragment = HostProfileFragment.newInstance(ARG_PARAM1, "Host Profile");
+                    hostProfileFragment.setArguments(bundle);
+                    FragmentTransition.to(hostProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+                }else if(role == Role.Guest){
+                    GuestProfileFragment guestProfileFragment = GuestProfileFragment.newInstance(ARG_PARAM1, "Guest Profile");
+                    guestProfileFragment.setArguments(bundle);
+                    FragmentTransition.to(guestProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+                }
+
+            }
+        });
+        return view;
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i("Booking", "edit account");
+
+//        authorize();
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,29 +130,56 @@ public class EditProfileFragment extends Fragment {
                 builder.setMessage("Are you sure?");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Call<Host> call;
-                        Log.d("Booking", "Edit profile call");
-                        editAccout();
-                        call = ClientUtils.hostService.edit(host);
+                        if(role==Role.Host){
+                            Call<Host> call;
+                            Log.d("Booking", "Edit profile call");
+                            editHostAccout();
+                            call = ClientUtils.hostService.edit(host);
 
-                        call.enqueue(new Callback<Host>() {
-                            @Override
-                            public void onResponse(Call<Host> call, Response<Host> response) {
-                                if (response.code() == 200){
-                                    Log.d("REZ","Meesage recieved");
-                                    System.out.println(response.body());
-                                    Host host = response.body();
-                                    System.out.println(host);
-                                    getActivity().getSupportFragmentManager().popBackStack();
-                                }else{
-                                    Log.d("REZ","Meesage recieved: "+response.code());
+                            call.enqueue(new Callback<Host>() {
+                                @Override
+                                public void onResponse(Call<Host> call, Response<Host> response) {
+                                    if (response.code() == 200){
+                                        Log.d("REZ","Meesage recieved");
+                                        System.out.println(response.body());
+                                        Host host = response.body();
+                                        System.out.println(host);
+                                        getActivity().getSupportFragmentManager().popBackStack();
+                                    }else{
+                                        Log.d("REZ","Meesage recieved: "+response.code());
+                                    }
                                 }
-                            }
-                            @Override
-                            public void onFailure(Call<Host> call, Throwable t) {
-                                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
-                            }
-                        });
+                                @Override
+                                public void onFailure(Call<Host> call, Throwable t) {
+                                    Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                                }
+                            });
+                        }else if(role == Role.Guest){
+                            Call<Guest> call;
+                            Log.d("Booking", "Edit profile call");
+                            editGuestAccout();
+                            call = ClientUtils.guestService.edit(guest);
+
+                            call.enqueue(new Callback<Guest>() {
+                                @Override
+                                public void onResponse(Call<Guest> call, Response<Guest> response) {
+                                    if (response.code() == 200){
+                                        Log.d("REZ","Meesage recieved");
+                                        System.out.println(response.body());
+                                        Guest guest = response.body();
+                                        System.out.println(guest);
+                                        getActivity().getSupportFragmentManager().popBackStack();
+                                    }else{
+                                        Log.d("REZ","Meesage recieved: "+response.code());
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<Guest> call, Throwable t) {
+                                    Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                                }
+                            });
+                        }
+
 
                         dialog.dismiss();
                     }
@@ -163,9 +213,12 @@ public class EditProfileFragment extends Fragment {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        Call<ResponseBody> call;
+                        Call<ResponseBody> call = null;
                         Log.d("Booking", "Deleting account call");
-                        call = ClientUtils.hostService.deleteHost(14L);
+                        if (role==Role.Host)
+                            call = ClientUtils.hostService.deleteHost(id);
+                        else if(role==Role.Guest)
+                            call = ClientUtils.guestService.deleteGuest(id);
 
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -241,7 +294,14 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("email", host.getEmail());
+                String email = "";
+                if (role==Role.Host)
+                    email=host.getEmail();
+                else if (role==Role.Guest)
+                    email=guest.getEmail();
+                bundle.putString("email",email);
+                bundle.putLong("id", id);
+                bundle.putString("type", role.name());
                 ChangePasswordFragment changePasswordFragment = ChangePasswordFragment.newInstance(ARG_PARAM1, "Changing password");
                 changePasswordFragment.setArguments(bundle);
 
@@ -255,7 +315,7 @@ public class EditProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getDataFromClient();
-
+//        authorize();
     }
     @Override
     public void onDestroyView() {
@@ -264,31 +324,52 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void getDataFromClient(){
-        Call<Host> call = ClientUtils.hostService.getById(5L);
-        call.enqueue(new Callback<Host>() {
-            @Override
-            public void onResponse(Call<Host> call, Response<Host> response) {
-                if (response.code() == 200){
-                    Log.d("REZ","Meesage recieved");
-                    Log.d("REZ", String.valueOf(response.body()));
-                    System.out.println(response.body());
-                    host = response.body();
-                    setData();
-
-                }else{
-                    Log.d("REZ","Meesage recieved: "+response.code());
+        if(role==Role.Host){
+            Call<Host> call = ClientUtils.hostService.getById(id);
+            call.enqueue(new Callback<Host>() {
+                @Override
+                public void onResponse(Call<Host> call, Response<Host> response) {
+                    if (response.code() == 200){
+                        Log.d("REZ","Meesage recieved");
+                        Log.d("REZ", String.valueOf(response.body()));
+                        System.out.println(response.body());
+                        host = response.body();
+                        setHostData();
+                    }else{
+                        Log.d("REZ","Meesage recieved: "+response.code());
+                    }
                 }
-            }
+                @Override
+                public void onFailure(Call<Host> call, Throwable t) {
+                    Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                }
+            });
+        }else if (role==Role.Guest){
+            Call<Guest> call = ClientUtils.guestService.getById(id);
+            call.enqueue(new Callback<Guest>() {
+                @Override
+                public void onResponse(Call<Guest> call, Response<Guest> response) {
+                    if (response.code() == 200){
+                        Log.d("REZ","Meesage recieved");
+                        Log.d("REZ", String.valueOf(response.body()));
+                        System.out.println(response.body());
+                        guest = response.body();
+                        setGuestData();
+                    }else{
+                        Log.d("REZ","Meesage recieved: "+response.code());
+                    }
+                }
+                @Override
+                public void onFailure(Call<Guest> call, Throwable t) {
+                    Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<Host> call, Throwable t) {
-                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
-            }
-        });
 
     }
 
-    private void setData(){
+    private void setHostData(){
         firstNameText.setText(host.getFirstName());
         lastNameText.setText(host.getLastName());
         emailText.setText(host.getEmail());
@@ -298,9 +379,18 @@ public class EditProfileFragment extends Fragment {
         cityText.setText(host.getAddress().getCity());
         Log.i("Jabuka",gson.toJson(host) );
     }
+    private void setGuestData(){
+        firstNameText.setText(guest.getFirstName());
+        lastNameText.setText(guest.getLastName());
+        emailText.setText(guest.getEmail());
+        phoneText.setText(guest.getPhone());
+        streetText.setText(guest.getAddress().getStreet());
+        numberText.setText(guest.getAddress().getNumber());
+        cityText.setText(guest.getAddress().getCity());
+        Log.i("Jabuka",gson.toJson(guest) );
+    }
 
-    private void editAccout(){
-        host.setId(5L);
+    private void editHostAccout(){
         host.setFirstName(String.valueOf(firstNameText.getText()));
         host.setLastName(String.valueOf(lastNameText.getText()));
         host.setEmail(String.valueOf(emailText.getText()));
@@ -308,4 +398,36 @@ public class EditProfileFragment extends Fragment {
         Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()));
         host.setAddress(address);
     }
+    private void editGuestAccout(){
+        guest.setFirstName(String.valueOf(firstNameText.getText()));
+        guest.setLastName(String.valueOf(lastNameText.getText()));
+        guest.setEmail(String.valueOf(emailText.getText()));
+        guest.setPhone(String.valueOf(phoneText.getText()));
+        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()));
+        guest.setAddress(address);
+    }
+//    private void authorize(){
+//        String token = PrefUtils.getFromPrefs(getActivity().getApplication(), "LoginPrefs", "token", "");
+//        JWT parsedJWT = new JWT(token);
+//        Claim emailData = parsedJWT.getClaim("sub");
+//        email = emailData.asString();
+//        Log.d("EMAIL", email);
+//        Call<Account> call = ClientUtils.accountService.getByEmail(email);
+//        call.enqueue(new Callback<Account>() {
+//            @Override
+//            public void onResponse(Call<Account> call, Response<Account> response) {
+//                if (response.code() == 200){
+//                    account = response.body();
+//                    getDataFromClient();
+//                    Log.d("ACCOUNT", account.toString());
+//                }else{
+//                    Log.d("REZ","Meesage recieved: "+response.code());
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<Account> call, Throwable t) {
+//                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+//            }
+//        });
+//    }
 }

@@ -31,6 +31,12 @@ public interface AccountService {
     })
     @GET("accounts/{id}")
     Call<Account> getById(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @GET("account/{email}")
+    Call<Account> getByEmail(@Path("email") String email);
 
     @Headers({
             "User-Agent: Mobile-Android",

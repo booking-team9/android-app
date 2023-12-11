@@ -1,14 +1,6 @@
 package com.example.bookingappteam9.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeScreen;
-import com.example.bookingappteam9.activities.LoginScreen;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.databinding.FragmentProfileBinding;
-import com.example.bookingappteam9.model.Account;
+import com.example.bookingappteam9.databinding.FragmentHostProfileBinding;
+import com.example.bookingappteam9.model.Address;
+import com.example.bookingappteam9.model.Host;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,12 +26,19 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link HostProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
-    private FragmentProfileBinding binding;
-    private Account account;
+public class HostProfileFragment extends Fragment {
+    private FragmentHostProfileBinding binding;
+    private Host host;
+    private Long id;
+
+    private TextView fullName;
+    private TextView email;
+    private TextView phone;
+    private TextView fullAddress;
+    private TextView profileType;
     private static HomeScreen ARG_PARAM1 = new HomeScreen();
     private static final String ARG_PARAM2 = "param2";
     private Gson gson = new Gson();
@@ -45,11 +46,11 @@ public class ProfileFragment extends Fragment {
     private HomeScreen mParam1;
     private String mParam2;
 
-    public ProfileFragment() {
+    public HostProfileFragment() {
         // Required empty public constructor
     }
-    public static ProfileFragment newInstance(HomeScreen param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static HostProfileFragment newInstance(HomeScreen param1, String param2) {
+        HostProfileFragment fragment = new HostProfileFragment();
         Bundle args = new Bundle();
         ARG_PARAM1 = param1;
         args.putString(ARG_PARAM2, param2);
@@ -68,16 +69,30 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        binding = FragmentHostProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        fullName = binding.hostFullName;
+        fullAddress = binding.profileHostAddress;
+        phone = binding.profileHostPhone;
+        email = binding.profileHostEmail;
+        profileType = binding.hostType;
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            id = bundle.getLong("id");
+        }
         ImageView editImage = (ImageView) view.findViewById(R.id.edit_button);
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
-
+                Bundle bundle = new Bundle();
+                bundle.putLong("id", id);
+                bundle.putString("type", "Host");
+                EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(ARG_PARAM1, "Host Edit Profile");
+                editProfileFragment.setArguments(bundle);
+                FragmentTransition.to(editProfileFragment, ARG_PARAM1, false, R.id.navigationView);
             }
         });
+
         return view;
     }
 
@@ -102,14 +117,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getDataFromClient(){
-        Call<Account> call = ClientUtils.accountService.getById(1L);
-        call.enqueue(new Callback<Account>() {
+        Call<Host> call = ClientUtils.hostService.getById(id);
+        call.enqueue(new Callback<Host>() {
             @Override
-            public void onResponse(Call<Account> call, Response<Account> response) {
+            public void onResponse(Call<Host> call, Response<Host> response) {
                 if (response.code() == 200){
                     Log.d("REZ","Meesage recieved");
                     System.out.println(response.body());
-                    account = response.body();
+                    host = response.body();
                     setData();
 
                 }else{
@@ -118,7 +133,7 @@ public class ProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Account> call, Throwable t) {
+            public void onFailure(Call<Host> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
             }
         });
@@ -126,8 +141,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setData(){
-        binding.profileEmail.setText(account.getEmail());
-        Log.i("Jabuka",gson.toJson(account) );
+        fullName.setText(host.getFirstName()+" "+host.getLastName());
+        phone.setText(host.getPhone());
+        Address address = host.getAddress();
+        fullAddress.setText(address.getStreet() + " - " + address.getNumber() + ",  " + address.getCity());
+        profileType.setText("Host");
+        email.setText(host.getEmail());
+        Log.i("Jabuka",gson.toJson(host) );
     }
 
 

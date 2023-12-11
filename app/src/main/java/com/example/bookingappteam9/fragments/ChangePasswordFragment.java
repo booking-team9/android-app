@@ -34,6 +34,8 @@ public class ChangePasswordFragment extends Fragment {
     private EditText newPasssword;
     private EditText confirmedPasssword;
     private String email;
+    private Long id;
+    private String type;
     private static HomeScreen ARG_PARAM1 = new HomeScreen();
     private static final String ARG_PARAM2 = "param2";
     private HomeScreen mParam1;
@@ -66,18 +68,18 @@ public class ChangePasswordFragment extends Fragment {
         binding = FragmentChangePasswordBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
         Bundle bundle = getArguments();
-        String mail = "";
         if (bundle != null) {
-            mail = bundle.getString("email");
+            email = bundle.getString("email");
+            id = bundle.getLong("id");
+            type = bundle.getString("type");
         }
         ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "This is profile edit!"), ARG_PARAM1, false, R.id.navigationView);
+                backToEdit();
             }
         });
-        this.email = mail;
         passwordChange = new PasswordChange();
         return view;
 //        return inflater.inflate(R.layout.fragment_change_password, container, false);
@@ -111,7 +113,7 @@ public class ChangePasswordFragment extends Fragment {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Log.d("REZ", "Password changed");
                                     System.out.println(response.body());
-                                    FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+                                    backToEdit();
                                     dialog.dismiss();
                                 }
                             });
@@ -129,7 +131,7 @@ public class ChangePasswordFragment extends Fragment {
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
-                                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+                                backToEdit();
                                 dialog.dismiss();
                             }
                         });
@@ -153,6 +155,14 @@ public class ChangePasswordFragment extends Fragment {
         passwordChange.setOldPassword(String.valueOf(oldPasssword.getText()));
         passwordChange.setNewPassword(String.valueOf(newPasssword.getText()));
         passwordChange.setConfirmedPassword(String.valueOf(confirmedPasssword.getText()));
+    }
 
+    private void backToEdit(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("id", id);
+        bundle.putString("type", type);
+        EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(ARG_PARAM1, "Edit Profile");
+        editProfileFragment.setArguments(bundle);
+        FragmentTransition.to(editProfileFragment, ARG_PARAM1, false, R.id.navigationView);
     }
 }
