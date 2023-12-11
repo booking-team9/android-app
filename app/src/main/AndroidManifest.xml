@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -13,19 +13,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookingAppTeam9"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.ConfirmedScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="localhost"
+                    android:pathPrefix="/api/register/confirm"
+                    android:port="8080"
+                    android:scheme="http" />
+                <data android:host="localhost:8080" />
+                <data android:pathPattern="/api/register/confirm" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ConfirmationScreen"
+            android:exported="false" />
         <activity
             android:name=".activities.HomeScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.RegisterScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.LoginScreen"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true">
