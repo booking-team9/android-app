@@ -52,6 +52,7 @@ public class Address {
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        this.number=number;
     }
+
 }

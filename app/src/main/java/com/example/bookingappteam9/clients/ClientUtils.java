@@ -1,6 +1,8 @@
 package com.example.bookingappteam9.clients;
 
 import com.example.bookingappteam9.BuildConfig;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,9 +26,10 @@ public class ClientUtils {
         return client;
     }
 
+
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SERVICE_API_PATH)
-            .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
             .client(test())
             .build();
 

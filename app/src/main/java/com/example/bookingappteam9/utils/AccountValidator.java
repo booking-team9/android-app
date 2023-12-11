@@ -1,17 +1,26 @@
 package com.example.bookingappteam9.utils;
 
-public class AccountValidator {
-    public Boolean ValidateUserName(String username){
-        if (username.equals("user")){
-            return true;
-        }
-        return false;
-    }
+import android.database.Observable;
+import android.util.Log;
 
-    public Boolean ValidatePassword(String password){
-        if (password.equals("123")){
-            return true;
-        }
+import com.example.bookingappteam9.clients.AccountService;
+import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.model.Account;
+import com.example.bookingappteam9.model.Login;
+import com.example.bookingappteam9.model.Token;
+
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class AccountValidator {
+    private String loggedUser;
+
+    public Boolean validateCredentials(String username, String password){
+
         return false;
     }
 }

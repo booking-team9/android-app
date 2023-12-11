@@ -45,4 +45,9 @@
     <string name="novi_sad">Novi Sad</string>
     <string name="old_password">Old Password</string>
     <string name="change">Change</string>
+    <string name="email_login">Email</string>
+    <string name="password_login">Password</string>
+    <string name="country">Country</string>
+    <string name="street">Street</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>
