@@ -102,7 +102,7 @@ public class RegisterScreen extends AppCompatActivity {
 
                             }else{
                                 Toast.makeText(RegisterScreen.this, "Unsuccessful registration!", Toast.LENGTH_SHORT).show();
-                                Log.d("Login","Meesage recieved: "+response.code());
+                                Log.d("Register","Meesage recieved: "+response.code());
                             }
                         }
 
