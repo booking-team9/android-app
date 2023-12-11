@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +19,7 @@ import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeScreen;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentEditProfileBinding;
+import com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Host;
 import com.google.gson.Gson;
@@ -170,14 +170,52 @@ public class EditProfileFragment extends Fragment {
                         call.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Log.d("REZ","Meesage recieved");
-                                System.out.println(response.body());
-                                Toast.makeText(getActivity(),"Account deleted",Toast.LENGTH_SHORT).show();
+                                if (response.code() == 200){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                    builder.setTitle("Success");
+                                    builder.setMessage("Your account has been deleted successfully");
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Log.d("REZ","Meesage recieved");
+                                            System.out.println(response.body());
+                                            FragmentTransition.to(AccommodationsPageFragment.newInstance(), ARG_PARAM1, false, R.id.navigationView);
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                }
+                                else {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                    builder.setTitle("Fail");
+                                    builder.setMessage("Your account failed to delete");
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                }
+
                             }
 
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                                builder.setTitle("Fail");
+                                builder.setMessage("Your account failed to delete");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                AlertDialog alert = builder.create();
+                                alert.show();
                             }
                         });
                         dialog.dismiss();
@@ -224,8 +262,6 @@ public class EditProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-
 
     private void getDataFromClient(){
         Call<Host> call = ClientUtils.hostService.getById(5L);

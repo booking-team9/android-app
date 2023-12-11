@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,17 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeScreen;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentChangePasswordBinding;
 import com.example.bookingappteam9.model.PasswordChange;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,9 +68,15 @@ public class ChangePasswordFragment extends Fragment {
         Bundle bundle = getArguments();
         String mail = "";
         if (bundle != null) {
-            mail = bundle.getString("email"); // Replace "key" with the actual key you used
-            // Now you have the data, you can use it as needed
+            mail = bundle.getString("email");
         }
+        ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "This is profile edit!"), ARG_PARAM1, false, R.id.navigationView);
+            }
+        });
         this.email = mail;
         passwordChange = new PasswordChange();
         return view;
@@ -85,24 +95,47 @@ public class ChangePasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("email", email);
-                Call<String> call;
+                Call<ResponseBody> call;
                 Log.d("Booking", "Changing password");
                 collectData();
                 call = ClientUtils.accountService.changePassword(passwordChange);
                 Log.d("adad", String.valueOf(passwordChange));
-                call.enqueue(new Callback<String>() {
+                call.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.code()==200){
-                            Log.d("REZ", "Password changed");
-                            System.out.println(response.body());
-                            Toast.makeText(getActivity(),"Password changed",Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            builder.setTitle("Success");
+                            builder.setMessage("Your password is successfully changed");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d("REZ", "Password changed");
+                                    System.out.println(response.body());
+                                    FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
                         }
                     }
-
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                        builder.setTitle("Fail");
+                        builder.setMessage("Failed to change password");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                                FragmentTransition.to(EditProfileFragment.newInstance(ARG_PARAM1, "Ovo je edit!"), ARG_PARAM1, false, R.id.navigationView);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
                 });
             }

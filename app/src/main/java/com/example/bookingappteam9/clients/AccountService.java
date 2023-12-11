@@ -5,6 +5,7 @@ import com.example.bookingappteam9.model.PasswordChange;
 
 import java.util.ArrayList;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -32,7 +33,7 @@ public interface AccountService {
             "Content-Type:application/json"
     })
     @POST("passwordChange")
-    Call<String> changePassword(@Body PasswordChange passwordChange);
+    Call<ResponseBody> changePassword(@Body PasswordChange passwordChange);
 
 /*
 
