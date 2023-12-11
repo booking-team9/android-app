@@ -1,6 +1,9 @@
 package com.example.bookingappteam9.clients;
 
 import com.example.bookingappteam9.model.Account;
+import com.example.bookingappteam9.model.Login;
+import com.example.bookingappteam9.model.Register;
+import com.example.bookingappteam9.model.Token;
 
 import java.util.ArrayList;
 
@@ -13,6 +16,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface AccountService {
     @Headers({
@@ -28,6 +32,29 @@ public interface AccountService {
     })
     @GET("accounts/{id}")
     Call<Account> getById(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @POST("login")
+    Call<Token> login(@Body Login login);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @POST("register")
+    Call<Token> register(@Body Register register);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @GET("register/confirm")
+    Call<String> registerConfirm(@Query("token")String token);
+
+
 /*
 
     @Headers({
