@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.bookingappteam9.activities.ui.home.HomeFragment"
+        android:name="com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_products_page" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.bookingappteam9.activities.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_profile"
+        android:name="com.example.bookingappteam9.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.bookingappteam9.activities.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_host_properties"
+        android:name="com.example.bookingappteam9.fragments.HostPropertiesFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_host_properties" />
 </navigation>
