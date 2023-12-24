@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import com.example.bookingappteam9.activities.HomeScreen;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentChangePasswordBinding;
 import com.example.bookingappteam9.model.PasswordChange;
+import com.example.bookingappteam9.utils.PrefUtils;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,7 +38,6 @@ public class ChangePasswordFragment extends Fragment {
     private EditText confirmedPasssword;
     private String email;
     private Long id;
-    private String type;
     private static HomeScreen ARG_PARAM1 = new HomeScreen();
     private static final String ARG_PARAM2 = "param2";
     private HomeScreen mParam1;
@@ -67,12 +69,9 @@ public class ChangePasswordFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentChangePasswordBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            email = bundle.getString("email");
-            id = bundle.getLong("id");
-            type = bundle.getString("type");
-        }
+        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        id = userInfo.getId();
+        email = userInfo.getEmail();
         ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,11 +157,6 @@ public class ChangePasswordFragment extends Fragment {
     }
 
     private void backToEdit(){
-        Bundle bundle = new Bundle();
-        bundle.putLong("id", id);
-        bundle.putString("type", type);
-        EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(ARG_PARAM1, "Edit Profile");
-        editProfileFragment.setArguments(bundle);
-        FragmentTransition.to(editProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+        findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_editProfileFragment);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentGuestProfileBinding;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Guest;
+import com.example.bookingappteam9.utils.PrefUtils;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
@@ -75,20 +78,13 @@ public class GuestProfileFragment extends Fragment {
         phone = binding.profileGuestPhone;
         email = binding.profileGuestEmail;
         profileType = binding.guestType;
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            id = bundle.getLong("id");
-        }
+        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        id = userInfo.getId();
         ImageView editImage = (ImageView) view.findViewById(R.id.edit_button);
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putLong("id", id);
-                bundle.putString("type", "Guest");
-                EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(ARG_PARAM1, "Guest Edit Profile");
-                editProfileFragment.setArguments(bundle);
-                FragmentTransition.to(editProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_guest_profile_to_editProfileFragment);
             }
         });
         return view;

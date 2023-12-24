@@ -37,7 +37,8 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/roki" />
+                    android:background="@color/md_theme_light_outlineVariant"
+                    android:src="@drawable/person_svgrepo_com" />
             </androidx.cardview.widget.CardView>
 
 <!--            <ImageView-->
@@ -62,7 +63,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="@string/petar_perovi"
             android:textColor="@color/black"
             android:textSize="32sp" />
 
@@ -113,7 +113,6 @@
                     android:id="@+id/profile_host_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/perovic_gmail_com"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -143,7 +142,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/_1_202_555_0157"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -173,7 +171,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/despota_stefana_5a"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -203,7 +200,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/guest"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

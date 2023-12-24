@@ -51,7 +51,8 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/roki" />
+                    android:background="@color/md_theme_light_outlineVariant"
+                    android:src="@drawable/person_svgrepo_com" />
             </androidx.cardview.widget.CardView>
 
 <!--            <ImageView-->
@@ -70,21 +71,21 @@
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/change_photo_btn"
-            android:layout_width="76dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginRight="64dp"
-            android:layout_marginBottom="15dp"
-            android:adjustViewBounds="true"
-            android:clickable="true"
-            android:scaleType="centerInside"
-            android:text="@string/change_photo"
-            android:textSize="9sp" />
+<!--        <Button-->
+<!--            android:id="@+id/change_photo_btn"-->
+<!--            android:layout_width="76dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:layout_marginEnd="45dp"-->
+<!--            android:layout_marginRight="64dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:clickable="true"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:text="@string/change_photo"-->
+<!--            android:textSize="9sp" />-->
 
 
     </RelativeLayout>
@@ -121,7 +122,6 @@
                     android:id="@+id/edit_first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/petar"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -148,7 +148,6 @@
                     android:id="@+id/edit_last_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/perovi"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -176,7 +175,6 @@
                     android:id="@+id/edit_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/perovic_gmail_com"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -204,7 +202,6 @@
                     android:id="@+id/edit_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_1_202_555_0157"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -237,7 +234,6 @@
                         android:id="@+id/edit_street"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/despota_stefana"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -255,7 +251,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/number"
+                        android:text="Number"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:layout_gravity="center"/>
@@ -264,7 +260,6 @@
                         android:id="@+id/edit_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10A"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_gravity="center"/>
@@ -291,7 +286,6 @@
                         android:id="@+id/edit_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/novi_sad"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:layout_gravity="center"/>

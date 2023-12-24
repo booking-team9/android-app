@@ -7,24 +7,60 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.bookingappteam9.activities.ui.home.HomeFragment"
+        android:name="com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_products_page" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.bookingappteam9.activities.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_host_profile"
         android:name="com.example.bookingappteam9.fragments.HostProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_host_profile" />
+        tools:layout="@layout/fragment_host_profile" >
+        <action
+            android:id="@+id/action_navigation_host_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
     <fragment
-        android:id="@+id/navigation_properties"
-        android:name="com.example.bookingappteam9.fragments.HostAccommodationsFragment"
-        android:label="@string/properties"
-        tools:layout="@layout/fragment_host_accommodations" />
+        android:id="@+id/navigation_guest_profile"
+        android:name="com.example.bookingappteam9.fragments.GuestProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_guest_profile" >
+        <action
+            android:id="@+id/action_navigation_guest_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_host_properties"
+        android:name="com.example.bookingappteam9.fragments.HostPropertiesFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_host_properties" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.bookingappteam9.fragments.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_host_profile"
+            app:destination="@id/navigation_host_profile" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_guest_profile"
+            app:destination="@id/navigation_guest_profile" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.bookingappteam9.fragments.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
 </navigation>

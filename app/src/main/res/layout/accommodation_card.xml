@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:orientation="horizontal"
-    android:background="@drawable/border_background"
-    android:padding="10dp"
-    android:layout_marginVertical="20dp"
-    android:id="@+id/accommodation_card_item"
-    >
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Hotel Photo -->
     <ImageView
-        android:id="@+id/accommodation_image"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/hotel"
-        android:contentDescription="@string/hotel_desc"
-        android:scaleType="fitXY"/>
+        android:id="@+id/hotelPhoto"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hotel" />
+
+    <!-- Hotel Information -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/hotelPhoto"
+        android:layout_marginStart="16dp"
         android:orientation="vertical">
+
+        <!-- Hotel Name -->
         <TextView
-            android:id="@+id/accommodation_title"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_margin="5dp"
-            android:text="@string/hotel_desc"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/accommodation_description"
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:layout_margin="5dp"
-            android:text="@string/hotel_desc"
-            android:textSize="14sp"
-            android:textStyle="italic"/>
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/hotelName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+            android:text="Hotel Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/accommodation_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="More"/>
-        </LinearLayout>
+        <!-- Hotel Address -->
+        <TextView
+            android:id="@+id/hotelAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotel Address"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray" />
 
-
+        <!-- Rating -->
+        <RatingBar
+            android:id="@+id/hotelRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="4.5" />
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

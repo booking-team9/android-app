@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,11 +21,11 @@ import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeScreen;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentEditProfileBinding;
-import com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Guest;
 import com.example.bookingappteam9.model.Host;
 import com.example.bookingappteam9.model.Role;
+import com.example.bookingappteam9.utils.PrefUtils;
 import com.google.gson.Gson;
 
 import okhttp3.ResponseBody;
@@ -91,24 +93,18 @@ public class EditProfileFragment extends Fragment {
         deleteAccountButton = binding.deleteAccountButton;
         changePasswordButton = binding.changePasswordButton;
         ImageView backImage = (ImageView) view.findViewById(R.id.back_icon);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            id = bundle.getLong("id");
-            role = Role.valueOf(bundle.getString("type"));
-        }
+        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        id = userInfo.getId();
+        role = userInfo.getRole();
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putLong("id", id);
                 if (role==Role.Host){
-                    HostProfileFragment hostProfileFragment = HostProfileFragment.newInstance(ARG_PARAM1, "Host Profile");
-                    hostProfileFragment.setArguments(bundle);
-                    FragmentTransition.to(hostProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+                    findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
                 }else if(role == Role.Guest){
-                    GuestProfileFragment guestProfileFragment = GuestProfileFragment.newInstance(ARG_PARAM1, "Guest Profile");
-                    guestProfileFragment.setArguments(bundle);
-                    FragmentTransition.to(guestProfileFragment, ARG_PARAM1, false, R.id.navigationView);
+                    findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
                 }
 
             }
@@ -145,7 +141,29 @@ public class EditProfileFragment extends Fragment {
                                         Host host = response.body();
                                         System.out.println(host);
                                         getActivity().getSupportFragmentManager().popBackStack();
+                                        AlertDialog.Builder builderGood = new AlertDialog.Builder(v.getContext());
+                                        builderGood.setTitle("Success");
+                                        builderGood.setMessage("Changes made successfully");
+                                        builderGood.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
+                                            }
+                                        });
+                                        AlertDialog alertGood = builderGood.create();
+                                        alertGood.show();
                                     }else{
+                                        AlertDialog.Builder builderBad = new AlertDialog.Builder(v.getContext());
+                                        builderBad.setTitle("Fail");
+                                        builderBad.setMessage("Failed to edit profile");
+                                        builderBad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
+                                            }
+                                        });
+                                        AlertDialog alertBad = builderBad.create();
+                                        alertBad.show();
                                         Log.d("REZ","Meesage recieved: "+response.code());
                                     }
                                 }
@@ -169,7 +187,29 @@ public class EditProfileFragment extends Fragment {
                                         Guest guest = response.body();
                                         System.out.println(guest);
                                         getActivity().getSupportFragmentManager().popBackStack();
+                                        AlertDialog.Builder builderGood = new AlertDialog.Builder(v.getContext());
+                                        builderGood.setTitle("Success");
+                                        builderGood.setMessage("Changes made successfully");
+                                        builderGood.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
+                                            }
+                                        });
+                                        AlertDialog alertGood = builderGood.create();
+                                        alertGood.show();
                                     }else{
+                                        AlertDialog.Builder builderBad = new AlertDialog.Builder(v.getContext());
+                                        builderBad.setTitle("Fail");
+                                        builderBad.setMessage("Failed to edit profile");
+                                        builderBad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
+                                            }
+                                        });
+                                        AlertDialog alertBad = builderBad.create();
+                                        alertBad.show();
                                         Log.d("REZ","Meesage recieved: "+response.code());
                                     }
                                 }
@@ -195,9 +235,6 @@ public class EditProfileFragment extends Fragment {
 
                 AlertDialog alert = builder.create();
                 alert.show();
-
-
-
             }
 
 
@@ -231,7 +268,7 @@ public class EditProfileFragment extends Fragment {
                                         public void onClick(DialogInterface dialog, int which) {
                                             Log.d("REZ","Meesage recieved");
                                             System.out.println(response.body());
-                                            FragmentTransition.to(AccommodationsPageFragment.newInstance(), ARG_PARAM1, false, R.id.navigationView);
+                                            findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_home);
                                             dialog.dismiss();
                                         }
                                     });
@@ -293,20 +330,7 @@ public class EditProfileFragment extends Fragment {
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                String email = "";
-                if (role==Role.Host)
-                    email=host.getEmail();
-                else if (role==Role.Guest)
-                    email=guest.getEmail();
-                bundle.putString("email",email);
-                bundle.putLong("id", id);
-                bundle.putString("type", role.name());
-                ChangePasswordFragment changePasswordFragment = ChangePasswordFragment.newInstance(ARG_PARAM1, "Changing password");
-                changePasswordFragment.setArguments(bundle);
-
-                FragmentTransition.to(changePasswordFragment, ARG_PARAM1, false, R.id.navigationView);
-
+                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_changePasswordFragment);
             }
         });
 

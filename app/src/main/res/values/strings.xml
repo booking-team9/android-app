@@ -39,12 +39,6 @@
     <string name="perovic_gmail_com">perovic@gmail.com</string>
     <string name="petar">Petar</string>
     <string name="perovi">Perović</string>
-    <string name="city">City</string>
-    <string name="number">Number</string>
-    <string name="despota_stefana">Despota Stefana</string>
-    <string name="novi_sad">Novi Sad</string>
-    <string name="old_password">Old Password</string>
-    <string name="change">Change</string>
     <string name="email_login">Email</string>
     <string name="password_login">Password</string>
     <string name="country">Country</string>
@@ -55,4 +49,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="properties">Properties</string>
+    <string name="city">City</string>
+
 </resources>
