@@ -40,6 +40,7 @@ public class HomeScreen extends AppCompatActivity {
         AtomicInteger currentItem = new AtomicInteger(R.id.home);
 
         navigation = binding.bottomNavigation;
+
         navigation.setOnItemSelectedListener(item -> {
 
              switch (item.getItemId()){

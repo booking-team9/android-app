@@ -58,7 +58,7 @@ public class LoginScreen extends AppCompatActivity {
                             if (response.code() == 200){
                                 Log.d("Login","Meesage recieved");
                                 PrefUtils.saveToPrefs(getApplication(), "LoginPrefs", "token", response.body().getToken());
-                                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                                Intent intent = new Intent(LoginScreen.this, MainActivity.class);
                                 startActivity(intent);
 
                             }else{
