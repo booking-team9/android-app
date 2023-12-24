@@ -18,8 +18,13 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.bookingappteam9.activities.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profile"
+        android:name="com.example.bookingappteam9.fragments.HostProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_host_profile" />
+    <fragment
+        android:id="@+id/navigation_properties"
+        android:name="com.example.bookingappteam9.fragments.HostAccommodationsFragment"
+        android:label="@string/properties"
+        tools:layout="@layout/fragment_host_accommodations" />
 </navigation>

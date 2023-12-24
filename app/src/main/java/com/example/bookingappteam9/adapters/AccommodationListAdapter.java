@@ -18,13 +18,13 @@ import androidx.annotation.Nullable;
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.model.Accommodation;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class AccommodationListAdapter extends ArrayAdapter<Accommodation> {
-    private ArrayList<Accommodation> allAccommodations;
+    private List<Accommodation> allAccommodations;
 
-    public AccommodationListAdapter(Context context, ArrayList<Accommodation> products){
+    public AccommodationListAdapter(Context context, List<Accommodation> products){
         super(context, R.layout.accommodation_card, products);
         allAccommodations = products;
     }
