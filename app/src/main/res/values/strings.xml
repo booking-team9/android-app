@@ -50,4 +50,8 @@
     <string name="country">Country</string>
     <string name="street">Street</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
