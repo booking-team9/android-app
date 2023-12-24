@@ -21,5 +21,15 @@
         android:id="@+id/navigation_host_properties"
         android:name="com.example.bookingappteam9.fragments.HostPropertiesFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_host_properties" />
+        tools:layout="@layout/fragment_host_properties" >
+        <action
+            android:id="@+id/action_navigation_host_properties_to_newPropertyFragment"
+            app:destination="@id/newPropertyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPropertyFragment"
+        android:name="com.example.bookingappteam9.fragments.NewPropertyFragment"
+        android:label="fragment_new_property"
+        tools:layout="@layout/fragment_new_property" />
+
 </navigation>
