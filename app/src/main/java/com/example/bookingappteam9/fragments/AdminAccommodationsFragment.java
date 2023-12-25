@@ -10,11 +10,10 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
-import com.example.bookingappteam9.adapters.AccommodationShortListAdapter;
+import com.example.bookingappteam9.adapters.AdminAccommodationListAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.databinding.FragmentHostPropertiesBinding;
+import com.example.bookingappteam9.databinding.FragmentAdminAccommodationsBinding;
 import com.example.bookingappteam9.model.AccommodationShort;
-import com.example.bookingappteam9.utils.PrefUtils;
 
 import java.util.ArrayList;
 
@@ -22,22 +21,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HostPropertiesFragment extends ListFragment {
-    private AccommodationShortListAdapter adapter;
+public class AdminAccommodationsFragment extends ListFragment {
+    private AdminAccommodationListAdapter adapter;
     private ArrayList<AccommodationShort> accommodations;
-    private FragmentHostPropertiesBinding binding;
+    private FragmentAdminAccommodationsBinding binding;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-    public HostPropertiesFragment() {
+    public AdminAccommodationsFragment() {
         // Required empty public constructor
     }
 
-    public static HostPropertiesFragment newInstance(String param1, String param2) {
-        HostPropertiesFragment fragment = new HostPropertiesFragment();
+    public static AdminAccommodationsFragment newInstance(String param1, String param2) {
+        AdminAccommodationsFragment fragment = new AdminAccommodationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -49,22 +49,21 @@ public class HostPropertiesFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        AccommodationShort accommodationShort = new AccommodationShort(1L, "QM", "aleksa kuma 21 kosjeric", 4.5);
+//        accommodationShort.setStatus(AccommodationStatus.Pending);
         ArrayList<AccommodationShort> list = new ArrayList<>();
 //        list.add(accommodationShort);
 //        accommodations = (ArrayList<AccommodationShort>) ClientUtils.accommodationService.getByHostId(1L);
-        adapter = new AccommodationShortListAdapter(getActivity(),list);
-
+        adapter = new AdminAccommodationListAdapter(getActivity(),list);
         setListAdapter(adapter);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHostPropertiesBinding.inflate(inflater,container,false);
+        // Inflate the layout for this fragment
+        binding = FragmentAdminAccommodationsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
-        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
-        Call<ArrayList<AccommodationShort>> call = ClientUtils.accommodationService.getByHostId(userInfo.getId());
+        Call<ArrayList<AccommodationShort>> call = ClientUtils.accommodationService.getUnapproved();
         call.enqueue(new Callback<ArrayList<AccommodationShort>>() {
             @Override
             public void onResponse(Call<ArrayList<AccommodationShort>> call, Response<ArrayList<AccommodationShort>> response) {
@@ -74,7 +73,6 @@ public class HostPropertiesFragment extends ListFragment {
 //                    accommodations=list;
                     ArrayList<AccommodationShort> accommodationShorts = response.body();
                     addProducts(accommodationShorts);
-//                    setData();
 
                 }else{
                     Log.d("QM","Meesage recieved: "+response.code());
@@ -85,7 +83,6 @@ public class HostPropertiesFragment extends ListFragment {
                 Log.d("QM", t.getMessage() != null?t.getMessage():"error");
             }
         });
-
         return root;
     }
 
@@ -104,4 +101,5 @@ public class HostPropertiesFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         // Handle the click on item at 'position'
     }
+
 }

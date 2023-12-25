@@ -72,4 +72,7 @@
     <color name="pink_300">#EF9A9A</color>
     <color name="pink_400">#E57373</color>
     <color name="blue_300">#90CAF9</color>
+    <color name="approve_green">#F1922D</color>
+    <color name="deny_red">#DFB8A5</color>
+
 </resources>

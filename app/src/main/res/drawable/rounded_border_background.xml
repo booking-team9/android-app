@@ -5,8 +5,8 @@
             <solid android:color="#FFFFFF" /> <!-- Set background color -->
             <corners android:radius="16dp" /> <!-- Set corner radius -->
             <stroke
-                android:color="#CCCCCC"
-            android:width="2dp"/> <!-- Set border width -->
+                android:color="@color/md_theme_dark_onSecondaryContainer"
+            android:width="3dp"/> <!-- Set border width -->
         </shape>
     </item>
 </selector>

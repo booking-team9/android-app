@@ -52,12 +52,14 @@ public class AccommodationShortListAdapter extends ArrayAdapter<AccommodationSho
         }
         RelativeLayout productCard = convertView.findViewById(R.id.accommodation_short_card_item);
         ImageView imageView = convertView.findViewById(R.id.accommodation_photo);
+        TextView status = convertView.findViewById(R.id.accommodation_status);
         TextView name = convertView.findViewById(R.id.accommodation_name);
         TextView address = convertView.findViewById(R.id.accommodation_address);
         RatingBar rating = convertView.findViewById(R.id.accommodation_rating);
 
         if (accommodation != null) {
 //            imageView.setImageResource(accommodation.getImage());
+            status.setText(accommodation.getStatus().toString());
             name.setText(accommodation.getName());
             address.setText(accommodation.getLocation());
             rating.setRating((float) accommodation.getAverageGrade());
