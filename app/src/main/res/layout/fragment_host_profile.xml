@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ProfileFragment">
+    tools:context=".fragments.HostProfileFragment">
 
 
     <RelativeLayout
@@ -37,7 +37,8 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/roki" />
+                    android:background="@color/md_theme_light_outlineVariant"
+                    android:src="@drawable/person_svgrepo_com" />
             </androidx.cardview.widget.CardView>
 
 <!--            <ImageView-->
@@ -55,14 +56,13 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/host_full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgUser"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:text="@string/petar_perovi"
             android:textColor="@color/black"
             android:textSize="32sp" />
 
@@ -110,10 +110,9 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/profile_email"
+                    android:id="@+id/profile_host_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/perovic_gmail_com"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -139,10 +138,10 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/profile_host_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/_1_202_555_0157"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -168,10 +167,10 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/profile_host_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/despota_stefana_5a"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -197,10 +196,10 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/host_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/guest"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -213,19 +212,31 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/logoutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="8dp"
                     android:text="@string/log_out"
+                    tools:layout_editor_absoluteX="161dp"
+                    tools:layout_editor_absoluteY="446dp;" />
+                <Button
+                    android:id="@+id/view_accommodations_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:text="View Accommodations"
+                    android:backgroundTint="@color/md_theme_light_outlineVariant"
+                    android:textColor="@color/black"
+                    android:textSize="10dp"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
 

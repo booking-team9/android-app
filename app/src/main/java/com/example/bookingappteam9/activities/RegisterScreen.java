@@ -1,28 +1,23 @@
 package com.example.bookingappteam9.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.bookingappteam9.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.ActivityRegisterScreenBinding;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Register;
 import com.example.bookingappteam9.model.Role;
 import com.example.bookingappteam9.model.Token;
-import com.example.bookingappteam9.utils.PrefUtils;
 import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
@@ -96,7 +91,7 @@ public class RegisterScreen extends AppCompatActivity {
                     }else{
                         role = "Host";
                     }
-                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(cityText, streetText, countryText, numberText)));
+                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(cityText, streetText, numberText)));
                     call.enqueue(new Callback<Token>() {
                         @Override
                         public void onResponse(Call<Token> call, Response<Token> response) {

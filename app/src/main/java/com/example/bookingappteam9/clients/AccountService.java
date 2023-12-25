@@ -2,6 +2,7 @@ package com.example.bookingappteam9.clients;
 
 import com.example.bookingappteam9.model.Account;
 import com.example.bookingappteam9.model.Login;
+import com.example.bookingappteam9.model.PasswordChange;
 import com.example.bookingappteam9.model.Register;
 import com.example.bookingappteam9.model.Token;
 
@@ -10,11 +11,9 @@ import java.util.ArrayList;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -32,6 +31,20 @@ public interface AccountService {
     })
     @GET("accounts/{id}")
     Call<Account> getById(@Path("id") Long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @GET("account/{email}")
+    Call<Account> getByEmail(@Path("email") String email);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @POST("passwordChange")
+    Call<ResponseBody> changePassword(@Body PasswordChange passwordChange);
+
 
     @Headers({
             "User-Agent: Mobile-Android",
