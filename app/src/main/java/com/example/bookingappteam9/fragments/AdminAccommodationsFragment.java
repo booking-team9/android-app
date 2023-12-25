@@ -10,12 +10,14 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
+import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.adapters.AdminAccommodationListAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAdminAccommodationsBinding;
 import com.example.bookingappteam9.model.AccommodationShort;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,6 +74,11 @@ public class AdminAccommodationsFragment extends ListFragment {
                     System.out.println(response.body());
 //                    accommodations=list;
                     ArrayList<AccommodationShort> accommodationShorts = response.body();
+                    int i = 0;
+                    for(AccommodationShort ac : accommodationShorts){
+                        ac.setImage(getImage(i));
+                        i++;
+                    }
                     addProducts(accommodationShorts);
 
                 }else{
@@ -100,6 +107,28 @@ public class AdminAccommodationsFragment extends ListFragment {
     public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         // Handle the click on item at 'position'
+    }
+
+    private int getImage(int i){
+            List<Integer> list = new ArrayList<>();
+            list.add(R.drawable.ap1);
+            list.add(R.drawable.ap2);
+            list.add(R.drawable.ap3);
+            list.add(R.drawable.apart1);
+            list.add(R.drawable.apart2);
+            list.add(R.drawable.apart3);
+            list.add(R.drawable.hotel);
+            list.add(R.drawable.hotel1);
+            list.add(R.drawable.hotel2);
+            list.add(R.drawable.hotel3);
+            list.add(R.drawable.ploce);
+            list.add(R.drawable.slika1);
+            list.add(R.drawable.slika2);
+            list.add(R.drawable.slika3);
+            list.add(R.drawable.slika33);
+            list.add(R.drawable.slika11);
+            list.add(R.drawable.logo);
+            return list.get(i);
     }
 
 }

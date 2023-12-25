@@ -1,5 +1,6 @@
 package com.example.bookingappteam9.fragments;
 
+
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
 import android.app.AlertDialog;
@@ -147,7 +148,7 @@ public class EditProfileFragment extends Fragment {
                                         builderGood.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
+//                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
                                             }
                                         });
                                         AlertDialog alertGood = builderGood.create();
@@ -159,7 +160,7 @@ public class EditProfileFragment extends Fragment {
                                         builderBad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
+//                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_host_profile);
                                             }
                                         });
                                         AlertDialog alertBad = builderBad.create();
@@ -193,7 +194,7 @@ public class EditProfileFragment extends Fragment {
                                         builderGood.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
+//                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
                                             }
                                         });
                                         AlertDialog alertGood = builderGood.create();
@@ -205,7 +206,7 @@ public class EditProfileFragment extends Fragment {
                                         builderBad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
+//                                                findNavController(getParentFragment()).navigate(R.id.action_editProfileFragment_to_navigation_guest_profile);
                                             }
                                         });
                                         AlertDialog alertBad = builderBad.create();

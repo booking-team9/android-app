@@ -6,6 +6,7 @@ public class AccommodationShort {
     private String location;
     private double averageGrade;
     private AccommodationStatus status;
+    private int image;
 
     public AccommodationShort(Long id, String name, String address, double rating){
         this.id=id;
@@ -13,12 +14,13 @@ public class AccommodationShort {
         this.name=name;
         this.averageGrade = rating;
     }
-    public AccommodationShort(Long id, String name, String address, double rating,AccommodationStatus status){
+    public AccommodationShort(Long id, String name, String address, double rating,AccommodationStatus status, int image){
         this.id=id;
         this.location=address;
         this.name=name;
         this.averageGrade = rating;
         this.status=status;
+        this.image = image;
     }
 
     public AccommodationStatus getStatus() {
@@ -43,6 +45,14 @@ public class AccommodationShort {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getLocation() {

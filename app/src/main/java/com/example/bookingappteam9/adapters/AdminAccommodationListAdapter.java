@@ -69,7 +69,7 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
         Button denyButton = convertView.findViewById(R.id.deny_button);
 
         if (accommodation != null) {
-//            imageView.setImageResource(accommodation.getImage());
+            imageView.setImageResource(accommodation.getImage());
             status.setText(accommodation.getStatus().toString());
             name.setText(accommodation.getName());
             address.setText(accommodation.getLocation());

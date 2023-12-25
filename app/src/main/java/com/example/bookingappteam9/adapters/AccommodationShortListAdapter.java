@@ -1,6 +1,7 @@
 package com.example.bookingappteam9.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 public class AccommodationShortListAdapter extends ArrayAdapter<AccommodationShort> {
     private ArrayList<AccommodationShort> accommodations;
+    private Bitmap imageBitmap = null;
 
     public AccommodationShortListAdapter(Context context, ArrayList<AccommodationShort> accommodationss){
         super(context, R.layout.accommodation_short_card, accommodationss);
@@ -50,15 +52,15 @@ public class AccommodationShortListAdapter extends ArrayAdapter<AccommodationSho
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.accommodation_short_card,
                     parent, false);
         }
+//        getImage(accommodation.getImage());
         RelativeLayout productCard = convertView.findViewById(R.id.accommodation_short_card_item);
         ImageView imageView = convertView.findViewById(R.id.accommodation_photo);
         TextView status = convertView.findViewById(R.id.accommodation_status);
         TextView name = convertView.findViewById(R.id.accommodation_name);
         TextView address = convertView.findViewById(R.id.accommodation_address);
         RatingBar rating = convertView.findViewById(R.id.accommodation_rating);
-
         if (accommodation != null) {
-//            imageView.setImageResource(accommodation.getImage());
+            imageView.setImageResource(accommodation.getImage());
             status.setText(accommodation.getStatus().toString());
             name.setText(accommodation.getName());
             address.setText(accommodation.getLocation());
@@ -67,5 +69,22 @@ public class AccommodationShortListAdapter extends ArrayAdapter<AccommodationSho
 
         return convertView;
     }
+
+
+//    private void getImage(String imageName){
+//        Call<byte[]> call = ClientUtils.imageService.getPhoto(imageName);
+//        call.enqueue(new Callback<byte[]>() {
+//            @Override
+//            public void onResponse(Call<byte[]> call, Response<byte[]> response) {
+//                imageBitmap = BitmapFactory.decodeByteArray(response.body(), 0, response.body().length);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<byte[]> call, Throwable t) {
+//
+//            }
+//        });
+//        return;
+//    }
 
 }
