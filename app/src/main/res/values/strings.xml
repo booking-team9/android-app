@@ -50,4 +50,10 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="properties">Properties</string>
+    <string name="property_type">Property type</string>
+    <string name="description">Description</string>
+    <string name="next">Next</string>
+    <string name="autocomplete_skipped_message">text\n</string>
+    <string name="api_key"><![CDATA[AIzaSyA-7iAwTLpwQJRR21oeE9y15zW3QVd6I-8&libraries=places]]></string>
+    <string name="add_photos">Add photos</string>
 </resources>

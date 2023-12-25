@@ -37,7 +37,7 @@ public class RegisterScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         Button registerButton = binding.registerButton;
         TextInputLayout firstName = binding.registerFirstName;
         TextInputLayout lastName = binding.registerLastName;

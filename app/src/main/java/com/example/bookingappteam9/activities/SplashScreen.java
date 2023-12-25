@@ -26,7 +26,7 @@ public class SplashScreen extends AppCompatActivity {
         Animation slideAnimation = AnimationUtils.loadAnimation(this,R.anim.rotation);
         logoImage.startAnimation(slideAnimation);
 
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         long SPLASH_TIMEOUT = 3000;
         new Timer().schedule(new TimerTask() {

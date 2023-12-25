@@ -30,6 +30,24 @@
         android:id="@+id/newPropertyFragment"
         android:name="com.example.bookingappteam9.fragments.NewPropertyFragment"
         android:label="fragment_new_property"
-        tools:layout="@layout/fragment_new_property" />
+        tools:layout="@layout/fragment_new_property" >
+        <action
+            android:id="@+id/action_newPropertyFragment_to_accomodationAddressFragment"
+            app:destination="@id/accomodationAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accomodationAddressFragment"
+        android:name="com.example.bookingappteam9.fragments.AccomodationAddressFragment"
+        android:label="fragment_accomodation_address"
+        tools:layout="@layout/fragment_accomodation_address" >
+        <action
+            android:id="@+id/action_accomodationAddressFragment_to_availabilityFragment"
+            app:destination="@id/availabilityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/availabilityFragment"
+        android:name="com.example.bookingappteam9.fragments.AvailabilityFragment"
+        android:label="fragment_availability"
+        tools:layout="@layout/fragment_availability" />
 
 </navigation>

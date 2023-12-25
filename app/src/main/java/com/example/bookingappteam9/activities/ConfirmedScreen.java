@@ -25,7 +25,7 @@ public class ConfirmedScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmed_screen);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
