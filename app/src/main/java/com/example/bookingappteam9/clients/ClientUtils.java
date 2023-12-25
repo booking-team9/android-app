@@ -35,6 +35,8 @@ public class ClientUtils {
     public static AccountService accountService = retrofit.create(AccountService.class);
     public static HostService hostService = retrofit.create(HostService.class);
     public static GuestService guestService = retrofit.create(GuestService.class);
+    public static AccommodationService accommodationService = retrofit.create(AccommodationService.class);
+
 
 
 }

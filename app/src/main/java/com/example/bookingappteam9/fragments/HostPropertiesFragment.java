@@ -1,27 +1,35 @@
 package com.example.bookingappteam9.fragments;
 
+import static java.sql.DriverManager.println;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.ListFragment;
 
-import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.adapters.AccommodationShortListAdapter;
+import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.databinding.FragmentHostPropertiesBinding;
+import com.example.bookingappteam9.model.AccommodationShort;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HostPropertiesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HostPropertiesFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class HostPropertiesFragment extends ListFragment {
+    private AccommodationShortListAdapter adapter;
+    private ArrayList<AccommodationShort> accommodations;
+    private FragmentHostPropertiesBinding binding;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -29,15 +37,6 @@ public class HostPropertiesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HostPropertiesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HostPropertiesFragment newInstance(String param1, String param2) {
         HostPropertiesFragment fragment = new HostPropertiesFragment();
         Bundle args = new Bundle();
@@ -50,16 +49,63 @@ public class HostPropertiesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        AccommodationShort accommodationShort = new AccommodationShort(1L, "QM", "aleksa kuma 21 kosjeric", 4.5);
+        ArrayList<AccommodationShort> list = new ArrayList<>();
+        list.add(accommodationShort);
+
+//        accommodations = (ArrayList<AccommodationShort>) ClientUtils.accommodationService.getByHostId(1L);
+        adapter = new AccommodationShortListAdapter(getActivity(),list);
+
+        setListAdapter(adapter);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_host_properties, container, false);
+        binding = FragmentHostPropertiesBinding.inflate(inflater,container,false);
+        View root = binding.getRoot();
+
+        Call<ArrayList<AccommodationShort>> call = ClientUtils.accommodationService.getByHostId(1L);
+        Log.d("ALeksa", "qm");
+        call.enqueue(new Callback<ArrayList<AccommodationShort>>() {
+            @Override
+            public void onResponse(Call<ArrayList<AccommodationShort>> call, Response<ArrayList<AccommodationShort>> response) {
+                if (response.code() == 200){
+                    Log.d("QM","Meesage recieved");
+                    System.out.println(response.body());
+                    println("mqm");
+//                    accommodations=list;
+                    ArrayList<AccommodationShort> accommodationShorts = response.body();
+                    addProducts(accommodationShorts);
+//                    setData();
+
+                }else{
+                    Log.d("QM","Meesage recieved: "+response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<AccommodationShort>> call, Throwable t) {
+                Log.d("QM", t.getMessage() != null?t.getMessage():"error");
+            }
+        });
+
+        return root;
+    }
+
+    public void addProducts(ArrayList<AccommodationShort> list){
+        this.adapter.addAll(list);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        // Handle the click on item at 'position'
     }
 }

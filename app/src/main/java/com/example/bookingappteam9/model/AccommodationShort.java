@@ -3,23 +3,21 @@ package com.example.bookingappteam9.model;
 public class AccommodationShort {
     private Long id;
     private String name;
-    private String address;
-    private double rating;
+    private String location;
+    private double averageGrade;
     private AccommodationStatus status;
-    private String image;
 
     public AccommodationShort(Long id, String name, String address, double rating){
         this.id=id;
-        this.address=address;
+        this.location=address;
         this.name=name;
-        this.rating = rating;
+        this.averageGrade = rating;
     }
-    public AccommodationShort(Long id, String name, String address, double rating, String image,AccommodationStatus status){
+    public AccommodationShort(Long id, String name, String address, double rating,AccommodationStatus status){
         this.id=id;
-        this.address=address;
+        this.location=address;
         this.name=name;
-        this.rating = rating;
-        this.image = image;
+        this.averageGrade = rating;
         this.status=status;
     }
 
@@ -47,27 +45,20 @@ public class AccommodationShort {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocation() {
+        return location;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLocation(String address) {
+        this.location = address;
     }
 
-    public double getRating() {
-        return rating;
+    public double getAverageGrade() {
+        return averageGrade;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setAverageGrade(double rating) {
+        this.averageGrade = rating;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 }
