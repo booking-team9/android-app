@@ -49,6 +49,7 @@ public interface AccountService {
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json",
+            "Skip-auth:true"
     })
     @POST("login")
     Call<Token> login(@Body Login login);
@@ -56,6 +57,7 @@ public interface AccountService {
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json",
+            "Skip-auth:true"
     })
     @POST("register")
     Call<Token> register(@Body Register register);
@@ -63,6 +65,7 @@ public interface AccountService {
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json",
+            "Skip-auth:true"
     })
     @GET("register/confirm")
     Call<String> registerConfirm(@Query("token")String token);
