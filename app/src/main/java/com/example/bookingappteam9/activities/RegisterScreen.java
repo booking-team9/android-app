@@ -32,7 +32,7 @@ public class RegisterScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         Button registerButton = binding.registerButton;
         TextInputLayout firstName = binding.registerFirstName;
         TextInputLayout lastName = binding.registerLastName;
@@ -91,7 +91,7 @@ public class RegisterScreen extends AppCompatActivity {
                     }else{
                         role = "Host";
                     }
-                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(cityText, streetText, numberText)));
+                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(cityText, streetText, numberText, countryText)));
                     call.enqueue(new Callback<Token>() {
                         @Override
                         public void onResponse(Call<Token> call, Response<Token> response) {

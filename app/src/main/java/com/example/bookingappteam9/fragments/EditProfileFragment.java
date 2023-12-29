@@ -420,7 +420,7 @@ public class EditProfileFragment extends Fragment {
         host.setLastName(String.valueOf(lastNameText.getText()));
         host.setEmail(String.valueOf(emailText.getText()));
         host.setPhone(String.valueOf(phoneText.getText()));
-        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()));
+        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()), "");
         host.setAddress(address);
     }
     private void editGuestAccout(){
@@ -428,7 +428,7 @@ public class EditProfileFragment extends Fragment {
         guest.setLastName(String.valueOf(lastNameText.getText()));
         guest.setEmail(String.valueOf(emailText.getText()));
         guest.setPhone(String.valueOf(phoneText.getText()));
-        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()));
+        Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()), "");
         guest.setAddress(address);
     }
 //    private void authorize(){

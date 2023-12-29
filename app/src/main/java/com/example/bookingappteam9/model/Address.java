@@ -16,11 +16,15 @@ public class Address {
     @SerializedName("city")
     @Expose
     private String city;
+    @SerializedName("country")
+    @Expose
+    private String country;
 
-    public Address(String street, String number, String city) {
+    public Address(String street, String number, String city, String country) {
         this.street = street;
         this.number = number;
         this.city = city;
+        this.country = country;
     }
 
     public Long getId() {
@@ -55,4 +59,11 @@ public class Address {
         this.number=number;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

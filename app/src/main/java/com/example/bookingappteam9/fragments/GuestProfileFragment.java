@@ -84,7 +84,7 @@ public class GuestProfileFragment extends Fragment {
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findNavController(getParentFragment()).navigate(R.id.action_navigation_guest_profile_to_editProfileFragment);
+                findNavController(getParentFragment()).navigate(R.id.action_guestProfileFragment_to_editProfileFragment);
             }
         });
         return view;
