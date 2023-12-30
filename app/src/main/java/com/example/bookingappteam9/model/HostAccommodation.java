@@ -7,12 +7,23 @@ public class HostAccommodation {
     private AccommodationStatus status;
     private String description;
 
-    public HostAccommodation(Long id, String name, String location, AccommodationStatus status, String description) {
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    private String hostName;
+
+    public HostAccommodation(Long id, String name, String location, AccommodationStatus status, String description, String hostName) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.status = status;
         this.description = description;
+        this.hostName = hostName;
     }
 
     public Long getId() {
