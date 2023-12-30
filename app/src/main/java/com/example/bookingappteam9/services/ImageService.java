@@ -1,4 +1,4 @@
-package com.example.bookingappteam9.clients;
+package com.example.bookingappteam9.services;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

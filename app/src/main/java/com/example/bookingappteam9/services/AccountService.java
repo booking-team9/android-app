@@ -1,4 +1,4 @@
-package com.example.bookingappteam9.clients;
+package com.example.bookingappteam9.services;
 
 import com.example.bookingappteam9.model.Account;
 import com.example.bookingappteam9.model.Login;

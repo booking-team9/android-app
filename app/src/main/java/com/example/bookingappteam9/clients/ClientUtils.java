@@ -1,18 +1,16 @@
 package com.example.bookingappteam9.clients;
 
-import androidx.annotation.NonNull;
-
 import com.example.bookingappteam9.BuildConfig;
-import com.example.bookingappteam9.utils.PrefUtils;
+import com.example.bookingappteam9.services.AccommodationService;
+import com.example.bookingappteam9.services.AccountService;
+import com.example.bookingappteam9.services.GuestService;
+import com.example.bookingappteam9.services.HostService;
+import com.example.bookingappteam9.services.ImageService;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

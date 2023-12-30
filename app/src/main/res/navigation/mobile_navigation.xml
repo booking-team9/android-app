@@ -3,13 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_products_page" />
+    app:startDestination="@+id/allAccommodationsFragment">
 
     <fragment
         android:id="@+id/navigation_host_profile"
@@ -101,5 +95,10 @@
             android:id="@+id/action_guestProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/allAccommodationsFragment"
+        android:name="com.example.bookingappteam9.fragments.accommodations.AllAccommodationsFragment"
+        android:label="fragment_all_accommodations"
+        tools:layout="@layout/fragment_all_accommodations" />
 
 </navigation>

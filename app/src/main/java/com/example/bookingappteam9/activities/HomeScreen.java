@@ -3,35 +3,21 @@ package com.example.bookingappteam9.activities;
 import static android.app.PendingIntent.getActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.databinding.ActivityHomeScreenBinding;
-import com.example.bookingappteam9.fragments.BlankFragment;
-import com.example.bookingappteam9.fragments.EditProfileFragment;
-import com.example.bookingappteam9.fragments.FragmentTransition;
-import com.example.bookingappteam9.fragments.accommodations.AccommodationsPageFragment;
 import com.example.bookingappteam9.model.Role;
-import com.google.android.libraries.places.api.Places;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomeScreen extends AppCompatActivity {
     private ActivityHomeScreenBinding binding;

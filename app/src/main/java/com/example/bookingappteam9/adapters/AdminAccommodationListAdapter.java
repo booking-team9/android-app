@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,7 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.model.AccommodationShort;
+import com.example.bookingappteam9.model.HostAccommodation;
 
 import java.util.ArrayList;
 
@@ -28,10 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationShort> {
-    private ArrayList<AccommodationShort> accommodations;
-    public AdminAccommodationListAdapter(Context context, ArrayList<AccommodationShort> accommodationss){
-        super(context, R.layout.accommodation_short_card, accommodationss);
+public class AdminAccommodationListAdapter extends ArrayAdapter<HostAccommodation> {
+    private ArrayList<HostAccommodation> accommodations;
+    public AdminAccommodationListAdapter(Context context, ArrayList<HostAccommodation> accommodationss){
+        super(context, R.layout.accommodation_host_card, accommodationss);
         this.accommodations = accommodationss;
     }
 
@@ -42,7 +40,7 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
 
     @Nullable
     @Override
-    public AccommodationShort getItem(int position) {
+    public HostAccommodation getItem(int position) {
         return accommodations.get(position);
     }
 
@@ -54,35 +52,33 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        AccommodationShort accommodation = getItem(position);
+        HostAccommodation accommodation = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.accommodation_admin_card,
                     parent, false);
         }
-        RelativeLayout productCard = convertView.findViewById(R.id.accommodation_admin_card_item);
-        ImageView imageView = convertView.findViewById(R.id.accommodation_photo_a);
-        TextView status = convertView.findViewById(R.id.accommodation_status_a);
-        TextView name = convertView.findViewById(R.id.accommodation_name_a);
-        TextView address = convertView.findViewById(R.id.accommodation_address_a);
-        RatingBar rating = convertView.findViewById(R.id.accommodation_rating_a);
-        Button approveButton = convertView.findViewById(R.id.approve_button);
-        Button denyButton = convertView.findViewById(R.id.deny_button);
+        RelativeLayout productCard = convertView.findViewById(R.id.accommodation_card_admin);
+        TextView status = convertView.findViewById(R.id.accommodation_status_admin);
+        TextView host = convertView.findViewById(R.id.accommodation_host_admin);
+        TextView name = convertView.findViewById(R.id.accommodation_name_admin);
+        TextView address = convertView.findViewById(R.id.accommodation_address_admin);
+        Button approveButton = convertView.findViewById(R.id.approve_button_admin);
+        Button denyButton = convertView.findViewById(R.id.deny_button_admin);
 
         if (accommodation != null) {
-            imageView.setImageResource(accommodation.getImage());
             status.setText(accommodation.getStatus().toString());
             name.setText(accommodation.getName());
-            address.setText(accommodation.getLocation());
-            rating.setRating((float) accommodation.getAverageGrade());
+            //address.setText(accommodation.getAddress());
+            host.setText("df");
         }
         approveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Call<AccommodationShort> call = ClientUtils.accommodationService.approveAccommodation(accommodation.getId());
-                call.enqueue(new Callback<AccommodationShort>() {
+                Call<HostAccommodation> call = ClientUtils.accommodationService.approveAccommodation(accommodation.getId());
+                call.enqueue(new Callback<HostAccommodation>() {
                     @Override
-                    public void onResponse(Call<AccommodationShort> call, Response<AccommodationShort> response) {
+                    public void onResponse(Call<HostAccommodation> call, Response<HostAccommodation> response) {
                         if (response.code()==200){
                             AlertDialog.Builder builderGood = new AlertDialog.Builder(v.getContext());
                             builderGood.setTitle("Success");
@@ -100,7 +96,7 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
                     }
 
                     @Override
-                    public void onFailure(Call<AccommodationShort> call, Throwable t) {
+                    public void onFailure(Call<HostAccommodation> call, Throwable t) {
                         AlertDialog.Builder builderBad = new AlertDialog.Builder(v.getContext());
                         builderBad.setTitle("Fail");
                         builderBad.setMessage("Failed to approve accommodation");
@@ -121,10 +117,10 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
         denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Call<AccommodationShort> call = ClientUtils.accommodationService.denyAccommodation(accommodation.getId());
-                call.enqueue(new Callback<AccommodationShort>() {
+                Call<HostAccommodation> call = ClientUtils.accommodationService.denyAccommodation(accommodation.getId());
+                call.enqueue(new Callback<HostAccommodation>() {
                     @Override
-                    public void onResponse(Call<AccommodationShort> call, Response<AccommodationShort> response) {
+                    public void onResponse(Call<HostAccommodation> call, Response<HostAccommodation> response) {
                         if (response.code() == 200) {
                             AlertDialog.Builder builderGood = new AlertDialog.Builder(v.getContext());
                             builderGood.setTitle("Success");
@@ -142,7 +138,7 @@ public class AdminAccommodationListAdapter extends ArrayAdapter<AccommodationSho
                     }
 
                     @Override
-                    public void onFailure(Call<AccommodationShort> call, Throwable t) {
+                    public void onFailure(Call<HostAccommodation> call, Throwable t) {
                         AlertDialog.Builder builderBad = new AlertDialog.Builder(v.getContext());
                         builderBad.setTitle("Fail");
                         builderBad.setMessage("Failed to deny accommodation");

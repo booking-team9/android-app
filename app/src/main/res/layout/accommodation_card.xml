@@ -1,60 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/accommodation_card"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:orientation="horizontal"
-    android:background="@drawable/border_background"
-    android:padding="10dp"
-    android:layout_marginVertical="20dp"
-    android:id="@+id/accommodation_card_item"
-    >
-    <ImageView
-        android:id="@+id/accommodation_image"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/hotel"
-        android:contentDescription="@string/hotel_desc"
-        android:scaleType="fitXY"/>
-    <LinearLayout
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/accommodation_title"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_margin="5dp"
-            android:text="@string/hotel_desc"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/accommodation_description"
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:layout_margin="5dp"
-            android:text="@string/hotel_desc"
-            android:textSize="14sp"
-            android:textStyle="italic"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/md_theme_light_background">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/accommodation_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="More"/>
+            <!-- Media -->
+            <ImageView
+                android:id="@+id/accommodation_image"
+                android:layout_width="150dp"
+                android:layout_height="240dp"
+                android:contentDescription="@string/content_description_media"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ap2" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/accommodation_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/name"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/accommodation_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/address"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_name"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_name" />
+
+                <TextView
+                    android:id="@+id/accommodation_description"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="3"
+                    android:text="@string/description"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_address"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_address" />
+
+
+
+                <TextView
+                    android:id="@+id/priceTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="16dp"
+                    android:text="@string/price"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_description"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_description" />
+
+                <TextView
+                    android:id="@+id/accommodation_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/rounded_corner"
+                    android:padding="12dp"
+                    android:text="200$"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.84"
+                    app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/accommodation_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rounded_corner"
+                    android:padding="5dp"
+                    android:text="4.5"
+                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_description" />
+
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/baseline_star_rate_24"
+                    app:layout_constraintStart_toEndOf="@+id/accommodation_rating"
+                    app:layout_constraintTop_toTopOf="@+id/accommodation_rating" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/materialButton"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/more_info"
+                    app:icon="@drawable/baseline_arrow_right_alt_24"
+                    app:iconGravity="textEnd"
+                    app:iconPadding="3dp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/accommodation_rating"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.66"
+                    app:layout_constraintStart_toEndOf="@+id/star" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Buttons -->
+
         </LinearLayout>
 
+    </com.google.android.material.card.MaterialCardView>
 
-
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

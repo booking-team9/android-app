@@ -4,21 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/accommodation_card_admin">
+    android:id="@+id/host_accommodation_card">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_margin="8dp"
+        >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <!-- Media -->
+            <ImageView
+                android:id="@+id/host_accommodation_image"
+                android:layout_width="150dp"
+                android:layout_height="240dp"
+                android:contentDescription="@string/content_description_media"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ap2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout"
@@ -27,7 +34,7 @@
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
-                    android:id="@+id/accommodation_name_admin"
+                    android:id="@+id/accommodation_name_host"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -41,56 +48,63 @@
                     android:id="@+id/accommodation_host_admin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/host"
-                    android:textAppearance="?attr/textAppearanceBodyMedium"
-                    android:textColor="?android:attr/textColorSecondary"
-                    app:layout_constraintStart_toStartOf="@+id/accommodation_name_admin"
-                    app:layout_constraintTop_toBottomOf="@+id/accommodation_name_admin" />
-
-                <TextView
-                    android:id="@+id/accommodation_address_admin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/address"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_name_host"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_name_host" />
+
+                <TextView
+                    android:id="@+id/accommodation_description_host"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:lines="3"
+                    android:text="@string/description"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/accommodation_host_admin"
                     app:layout_constraintTop_toBottomOf="@+id/accommodation_host_admin" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/accommodation_status_admin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/active"
-                    app:layout_constraintStart_toStartOf="@+id/accommodation_address_admin"
-                    app:layout_constraintTop_toBottomOf="@+id/accommodation_address_admin" />
 
-                <Button
-                    android:id="@+id/deny_button_admin"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/accommodation_status_host"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:text="@string/deny"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/approve_button_admin"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/approve_button_admin"
-                    app:layout_constraintTop_toBottomOf="@+id/approve_button_admin"
-                    app:layout_constraintVertical_bias="0.153" />
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="Status"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_description_host" />
 
                 <Button
-                    android:id="@+id/approve_button_admin"
-                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:id="@+id/accommodation_view_host"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="91dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="View"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/accommodation_edit_host"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/approve"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Edit"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/accommodation_view_host"
+                    app:layout_constraintTop_toTopOf="@+id/accommodation_view_host" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

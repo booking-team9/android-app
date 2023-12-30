@@ -1,6 +1,6 @@
-package com.example.bookingappteam9.clients;
+package com.example.bookingappteam9.services;
 
-import com.example.bookingappteam9.model.Host;
+import com.example.bookingappteam9.model.Guest;
 
 import java.util.ArrayList;
 
@@ -13,33 +13,32 @@ import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface HostService {
+public interface GuestService {
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @GET("hosts/all")
-    Call<ArrayList<Host>> getAll();
+    @GET("guests/all")
+    Call<ArrayList<Guest>> getAll();
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json",
     })
-    @GET("hosts/{id}")
-    Call<Host> getById(@Path("id") Long id);
+    @GET("guests/{id}")
+    Call<Guest> getById(@Path("id") Long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @PUT("hosts/update")
-    Call<Host> edit(@Body Host host);
+    @PUT("guests/update")
+    Call<Guest> edit(@Body Guest guest);
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @DELETE("hosts/{id}")
-    Call<ResponseBody> deleteHost(@Path("id") Long id);
-
+    @DELETE("guests/{id}")
+    Call<ResponseBody> deleteGuest(@Path("id") Long id);
 }

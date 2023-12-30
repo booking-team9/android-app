@@ -5,25 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/my_properties"
+        android:textSize="26sp" />
 
     <Button
         android:id="@+id/addProperty"
         android:layout_marginBottom="30dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_property" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/host_properties_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Add property" />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_margin="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="300dp"
-
-        tools:listitem="@layout/accommodation_short_card"
-        />
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_corner_gray"
+        android:minHeight="150dp" />
 
 </LinearLayout>
