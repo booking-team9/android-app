@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.auth0.android.jwt.Claim;
@@ -20,30 +19,25 @@ import com.example.bookingappteam9.utils.AccountValidator;
 import com.example.bookingappteam9.utils.PrefUtils;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.internal.LinkedTreeMap;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_screen);
+        setContentView(R.layout.activity_login);
         //getSupportActionBar().hide();
         Button registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginScreen.this, RegisterScreen.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -71,11 +65,11 @@ public class LoginScreen extends AppCompatActivity {
                                 String raw_role = jwt.getClaim("role").asObject(JsonArray.class).get(0).getAsJsonObject().get("authority").getAsString();
                                 String role = parseRole(raw_role);
                                 PrefUtils.saveLoginInfo(getApplicationContext(), email, token, role, id);
-                                Intent intent = new Intent(LoginScreen.this, HomeScreen.class);
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 intent.putExtra("role", role);
                                 startActivity(intent);
                             }else{
-                                Toast.makeText(LoginScreen.this, "Unsuccessful login!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Unsuccessful login!", Toast.LENGTH_SHORT).show();
                                 Log.d("Login","Meesage recieved: "+response.code());
                             }
                         }
@@ -84,7 +78,7 @@ public class LoginScreen extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Token> call, Throwable t) {
-                            Toast.makeText(LoginScreen.this, "Server error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Server error!", Toast.LENGTH_SHORT).show();
                             Log.d("Login", t.getMessage() != null?t.getMessage():"error");
                         }
                     });

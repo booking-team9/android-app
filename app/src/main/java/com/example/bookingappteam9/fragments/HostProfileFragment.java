@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookingappteam9.R;
-import com.example.bookingappteam9.activities.HomeScreen;
+import com.example.bookingappteam9.activities.HomeActivity;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentHostProfileBinding;
 import com.example.bookingappteam9.model.Address;
@@ -42,17 +42,17 @@ public class HostProfileFragment extends Fragment {
     private TextView phone;
     private TextView fullAddress;
     private TextView profileType;
-    private static HomeScreen ARG_PARAM1 = new HomeScreen();
+    private static HomeActivity ARG_PARAM1 = new HomeActivity();
     private static final String ARG_PARAM2 = "param2";
     private Gson gson = new Gson();
 
-    private HomeScreen mParam1;
+    private HomeActivity mParam1;
     private String mParam2;
 
     public HostProfileFragment() {
         // Required empty public constructor
     }
-    public static HostProfileFragment newInstance(HomeScreen param1, String param2) {
+    public static HostProfileFragment newInstance(HomeActivity param1, String param2) {
         HostProfileFragment fragment = new HostProfileFragment();
         Bundle args = new Bundle();
         ARG_PARAM1 = param1;

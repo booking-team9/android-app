@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.databinding.ActivityRegisterScreenBinding;
+import com.example.bookingappteam9.databinding.ActivityRegisterBinding;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Register;
 import com.example.bookingappteam9.model.Role;
@@ -24,13 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterScreen extends AppCompatActivity {
-    ActivityRegisterScreenBinding binding;
+public class RegisterActivity extends AppCompatActivity {
+    ActivityRegisterBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRegisterScreenBinding.inflate(getLayoutInflater());
+        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //getSupportActionBar().hide();
         Button registerButton = binding.registerButton;
@@ -97,18 +97,18 @@ public class RegisterScreen extends AppCompatActivity {
                         public void onResponse(Call<Token> call, Response<Token> response) {
                             if (response.code() == 200){
                                 Log.d("Register","Meesage recieved");
-                                Intent intent = new Intent(RegisterScreen.this, ConfirmationScreen.class);
+                                Intent intent = new Intent(RegisterActivity.this, ConfirmationActivity.class);
                                 startActivity(intent);
 
                             }else{
-                                Toast.makeText(RegisterScreen.this, "Unsuccessful registration!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Unsuccessful registration!", Toast.LENGTH_SHORT).show();
                                 Log.d("Register","Meesage recieved: "+response.code());
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Token> call, Throwable t) {
-                            Toast.makeText(RegisterScreen.this, "Server error!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Server error!", Toast.LENGTH_SHORT).show();
                             Log.d("Register", t.getMessage() != null?t.getMessage():"error");
                         }
                     });

@@ -15,12 +15,12 @@ import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.example.bookingappteam9.R;
-import com.example.bookingappteam9.databinding.ActivityHomeScreenBinding;
+import com.example.bookingappteam9.databinding.ActivityHomeBinding;
 import com.example.bookingappteam9.model.Role;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeScreen extends AppCompatActivity {
-    private ActivityHomeScreenBinding binding;
+public class HomeActivity extends AppCompatActivity {
+    private ActivityHomeBinding binding;
     private BottomNavigationView navView;
     private boolean mKeyboardVisible;
 
@@ -34,7 +34,7 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
+        binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //getSupportActionBar().hide();
 

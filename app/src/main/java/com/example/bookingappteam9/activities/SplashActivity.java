@@ -15,12 +15,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashScreen extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.activity_splash);
 
         ImageView logoImage = findViewById(R.id.logoImage);
         Animation slideAnimation = AnimationUtils.loadAnimation(this,R.anim.rotation);
@@ -32,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, LoginScreen.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -13,18 +13,17 @@ import android.widget.Toast;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.utils.PrefUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConfirmedScreen extends AppCompatActivity {
+public class ConfirmedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmed_screen);
+        setContentView(R.layout.activity_confirmed);
         //getSupportActionBar().hide();
         // ATTENTION: This was auto-generated to handle app links.
         Intent appLinkIntent = getIntent();
@@ -37,7 +36,7 @@ public class ConfirmedScreen extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConfirmedScreen.this, LoginScreen.class);
+                Intent intent = new Intent(ConfirmedActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +58,7 @@ public class ConfirmedScreen extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(ConfirmedScreen.this, "Server error!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfirmedActivity.this, "Server error!", Toast.LENGTH_SHORT).show();
                     Log.d("Confirm", t.getMessage() != null?t.getMessage():"error");
                 }
             });
