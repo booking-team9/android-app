@@ -19,6 +19,29 @@ public class Address {
     @SerializedName("country")
     @Expose
     private String country;
+    @SerializedName("latitude")
+    @Expose
+    private Double latitude;
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    @SerializedName("longitude")
+    @Expose
+    private Double longitude;
 
     public Address(String street, String number, String city, String country) {
         this.street = street;
