@@ -11,24 +11,27 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/my_properties"
         android:textSize="26sp"
         app:layout_constraintEnd_toStartOf="@+id/addProperty"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textAlignment="gravity" />
 
     <Button
         android:id="@+id/addProperty"
         style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:includeFontPadding="false"
         android:text="@string/add_property"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/host_properties_list"

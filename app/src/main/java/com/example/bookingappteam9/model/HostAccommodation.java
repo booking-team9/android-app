@@ -1,11 +1,14 @@
 package com.example.bookingappteam9.model;
 
+import java.util.List;
+
 public class HostAccommodation {
     private Long id;
     private String name;
     private String location;
     private AccommodationStatus status;
     private String description;
+    private List<String> photos;
 
     public String getHostName() {
         return hostName;
@@ -17,12 +20,13 @@ public class HostAccommodation {
 
     private String hostName;
 
-    public HostAccommodation(Long id, String name, String location, AccommodationStatus status, String description, String hostName) {
+    public HostAccommodation(Long id, String name, String location, AccommodationStatus status, String description, List<String> photos, String hostName) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.status = status;
         this.description = description;
+        this.photos = photos;
         this.hostName = hostName;
     }
 
@@ -64,5 +68,13 @@ public class HostAccommodation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 }

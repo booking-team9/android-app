@@ -1,5 +1,6 @@
 package com.example.bookingappteam9.model;
 
+import java.util.List;
 import java.util.Set;
 
 public class AccommodationShort {
@@ -8,9 +9,9 @@ public class AccommodationShort {
     private String location;
     private String description;
     private Double averageGrade;
-    private Set<String> images;
+    private List<String> images;
 
-    public AccommodationShort(Long id, String name, String location, String description, Double averageGrade, Set<String> images) {
+    public AccommodationShort(Long id, String name, String location, String description, Double averageGrade, List<String> images) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -59,11 +60,11 @@ public class AccommodationShort {
         this.averageGrade = averageGrade;
     }
 
-    public Set<String> getImages() {
+    public List<String> getImages() {
         return images;
     }
 
-    public void setImages(Set<String> images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 }

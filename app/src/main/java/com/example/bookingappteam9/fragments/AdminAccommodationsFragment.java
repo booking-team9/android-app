@@ -5,22 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.bookingappteam9.R;
-import com.example.bookingappteam9.adapters.AdminAccommodationListAdapter;
 import com.example.bookingappteam9.adapters.AdminAccommodationsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAdminAccommodationsBinding;
 import com.example.bookingappteam9.model.HostAccommodation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

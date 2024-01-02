@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ClientUtils {
     public static final String SERVICE_API_PATH = "http://" + BuildConfig.IP_ADDR + ":8080/api/";
+    public static final String SERVICE_PATH_RAW = "http://" + BuildConfig.IP_ADDR + ":8080/";
 
     public static OkHttpClient test() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -42,7 +43,9 @@ public class ClientUtils {
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).setLenient().create()))
             .client(test())
             .build();
-
+    public static String getPhotoPath(String photo){
+        return SERVICE_PATH_RAW + "files/"+photo;
+    }
     public static AccountService accountService = retrofit.create(AccountService.class);
     public static HostService hostService = retrofit.create(HostService.class);
     public static GuestService guestService = retrofit.create(GuestService.class);

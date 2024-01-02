@@ -3,12 +3,15 @@ package com.example.bookingappteam9.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.model.AccommodationShort;
 import com.example.bookingappteam9.model.HostAccommodation;
 
@@ -17,6 +20,8 @@ import java.util.List;
 public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodationsAdapter.ViewHolder> {
 
     private List<AccommodationShort> accommodationList;
+
+    private View view;
     public AllAccommodationsAdapter(List<AccommodationShort> accommodations){
         this.accommodationList = accommodations;
     }
@@ -25,7 +30,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accommodation_card, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accommodation_card, parent, false);
         return new ViewHolder(view);
     }
 
@@ -37,8 +42,10 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
         holder.getPrice().setVisibility(View.INVISIBLE);
         holder.getPriceTag().setVisibility(View.INVISIBLE);
         holder.getDescription().setText(accommodationList.get(position).getDescription());
+        Glide.with(view).load(ClientUtils.getPhotoPath(accommodationList.get(position).getImages().get(0))).into(holder.getImage());
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -56,6 +63,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
         private final TextView rating;
         private final TextView price;
         private final TextView priceTag;
+        private final ImageView image;
 
         public ViewHolder(View view) {
             super(view);
@@ -67,6 +75,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
             rating = (TextView) view.findViewById(R.id.accommodation_rating);
             price = (TextView) view.findViewById(R.id.accommodation_price);
             priceTag = (TextView) view.findViewById(R.id.priceTag);
+            image = (ImageView) view.findViewById(R.id.accommodation_image);
         }
 
         public TextView getName() {
@@ -89,5 +98,9 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
             return price;
         }
         public TextView getPriceTag(){return priceTag;}
+
+        public ImageView getImage() {
+            return image;
+        }
     }
 }
