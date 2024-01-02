@@ -70,6 +70,7 @@ public class AllAccommodationsFragment extends Fragment {
             public void onResponse(Call<ArrayList<AccommodationShort>> call, Response<ArrayList<AccommodationShort>> response) {
                 if (response.code() == 200){
                     adapter.addAll(response.body());
+                    binding.progressLoaderAllAccommodations.setVisibility(View.INVISIBLE);
                 }else{
                     Log.d("QM","Meesage recieved: "+response.code());
 
