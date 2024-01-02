@@ -1,14 +1,46 @@
 package com.example.bookingappteam9.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.ParcelFileDescriptor;
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.adapters.NewPhotosAdapter;
+import com.example.bookingappteam9.databinding.FragmentAccommodationPhotosBinding;
+import com.example.bookingappteam9.model.Photo;
+import com.example.bookingappteam9.viewmodels.NewAccommodationViewModel;
+import com.google.android.material.chip.Chip;
+
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,35 +48,60 @@ import com.example.bookingappteam9.R;
  * create an instance of this fragment.
  */
 public class AccommodationPhotosFragment extends Fragment {
+    private NewPhotosAdapter adapter;
+    private NewAccommodationViewModel viewModel;
+    private FragmentAccommodationPhotosBinding binding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
+            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(7), uris -> {
+                // Callback is invoked after the user selects media items or closes the
+                // photo picker.
+                if (!uris.isEmpty()) {
+                    Log.d("PhotoPicker", "Number of items selected: " + uris.size());
+                    for (int i = 0; i < uris.size(); i++) {
+                        int finalI = i;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Photo newPhoto = new Photo(uris.get(finalI), "image1", getBitmapFromUri(uris.get(finalI)));
+                                Cursor returnCursor =
+                                        getContext().getContentResolver().query(uris.get(finalI), null, null, null, null);
+                                returnCursor.moveToFirst();
+                                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                                newPhoto.setName(returnCursor.getString(nameIndex));
+                                adapter.addPhoto(newPhoto);
+                            }
+                        }).run();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+                    }
+                } else {
+                    Log.d("PhotoPicker", "No media selected");
+                }
+            });
+
+
+    private Bitmap getBitmapFromUri(Uri uri) {
+        ParcelFileDescriptor parcelFileDescriptor = null;
+        try {
+            parcelFileDescriptor = getContext().getContentResolver().openFileDescriptor(uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            parcelFileDescriptor.close();
+            return image;
+        } catch (IOException e) {
+            Log.d("PhotoPicker", "Error with file");
+        }
+        return null;
+
+    }
 
     public AccommodationPhotosFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccommodationPhotosFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static AccommodationPhotosFragment newInstance(String param1, String param2) {
         AccommodationPhotosFragment fragment = new AccommodationPhotosFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -52,15 +109,69 @@ public class AccommodationPhotosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentAccommodationPhotosBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        ArrayList<Photo> addedPhotos = new ArrayList<>();
+        adapter = new NewPhotosAdapter(addedPhotos);
+        binding.newPhotosList.setAdapter(adapter);
+        binding.newPhotosList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.addPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                        .build());
+            }
+        });
+        binding.newPhotoNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Photo> photos = adapter.getPhotos();
+                if (photos.size() > 0) {
+                    viewModel.setRawPhotos(new ArrayList<>(photos));
+                    viewModel.setPhotos(photos.stream().map(photo -> photo.getName()).collect(Collectors.toList()));
+                    viewModel.setThirdStepEmpty(false);
+                    findNavController(getParentFragment()).navigate(R.id.action_accommodationPhotosFragment_to_availabilityFragment);
+
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Continue without photos").setTitle("You haven't selected any photo!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            findNavController(getParentFragment()).navigate(R.id.action_accommodationPhotosFragment_to_availabilityFragment);
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+
+
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accommodation_photos, container, false);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(NewAccommodationViewModel.class);
+        if (!viewModel.getThirdStepEmpty()) {
+            viewModel.getRawPhotos().observe(getViewLifecycleOwner(), photos -> {
+                for (Photo ph : photos) {
+                    this.adapter.addPhoto(ph);
+                }
+            });
+        }
+
+
     }
 }

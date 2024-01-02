@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.bookingappteam9.model.Address;
+import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.TimeSlot;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class NewAccommodationViewModel extends ViewModel {
     }
 
     private Boolean secondStepEmpty = true;
+    private Boolean thirdStepEmpty = true;
     private MutableLiveData<String> name = new MutableLiveData<>();
     private MutableLiveData<String> type = new MutableLiveData<>();
     private MutableLiveData<String> description = new MutableLiveData<>();
@@ -27,7 +29,8 @@ public class NewAccommodationViewModel extends ViewModel {
     private MutableLiveData<Integer> maxGuests = new MutableLiveData<>();
     private MutableLiveData<List<String>> amenities = new MutableLiveData<>();
     private MutableLiveData<Address> address = new MutableLiveData<>();
-    private MutableLiveData<String> photos = new MutableLiveData<>();
+    private MutableLiveData<List<String>> photos = new MutableLiveData<>();
+    private MutableLiveData<List<Photo>> rawPhotos = new MutableLiveData<>();
     private MutableLiveData<List<TimeSlot>> availability = new MutableLiveData<>();
     private MutableLiveData<Boolean> pricePerGuest = new MutableLiveData<>();
     private MutableLiveData<Boolean> autoApproval = new MutableLiveData<>();
@@ -54,7 +57,7 @@ public class NewAccommodationViewModel extends ViewModel {
     public void setAddress(Address address){
         this.address.setValue(address);
     }
-    public void setPhotos(String photos){
+    public void setPhotos(List<String> photos){
         this.photos.setValue(photos);
     }
     public void setAvailability(List<TimeSlot> availability){
@@ -98,7 +101,7 @@ public class NewAccommodationViewModel extends ViewModel {
         return address;
     }
 
-    public MutableLiveData<String> getPhotos() {
+    public MutableLiveData<List<String>> getPhotos() {
         return photos;
     }
 
@@ -124,5 +127,21 @@ public class NewAccommodationViewModel extends ViewModel {
 
     public void setFirstStepEmpty(Boolean firstStepEmpty) {
         this.firstStepEmpty = firstStepEmpty;
+    }
+
+    public Boolean getThirdStepEmpty() {
+        return thirdStepEmpty;
+    }
+
+    public void setThirdStepEmpty(Boolean thirdStepEmpty) {
+        this.thirdStepEmpty = thirdStepEmpty;
+    }
+
+    public MutableLiveData<List<Photo>> getRawPhotos() {
+        return rawPhotos;
+    }
+
+    public void setRawPhotos(List<Photo> rawPhotos) {
+        this.rawPhotos.setValue(rawPhotos);
     }
 }

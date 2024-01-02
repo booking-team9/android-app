@@ -79,8 +79,8 @@
         android:label="fragment_accomodation_address"
         tools:layout="@layout/fragment_accomodation_address" >
         <action
-            android:id="@+id/action_accomodationAddressFragment_to_availabilityFragment"
-            app:destination="@id/availabilityFragment" />
+            android:id="@+id/action_accomodationAddressFragment_to_accommodationPhotosFragment"
+            app:destination="@id/accommodationPhotosFragment" />
     </fragment>
     <fragment
         android:id="@+id/availabilityFragment"
@@ -100,5 +100,14 @@
         android:name="com.example.bookingappteam9.fragments.accommodations.AllAccommodationsFragment"
         android:label="fragment_all_accommodations"
         tools:layout="@layout/fragment_all_accommodations" />
+    <fragment
+        android:id="@+id/accommodationPhotosFragment"
+        android:name="com.example.bookingappteam9.fragments.AccommodationPhotosFragment"
+        android:label="fragment_accommodation_photos"
+        tools:layout="@layout/fragment_accommodation_photos" >
+        <action
+            android:id="@+id/action_accommodationPhotosFragment_to_availabilityFragment"
+            app:destination="@id/availabilityFragment" />
+    </fragment>
 
 </navigation>

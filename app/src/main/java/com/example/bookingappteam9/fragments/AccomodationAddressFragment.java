@@ -72,30 +72,6 @@ public class AccomodationAddressFragment extends Fragment{
     private TextInputLayout country;
     private TextInputLayout city;
 
-
-    /*ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
-            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(7), uris -> {
-                // Callback is invoked after the user selects media items or closes the
-                // photo picker.
-                if (!uris.isEmpty()) {
-                    Log.d("PhotoPicker", "Number of items selected: " + uris.size());
-                    for (int i = 0; i < uris.size(); i++){
-                        Chip chip = new Chip(getContext());
-                        String name[] = uris.get(i).toString().split("/");
-                        //chip.setText(name[name.length-1]);
-                        chip.setText("photo" + String.valueOf(i+1));
-                        chip.setOnCloseIconClickListener(v1 -> {
-                            addedPhotos.removeView(chip);
-                        });
-                        chip.setCloseIconVisible(true);
-                        addedPhotos.addView(chip);
-                    }
-                } else {
-                    Log.d("PhotoPicker", "No media selected");
-                }
-            });*/
-
-
     private final ActivityResultLauncher<Intent> startAutocomplete = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -185,16 +161,6 @@ public class AccomodationAddressFragment extends Fragment{
             }
         });
         View view = binding.getRoot();
-        /*addedPhotos = binding.addedPhotos;
-        binding.addPhotos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                        .build());
-            }
-        });*/
-
         Button nextButton = binding.nextButton;
         nextButton.setOnClickListener(v -> next());
         return view;
@@ -231,7 +197,7 @@ public class AccomodationAddressFragment extends Fragment{
             address.setLongitude(coords.longitude);
             viewModel.setAddress(address);
             viewModel.setSecondStepEmpty(false);
-            findNavController(getParentFragment()).navigate(R.id.action_accomodationAddressFragment_to_availabilityFragment);
+            findNavController(getParentFragment()).navigate(R.id.action_accomodationAddressFragment_to_accommodationPhotosFragment);
         }
 
 
