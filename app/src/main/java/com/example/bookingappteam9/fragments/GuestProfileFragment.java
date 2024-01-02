@@ -2,6 +2,7 @@ package com.example.bookingappteam9.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.activities.HomeActivity;
+import com.example.bookingappteam9.activities.SplashActivity;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentGuestProfileBinding;
 import com.example.bookingappteam9.model.Address;
@@ -78,6 +80,14 @@ public class GuestProfileFragment extends Fragment {
         phone = binding.profileGuestPhone;
         email = binding.profileGuestEmail;
         profileType = binding.guestType;
+        binding.logoutButtonGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrefUtils.clearUserInfo(getActivity().getApplicationContext());
+                Intent intent = new Intent(getActivity(), SplashActivity.class);
+                startActivity(intent);
+            }
+        });
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         id = userInfo.getId();
         ImageView editImage = (ImageView) view.findViewById(R.id.edit_button);

@@ -10,7 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.utils.PrefUtils;
 
+import java.time.Instant;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,6 +34,17 @@ public class SplashActivity extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
+                if (!PrefUtils.getUserInfo(getApplicationContext()).getEmail().isEmpty()){
+                    Long tokenExp = PrefUtils.getUserInfo(getApplicationContext()).getTokenExpiration();
+                    if (Instant.ofEpochSecond(tokenExp).isAfter(Instant.now())){
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        intent.putExtra("role", PrefUtils.getUserInfo(getApplicationContext()).getRole().toString());
+                        startActivity(intent);
+                        finish();
+                        return;
+                    }
+                }
+
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

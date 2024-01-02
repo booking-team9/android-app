@@ -113,5 +113,10 @@
             android:id="@+id/action_accommodationPhotosFragment_to_availabilityFragment"
             app:destination="@id/availabilityFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/adminProfileFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminProfileFragment"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" />
 
 </navigation>

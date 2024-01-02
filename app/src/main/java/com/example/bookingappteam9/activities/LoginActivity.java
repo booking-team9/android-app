@@ -64,7 +64,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Long id = jwt.getClaim("id").asLong();
                                 String raw_role = jwt.getClaim("role").asObject(JsonArray.class).get(0).getAsJsonObject().get("authority").getAsString();
                                 String role = parseRole(raw_role);
-                                PrefUtils.saveLoginInfo(getApplicationContext(), email, token, role, id);
+                                Long tokenExp = jwt.getClaim("exp").asLong();
+                                PrefUtils.saveLoginInfo(getApplicationContext(), email, token, role, id, tokenExp);
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 intent.putExtra("role", role);
                                 startActivity(intent);
