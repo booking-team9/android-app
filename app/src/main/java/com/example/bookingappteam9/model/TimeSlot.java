@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.time.LocalDateTime;
 
 public class TimeSlot {
@@ -8,12 +10,16 @@ public class TimeSlot {
     private LocalDateTime endDate;
     private double price;
     private boolean isOccupied;
+    @Expose(serialize = false, deserialize = false)
+    private String rangeString;
+    public TimeSlot(){}
 
-    public TimeSlot(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean isOccupied) {
+    public TimeSlot(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, boolean isOccupied, String rangeString) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
+        this.rangeString = rangeString;
         this.isOccupied = isOccupied;
     }
 
@@ -55,5 +61,13 @@ public class TimeSlot {
 
     public void setOccupied(boolean occupied) {
         isOccupied = occupied;
+    }
+
+    public String getRangeString() {
+        return rangeString;
+    }
+
+    public void setRangeString(String rangeString) {
+        this.rangeString = rangeString;
     }
 }

@@ -22,6 +22,7 @@ public class NewAccommodationViewModel extends ViewModel {
 
     private Boolean secondStepEmpty = true;
     private Boolean thirdStepEmpty = true;
+    private Boolean fourthStepEmpty = true;
     private MutableLiveData<String> name = new MutableLiveData<>();
     private MutableLiveData<String> type = new MutableLiveData<>();
     private MutableLiveData<String> description = new MutableLiveData<>();
@@ -143,5 +144,13 @@ public class NewAccommodationViewModel extends ViewModel {
 
     public void setRawPhotos(List<Photo> rawPhotos) {
         this.rawPhotos.setValue(rawPhotos);
+    }
+
+    public Boolean getFourthStepEmpty() {
+        return fourthStepEmpty;
+    }
+
+    public void setFourthStepEmpty(Boolean fourthStepEmpty) {
+        this.fourthStepEmpty = fourthStepEmpty;
     }
 }

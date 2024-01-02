@@ -6,8 +6,11 @@ import com.example.bookingappteam9.services.AccountService;
 import com.example.bookingappteam9.services.GuestService;
 import com.example.bookingappteam9.services.HostService;
 import com.example.bookingappteam9.services.ImageService;
+import com.example.bookingappteam9.utils.LocalDateTimeDeserializer;
+import com.example.bookingappteam9.utils.LocalDateTimeSerializer;
 import com.google.gson.GsonBuilder;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -36,7 +39,7 @@ public class ClientUtils {
 
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SERVICE_API_PATH)
-            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).setLenient().create()))
             .client(test())
             .build();
 
