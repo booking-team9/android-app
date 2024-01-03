@@ -118,5 +118,15 @@
         android:name="com.example.bookingappteam9.fragments.AdminProfileFragment"
         android:label="fragment_admin_profile"
         tools:layout="@layout/fragment_admin_profile" />
+    <fragment
+        android:id="@+id/navigation_guest_reservations"
+        android:name="com.example.bookingappteam9.fragments.GuestReservationsFragment"
+        android:label="fragment_guest_reservations"
+        tools:layout="@layout/fragment_guest_reservations" />
+    <fragment
+        android:id="@+id/navigation_host_reservations"
+        android:name="com.example.bookingappteam9.fragments.HostReservationsFragment"
+        android:label="fragment_host_reservations"
+        tools:layout="@layout/fragment_host_reservations" />
 
 </navigation>

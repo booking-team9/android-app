@@ -161,5 +161,6 @@
     <string name="photos">Photos</string>
     <string name="add_photo">Add photo</string>
     <string name="remove">Remove</string>
+    <string name="reservations">Reservations</string>
 
 </resources>
