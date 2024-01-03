@@ -18,7 +18,7 @@
             android:layout_height="300dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            android:src="@drawable/logo" />
+            android:src="@drawable/staylogo" />
 
 
     </LinearLayout>

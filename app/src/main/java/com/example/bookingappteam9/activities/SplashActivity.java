@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         ImageView logoImage = findViewById(R.id.logoImage);
-        Animation slideAnimation = AnimationUtils.loadAnimation(this,R.anim.rotation);
+        Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         logoImage.startAnimation(slideAnimation);
 
         //getSupportActionBar().hide();
