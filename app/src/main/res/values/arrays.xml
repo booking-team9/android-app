@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+        <item>Room</item>
+        <item>Apartment</item>
+        <item>Hotel</item>
+        <item>Villa</item>
+    </string-array>
+</resources>

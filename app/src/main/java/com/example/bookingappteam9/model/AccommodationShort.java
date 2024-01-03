@@ -1,34 +1,23 @@
 package com.example.bookingappteam9.model;
 
+import java.util.List;
+import java.util.Set;
+
 public class AccommodationShort {
     private Long id;
     private String name;
     private String location;
-    private double averageGrade;
-    private AccommodationStatus status;
-    private int image;
+    private String description;
+    private Double averageGrade;
+    private List<String> images;
 
-    public AccommodationShort(Long id, String name, String address, double rating){
-        this.id=id;
-        this.location=address;
-        this.name=name;
-        this.averageGrade = rating;
-    }
-    public AccommodationShort(Long id, String name, String address, double rating,AccommodationStatus status, int image){
-        this.id=id;
-        this.location=address;
-        this.name=name;
-        this.averageGrade = rating;
-        this.status=status;
-        this.image = image;
-    }
-
-    public AccommodationStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AccommodationStatus status) {
-        this.status = status;
+    public AccommodationShort(Long id, String name, String location, String description, Double averageGrade, List<String> images) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.description = description;
+        this.averageGrade = averageGrade;
+        this.images = images;
     }
 
     public Long getId() {
@@ -47,28 +36,35 @@ public class AccommodationShort {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String address) {
-        this.location = address;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public double getAverageGrade() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getAverageGrade() {
         return averageGrade;
     }
 
-    public void setAverageGrade(double rating) {
-        this.averageGrade = rating;
+    public void setAverageGrade(Double averageGrade) {
+        this.averageGrade = averageGrade;
     }
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 }

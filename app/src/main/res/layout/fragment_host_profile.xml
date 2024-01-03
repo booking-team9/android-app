@@ -63,7 +63,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/black"
+           
             android:textSize="32sp" />
 
 
@@ -106,14 +106,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
-                    android:textColor="@color/black"
+                   
                     android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/profile_host_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                   
                     android:textSize="18sp" />
 
                 <View
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/phone"
-                    android:textColor="@color/black"
+                   
                     android:textSize="13sp" />
 
                 <TextView
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/black"
+                   
                     android:textSize="18sp" />
 
                 <View
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/address"
-                    android:textColor="@color/black"
+                   
                     android:textSize="13sp" />
 
                 <TextView
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/black"
+                   
                     android:textSize="18sp" />
 
                 <View
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/account_type"
-                    android:textColor="@color/black"
+                   
                     android:textSize="13sp" />
 
                 <TextView
@@ -200,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:textColor="@color/black"
+                   
                     android:textSize="18sp" />
 
                 <View
@@ -219,7 +219,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/logoutButton"
+                    android:id="@+id/logoutButtonHost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -235,7 +235,7 @@
                     android:layout_marginLeft="8dp"
                     android:text="View Accommodations"
                     android:backgroundTint="@color/md_theme_light_outlineVariant"
-                    android:textColor="@color/black"
+                   
                     android:textSize="10dp"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />

@@ -1,142 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@drawable/rounded_border_background"
-    android:layout_marginTop="25dp"
-    android:layout_marginLeft="25dp"
-    android:layout_marginRight="25dp"
-    android:layout_marginBottom="45dp"
-    android:id="@+id/accommodation_admin_card_item">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/accommodation_card_admin">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
-
-            <ImageView
-                android:id="@+id/accommodation_photo_a"
-                android:layout_width="140dp"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/hotel" />
-
-            <!-- Hotel Information -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:orientation="vertical">
-
-                <!-- Hotel Name -->
-                <TextView
-                    android:id="@+id/accommodation_status_a"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="right"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/border_background"
-                    android:padding="4dp"
-                    android:text="Inactive"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp" />
-
-                <!-- Hotel Name and Address -->
-                <LinearLayout
-                    android:id="@+id/nameAddressLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Hotel Name -->
-                    <TextView
-                        android:id="@+id/accommodation_name_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hotel Name"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <!-- Hotel Address -->
-                    <TextView
-                        android:id="@+id/accommodation_address_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hotel Address"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Rating -->
-
-                <RatingBar
-                    android:id="@+id/accommodation_rating_a"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:padding="0dp"
-                    android:rating="4.5"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    android:stepSize="0.1" />
-
-
-                <!-- More Button -->
-                <Button
-                    android:id="@+id/more_button_a"
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginEnd="8dp"
-                    android:text="More"
-                    android:textSize="9sp" /> <!-- Added margin between buttons -->
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <!-- More Button -->
-            <Button
-                android:id="@+id/approve_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/approve_green"
-                android:text="Approve" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <!-- Edit Button -->
-            <Button
-                android:id="@+id/deny_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/deny_red"
-                android:text="Deny" />
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/accommodation_name_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/name"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/accommodation_host_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/host"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_name_admin"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_name_admin" />
+
+                <TextView
+                    android:id="@+id/accommodation_address_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/address"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_host_admin"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_host_admin" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/accommodation_status_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/active"
+                    app:layout_constraintStart_toStartOf="@+id/accommodation_address_admin"
+                    app:layout_constraintTop_toBottomOf="@+id/accommodation_address_admin" />
+
+                <Button
+                    android:id="@+id/deny_button_admin"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/deny"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/approve_button_admin"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/approve_button_admin"
+                    app:layout_constraintTop_toBottomOf="@+id/approve_button_admin"
+                    app:layout_constraintVertical_bias="0.153" />
+
+                <Button
+                    android:id="@+id/approve_button_admin"
+                    style="@style/Widget.Material3.Button.TonalButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/approve"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Buttons -->
+
         </LinearLayout>
 
-
-    </LinearLayout>
-
-
-
-    <!-- Hotel Photo -->
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

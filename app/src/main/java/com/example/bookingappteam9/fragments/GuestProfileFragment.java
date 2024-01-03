@@ -2,6 +2,7 @@ package com.example.bookingappteam9.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.bookingappteam9.R;
-import com.example.bookingappteam9.activities.HomeScreen;
+import com.example.bookingappteam9.activities.HomeActivity;
+import com.example.bookingappteam9.activities.SplashActivity;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentGuestProfileBinding;
 import com.example.bookingappteam9.model.Address;
@@ -41,17 +43,17 @@ public class GuestProfileFragment extends Fragment {
     private TextView phone;
     private TextView fullAddress;
     private TextView profileType;
-    private static HomeScreen ARG_PARAM1 = new HomeScreen();
+    private static HomeActivity ARG_PARAM1 = new HomeActivity();
     private static final String ARG_PARAM2 = "param2";
     private Gson gson = new Gson();
 
-    private HomeScreen mParam1;
+    private HomeActivity mParam1;
     private String mParam2;
 
     public GuestProfileFragment() {
         // Required empty public constructor
     }
-    public static GuestProfileFragment newInstance(HomeScreen param1, String param2) {
+    public static GuestProfileFragment newInstance(HomeActivity param1, String param2) {
         GuestProfileFragment fragment = new GuestProfileFragment();
         Bundle args = new Bundle();
         ARG_PARAM1 = param1;
@@ -78,13 +80,21 @@ public class GuestProfileFragment extends Fragment {
         phone = binding.profileGuestPhone;
         email = binding.profileGuestEmail;
         profileType = binding.guestType;
+        binding.logoutButtonGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrefUtils.clearUserInfo(getActivity().getApplicationContext());
+                Intent intent = new Intent(getActivity(), SplashActivity.class);
+                startActivity(intent);
+            }
+        });
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         id = userInfo.getId();
         ImageView editImage = (ImageView) view.findViewById(R.id.edit_button);
         editImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findNavController(getParentFragment()).navigate(R.id.action_navigation_guest_profile_to_editProfileFragment);
+                findNavController(getParentFragment()).navigate(R.id.action_guestProfileFragment_to_editProfileFragment);
             }
         });
         return view;

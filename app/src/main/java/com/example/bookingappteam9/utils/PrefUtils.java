@@ -12,6 +12,8 @@ public class PrefUtils {
     public static final String PREFS_LOGIN_JWT_TOKEN = "__TOKEN__";
     public static final String PREFS_LOGIN_ROLE = "__ROLE__";
     public static final String PREFS_LOGIN_USER_ID = "__ID__";
+    public static final String PREFS_LOGIN_TOKEN_EXP = "__EXP__";
+
 
 
     /**
@@ -27,12 +29,13 @@ public class PrefUtils {
         return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
 
-    public static void saveLoginInfo(Context context, String email, String token, String role, Long id) {
+    public static void saveLoginInfo(Context context, String email, String token, String role, Long id, Long tokenExp) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(PREFS_LOGIN_USERNAME_KEY, email);
         editor.putString(PREFS_LOGIN_JWT_TOKEN, token);
         editor.putString(PREFS_LOGIN_ROLE, role);
         editor.putLong(PREFS_LOGIN_USER_ID, id);
+        editor.putLong(PREFS_LOGIN_TOKEN_EXP, tokenExp);
         editor.apply();
     }
 
@@ -40,9 +43,10 @@ public class PrefUtils {
         SharedPreferences preferences = getSharedPreferences(context);
         String email = preferences.getString(PREFS_LOGIN_USERNAME_KEY, "");
         String token = preferences.getString(PREFS_LOGIN_JWT_TOKEN, "");
-        String role = preferences.getString(PREFS_LOGIN_ROLE, "");
+        String role = preferences.getString(PREFS_LOGIN_ROLE, "Guest");
         Long id = preferences.getLong(PREFS_LOGIN_USER_ID, 0L);
-        return new UserInfo(email, token, role, id);
+        Long tokenExp = preferences.getLong(PREFS_LOGIN_TOKEN_EXP, 0L);
+        return new UserInfo(email, token, role, id, tokenExp);
     }
 
     public static void clearUserInfo(Context context){
@@ -51,6 +55,7 @@ public class PrefUtils {
         editor.remove(PREFS_LOGIN_ROLE);
         editor.remove(PREFS_LOGIN_USER_ID);
         editor.remove(PREFS_LOGIN_JWT_TOKEN);
+        editor.remove(PREFS_LOGIN_TOKEN_EXP);
         editor.apply();
     }
 
@@ -66,12 +71,14 @@ public class PrefUtils {
         private String token;
         private Role role;
         private Long id;
+        private Long tokenExpiration;
 
-        UserInfo(String email, String token, String role, Long id) {
+        UserInfo(String email, String token, String role, Long id, Long tokenExpiration) {
             this.email = email;
             this.id = id;
             this.token = token;
             this.role = Role.valueOf(role);
+            this.tokenExpiration = tokenExpiration;
         }
 
         public String getEmail() {
@@ -89,6 +96,7 @@ public class PrefUtils {
         public Long getId() {
             return id;
         }
+        public Long getTokenExpiration(){return tokenExpiration;}
     }
 
     /**

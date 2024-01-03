@@ -16,11 +16,38 @@ public class Address {
     @SerializedName("city")
     @Expose
     private String city;
+    @SerializedName("country")
+    @Expose
+    private String country;
+    @SerializedName("latitude")
+    @Expose
+    private Double latitude;
 
-    public Address(String street, String number, String city) {
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    @SerializedName("longitude")
+    @Expose
+    private Double longitude;
+
+    public Address(String street, String number, String city, String country) {
         this.street = street;
         this.number = number;
         this.city = city;
+        this.country = country;
     }
 
     public Long getId() {
@@ -55,4 +82,11 @@ public class Address {
         this.number=number;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

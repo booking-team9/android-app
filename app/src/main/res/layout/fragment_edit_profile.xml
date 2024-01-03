@@ -115,14 +115,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/first_name"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/edit_first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="18sp" />
 
                 <View
@@ -141,14 +141,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/last_name"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/edit_last_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="18sp" />
 
                 <View
@@ -168,14 +168,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/email"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/edit_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="18sp" />
 
                 <View
@@ -195,14 +195,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/phone"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/edit_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="18sp" />
 
                 <View
@@ -227,14 +227,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/address"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="13sp" />
 
                     <EditText
                         android:id="@+id/edit_street"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="18sp" />
 
                     <View
@@ -252,7 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Number"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="13sp"
                         android:layout_gravity="center"/>
 
@@ -260,7 +260,7 @@
                         android:id="@+id/edit_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="18sp"
                         android:layout_gravity="center"/>
 
@@ -279,14 +279,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/city"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="13sp"
                         android:layout_gravity="center"/>
                     <EditText
                         android:id="@+id/edit_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
+                        android:textColor="@color/quantum_black_100"
                         android:textSize="18sp"
                         android:layout_gravity="center"/>
 
@@ -327,7 +327,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="@string/delete_account"
                     android:backgroundTint="@color/md_theme_light_outlineVariant"
-                    android:textColor="@color/black"
+                    android:textColor="@color/quantum_black_100"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
             </LinearLayout>

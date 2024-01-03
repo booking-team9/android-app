@@ -2,9 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/allAccommodationsFragment"
         android:icon="@drawable/baseline_home_24"
         android:title="@string/title_home" />
+    <item
+        android:id="@+id/navigation_guest_reservations"
+        android:icon="@drawable/baseline_hotel_24"
+        android:title="@string/reservations"/>
 
     <item
         android:id="@+id/navigation_guest_profile"
