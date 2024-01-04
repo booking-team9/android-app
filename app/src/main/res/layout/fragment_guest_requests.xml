@@ -15,14 +15,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="My Reservations"
+        android:text="@string/my_requests"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:textAlignment="gravity" />
 
     <ProgressBar
-        android:id="@+id/progress_loader_host_reservations"
+        android:id="@+id/progress_loader_guest_requests"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,13 +37,13 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/host_reservation_list"
+        android:id="@+id/guest_requests_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
-        tools:listitem="@layout/reservation_host_card"
+        tools:listitem="@layout/request_guest_card"
         android:minHeight="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
