@@ -162,5 +162,10 @@
     <string name="add_photo">Add photo</string>
     <string name="remove">Remove</string>
     <string name="reservations">Reservations</string>
+    <string name="requests">Requests</string>
+    <string name="guest_email">Guest Email</string>
+    <string name="dates">Dates</string>
+    <string name="my_requests">My Requests</string>
+    <string name="host_email">Host Email</string>
 
 </resources>

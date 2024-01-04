@@ -6,6 +6,7 @@ import com.example.bookingappteam9.services.AccountService;
 import com.example.bookingappteam9.services.GuestService;
 import com.example.bookingappteam9.services.HostService;
 import com.example.bookingappteam9.services.ImageService;
+import com.example.bookingappteam9.services.ReservationService;
 import com.example.bookingappteam9.utils.LocalDateTimeDeserializer;
 import com.example.bookingappteam9.utils.LocalDateTimeSerializer;
 import com.google.gson.GsonBuilder;
@@ -51,6 +52,7 @@ public class ClientUtils {
     public static GuestService guestService = retrofit.create(GuestService.class);
     public static AccommodationService accommodationService = retrofit.create(AccommodationService.class);
     public static ImageService imageService = retrofit.create(ImageService.class);
+    public static ReservationService reservationService = retrofit.create(ReservationService.class);
 
 
 }

@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.bookingappteam9.adapters.HostReservationsAdapter;
+import com.example.bookingappteam9.adapters.GuestRequestAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.databinding.FragmentHostReservationsBinding;
+import com.example.bookingappteam9.databinding.FragmentGuestRequestsBinding;
 import com.example.bookingappteam9.model.Reservation;
 import com.example.bookingappteam9.utils.PrefUtils;
 
@@ -24,10 +24,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HostReservationsFragment extends Fragment {
-
-    private HostReservationsAdapter adapter;
-    private FragmentHostReservationsBinding binding;
+public class GuestRequestsFragment extends Fragment {
+    private GuestRequestAdapter adapter;
+    private FragmentGuestRequestsBinding binding;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -35,12 +34,12 @@ public class HostReservationsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HostReservationsFragment() {
+    public GuestRequestsFragment() {
         // Required empty public constructor
     }
 
-    public static HostReservationsFragment newInstance(String param1, String param2) {
-        HostReservationsFragment fragment = new HostReservationsFragment();
+    public static GuestRequestsFragment newInstance(String param1, String param2) {
+        GuestRequestsFragment fragment = new GuestRequestsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,15 +71,15 @@ public class HostReservationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHostReservationsBinding.inflate(inflater,container,false);
+        binding = FragmentGuestRequestsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         ArrayList<Reservation> reservations = new ArrayList<>();
-        adapter = new HostReservationsAdapter(reservations);
-        binding.hostReservationList.setAdapter(adapter);
-        binding.hostReservationList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new GuestRequestAdapter(reservations);
+        binding.guestRequestsList.setAdapter(adapter);
+        binding.guestRequestsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getDecidedReservationsByHostId(userInfo.getId());
+        Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getRequestsByGuestId(userInfo.getId());
         call.enqueue(new Callback<ArrayList<Reservation>>() {
             @Override
             public void onResponse(Call<ArrayList<Reservation>> call, Response<ArrayList<Reservation>> response) {
@@ -88,7 +87,7 @@ public class HostReservationsFragment extends Fragment {
                     List<Reservation> reservatonsRaw = response.body();
                     adapter.addReservations(reservatonsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderHostReservations.setVisibility(View.INVISIBLE);
+                    binding.progressLoaderGuestRequests.setVisibility(View.INVISIBLE);
                 }
                 else {
                     Log.d("QM","Meesage recieved: "+response.code());
@@ -100,7 +99,6 @@ public class HostReservationsFragment extends Fragment {
                 Log.d("QM", t.getMessage() != null?t.getMessage():"error");
             }
         });
-
 
 
         return root;

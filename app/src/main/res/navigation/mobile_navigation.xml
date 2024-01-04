@@ -44,7 +44,7 @@
             app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_editProfileFragment_to_guestProfileFragment"
-            app:destination="@id/guestProfileFragment" />
+            app:destination="@id/navigation_guest_profile" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -92,9 +92,10 @@
             app:destination="@id/navigation_host_properties" />
     </fragment>
     <fragment
-        android:id="@+id/guestProfileFragment"
+        android:id="@+id/navigation_guest_profile"
         android:name="com.example.bookingappteam9.fragments.GuestProfileFragment"
-        android:label="GuestProfileFragment" >
+        android:label="GuestProfileFragment"
+        tools:layout="@layout/fragment_guest_profile">
         <action
             android:id="@+id/action_guestProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -128,5 +129,15 @@
         android:name="com.example.bookingappteam9.fragments.HostReservationsFragment"
         android:label="fragment_host_reservations"
         tools:layout="@layout/fragment_host_reservations" />
+    <fragment
+        android:id="@+id/navigation_host_requests"
+        android:name="com.example.bookingappteam9.fragments.HostRequestsFragment"
+        android:label="fragment_host_requests"
+        tools:layout="@layout/fragment_host_requests" />
+    <fragment
+        android:id="@+id/navigation_guest_requests"
+        android:name="com.example.bookingappteam9.fragments.GuestRequestsFragment"
+        android:label="fragment_guest_requests"
+        tools:layout="@layout/fragment_guest_requests" />
 
 </navigation>

@@ -11,6 +11,10 @@
         android:icon="@drawable/baseline_domain_24"
         android:title="@string/properties" />
     <item
+        android:id="@+id/navigation_host_requests"
+        android:icon="@drawable/care_request_reviewer_svgrepo_com"
+        android:title="@string/requests" />
+    <item
         android:id="@+id/navigation_host_reservations"
         android:icon="@drawable/baseline_hotel_24"
         android:title="@string/reservations" />
