@@ -22,8 +22,22 @@ public interface ReservationService {
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
+    @GET("reservations/requests/guest/{id}")
+    Call<ArrayList<Reservation>> getRequestsByGuestId(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
     @GET("reservations/decided/host/{id}")
     Call<ArrayList<Reservation>> getDecidedReservationsByHostId(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("reservations/decided/guest/{id}")
+    Call<ArrayList<Reservation>> getDecidedReservationsByGuestId(@Path("id") Long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
@@ -38,4 +52,11 @@ public interface ReservationService {
     })
     @PUT("reservations/{id}/deny")
     Call<Void> denyReservation(@Path("id") Long id);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("reservations/{id}/cancel")
+    Call<Void> cancelReservation(@Path("id") Long id);
 }

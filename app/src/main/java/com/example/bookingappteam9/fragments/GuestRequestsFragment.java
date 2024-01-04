@@ -1,27 +1,36 @@
 package com.example.bookingappteam9.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.adapters.GuestRequestAdapter;
+import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.databinding.FragmentGuestRequestsBinding;
+import com.example.bookingappteam9.model.Reservation;
+import com.example.bookingappteam9.utils.PrefUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GuestRequestsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class GuestRequestsFragment extends Fragment {
+    private GuestRequestAdapter adapter;
+    private FragmentGuestRequestsBinding binding;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -29,15 +38,6 @@ public class GuestRequestsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GuestRequestsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static GuestRequestsFragment newInstance(String param1, String param2) {
         GuestRequestsFragment fragment = new GuestRequestsFragment();
         Bundle args = new Bundle();
@@ -50,16 +50,57 @@ public class GuestRequestsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_guest_requests, container, false);
+        binding = FragmentGuestRequestsBinding.inflate(inflater,container,false);
+        View root = binding.getRoot();
+        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        adapter = new GuestRequestAdapter(reservations);
+        binding.guestRequestsList.setAdapter(adapter);
+        binding.guestRequestsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getRequestsByGuestId(userInfo.getId());
+        call.enqueue(new Callback<ArrayList<Reservation>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Reservation>> call, Response<ArrayList<Reservation>> response) {
+                if (response.code()==200){
+                    List<Reservation> reservatonsRaw = response.body();
+                    adapter.addReservations(reservatonsRaw);
+                    adapter.notifyDataSetChanged();
+                    binding.progressLoaderGuestRequests.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    Log.d("QM","Meesage recieved: "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Reservation>> call, Throwable t) {
+                Log.d("QM", t.getMessage() != null?t.getMessage():"error");
+            }
+        });
+
+
+        return root;
     }
 }

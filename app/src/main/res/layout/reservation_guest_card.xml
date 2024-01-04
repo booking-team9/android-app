@@ -26,74 +26,72 @@
                 android:layout_height="match_parent">
 
                 <!-- Title, secondary and supporting text -->
+
+
                 <TextView
-                    android:id="@+id/property_name_request"
+                    android:id="@+id/property_name_reservation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/name"
-                    android:textSize="18dp"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/host_request"
+                    android:id="@+id/host_reservation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/host_email"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/guest_email"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
-                    app:layout_constraintStart_toStartOf="@+id/property_name_request"
-                    app:layout_constraintTop_toBottomOf="@+id/property_name_request" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_name_reservation" />
 
                 <TextView
-                    android:id="@+id/date_request"
+                    android:id="@+id/date_reservation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/dates"
-                    android:textSize="18dp"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
-                    app:layout_constraintStart_toStartOf="@+id/host_request"
-                    app:layout_constraintTop_toBottomOf="@+id/host_request" />
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/prices_reservation"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
-                    android:id="@+id/prices_request"
+                    android:id="@+id/prices_reservation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+
                     android:text="Price"
-                    android:textSize="18dp"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
-
                     android:textColor="?android:attr/textColorSecondary"
-                    app:layout_constraintStart_toStartOf="@+id/date_request"
-                    app:layout_constraintTop_toBottomOf="@+id/date_request" />
-
+                    android:textSize="26dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/requests_status"
+                    android:id="@+id/reservations_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:text="@string/active"
                     android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/prices_request"
-                    app:layout_constraintTop_toBottomOf="@+id/prices_request" />
-
-                <Button
-                    android:id="@+id/cancel_button_guest"
-                    style="@style/Widget.Material3.Button.TonalButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:text="Cancel"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/host_reservation"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
