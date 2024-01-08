@@ -170,5 +170,9 @@
     <string name="add_your_review">Add your review</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="reviews">Reviews</string>
+    <string name="author">Author</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="review">Review</string>
 
 </resources>

@@ -139,5 +139,10 @@
         android:name="com.example.bookingappteam9.fragments.GuestRequestsFragment"
         android:label="fragment_guest_requests"
         tools:layout="@layout/fragment_guest_requests" />
+    <fragment
+        android:id="@+id/adminReviewsFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminReviewsFragment"
+        android:label="fragment_admin_reviews"
+        tools:layout="@layout/fragment_admin_reviews" />
 
 </navigation>

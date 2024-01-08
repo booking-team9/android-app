@@ -1,14 +1,18 @@
 package com.example.bookingappteam9.services;
 
+import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.Login;
 import com.example.bookingappteam9.model.Review;
 import com.example.bookingappteam9.model.Token;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -20,7 +24,12 @@ public interface ReviewService {
     })
     @POST("reviews")
     Call<Review> saveNewReview(@Body Review review);
-
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("reviews/all")
+    Call<ArrayList<Review>> getAll();
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
@@ -41,4 +50,8 @@ public interface ReviewService {
     })
     @DELETE("reviews/{id}")
     Call<Void> deleteReview(@Path("id") Long reviewId);
+
+    @PATCH("reviews/{id}/approve")
+    Call<Void> approveReview(@Path("id") Long reviewId);
+
 }
