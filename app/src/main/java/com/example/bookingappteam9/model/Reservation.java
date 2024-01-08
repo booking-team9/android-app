@@ -10,15 +10,17 @@ public class Reservation {
     private String accommodationName;
     private String guestEmail;
     private String hostEmail;
+    private Long hostId;
     private ReservationStatus reservationStatus;
     private Integer numberOfGuests;
     private Integer guestTimesCancelled;
+    private Long accommodationId;
 
     public Reservation(){
 
     }
 
-    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, String accommodationName, String guestEmail, String hostEmail, ReservationStatus reservationStatus, Integer numberOfGuests, Integer guestTimesCancelled) {
+    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, String accommodationName, String guestEmail, String hostEmail, Long hostId, ReservationStatus reservationStatus, Integer numberOfGuests, Integer guestTimesCancelled, Long accommodationId) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -26,9 +28,11 @@ public class Reservation {
         this.accommodationName = accommodationName;
         this.guestEmail = guestEmail;
         this.hostEmail = hostEmail;
+        this.hostId = hostId;
         this.reservationStatus = reservationStatus;
         this.numberOfGuests = numberOfGuests;
         this.guestTimesCancelled = guestTimesCancelled;
+        this.accommodationId = accommodationId;
     }
 
     public Long getId() {
@@ -109,5 +113,21 @@ public class Reservation {
 
     public void setGuestTimesCancelled(Integer guestTimesCancelled) {
         this.guestTimesCancelled = guestTimesCancelled;
+    }
+
+    public Long getAccommodationId() {
+        return accommodationId;
+    }
+
+    public void setAccommodationId(Long accommodationId) {
+        this.accommodationId = accommodationId;
+    }
+
+    public Long getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(Long hostId) {
+        this.hostId = hostId;
     }
 }

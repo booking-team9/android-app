@@ -167,5 +167,8 @@
     <string name="dates">Dates</string>
     <string name="my_requests">My Requests</string>
     <string name="host_email">Host Email</string>
+    <string name="add_your_review">Add your review</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 
 </resources>

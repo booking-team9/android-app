@@ -3,19 +3,26 @@ package com.example.bookingappteam9.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.fragments.ReviewDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
+import com.example.bookingappteam9.model.ReservationStatus;
 import com.google.android.material.chip.Chip;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder>{
+public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder> {
     private List<Reservation> reservations;
     private View view;
 
@@ -25,6 +32,9 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         private final TextView dates;
         private final TextView price;
         private final Chip status;
+        private final TextView reviewText;
+        private final Button reviewAccommodation;
+        private final Button reviewHost;
 
         public ViewHolder(View view) {
             super(view);
@@ -34,6 +44,9 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
             dates = (TextView) view.findViewById(R.id.date_reservation);
             price = (TextView) view.findViewById(R.id.prices_reservation);
             status = (Chip) view.findViewById(R.id.reservations_status);
+            reviewText = (TextView) view.findViewById(R.id.review_text_card);
+            reviewHost = (Button) view.findViewById(R.id.add_review_host);
+            reviewAccommodation = (Button) view.findViewById(R.id.add_review_accommodation);
         }
 
         public TextView getAccommodationName() {
@@ -56,9 +69,20 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
             return status;
         }
 
+        public TextView getReviewText() {
+            return reviewText;
+        }
+
+        public Button getReviewAccommodation() {
+            return reviewAccommodation;
+        }
+
+        public Button getReviewHost() {
+            return reviewHost;
+        }
     }
 
-    public GuestReservationsAdapter(List<Reservation> reservations){
+    public GuestReservationsAdapter(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
@@ -79,6 +103,42 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         String priceInfo = Double.toString(reservations.get(position).getPrice()) + " €";
         holder.getPrice().setText(priceInfo);
         holder.getStatus().setText(reservations.get(position).getReservationStatus().toString());
+        if (reservations.get(position).getReservationStatus().equals(ReservationStatus.Done) && reservations.get(position).getEndDate().plusDays(7).isBefore(LocalDateTime.now())) {
+            holder.reviewText.setVisibility(View.VISIBLE);
+            holder.reviewHost.setVisibility(View.VISIBLE);
+            holder.reviewAccommodation.setVisibility(View.VISIBLE);
+            holder.reviewAccommodation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ReviewDialogFragment dialogFragment = ReviewDialogFragment.newInstance("Accommodation review", "accommodation", reservations.get(holder.getBindingAdapterPosition()).getAccommodationId());
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                    Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
+                    if (prev != null) {
+                        ft.remove(prev);
+                    }
+                    ft.addToBackStack(null);
+
+                    dialogFragment.show(ft, "dialog");
+                }
+            });
+
+        }
+        holder.reviewHost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReviewDialogFragment dialogFragment = ReviewDialogFragment.newInstance("Host review", "host", reservations.get(holder.getBindingAdapterPosition()).getHostId());
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                dialogFragment.show(ft, "dialog");
+            }
+        });
     }
 
     @Override
@@ -86,7 +146,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         return reservations.size();
     }
 
-    public void addReservations(List<Reservation> reservationss){
+    public void addReservations(List<Reservation> reservationss) {
         this.reservations.addAll(reservationss);
     }
 }
