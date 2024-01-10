@@ -156,7 +156,11 @@
         android:id="@+id/hostWithReviewsFragment"
         android:name="com.example.bookingappteam9.fragments.HostWithReviewsFragment"
         android:label="HostWithReviewsFragment"
-        tools:layout="@layout/fragment_host_with_reviews"/>
+        tools:layout="@layout/fragment_host_with_reviews">
+        <argument
+            android:name="hostId"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/accommodationDetailsFragment"
         android:name="com.example.bookingappteam9.fragments.AccommodationDetailsFragment"

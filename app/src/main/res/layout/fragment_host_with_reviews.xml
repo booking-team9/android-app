@@ -13,8 +13,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl1"
+            android:background="@color/md_theme_light_inverseOnSurface"
             android:layout_width="match_parent"
             android:layout_height="108dp">
 
@@ -25,30 +27,37 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
 
+                android:layout_marginEnd="16dp"
                 android:text="@string/host_name"
-                android:textSize="30dp"
+                android:textSize="23dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintEnd_toStartOf="@+id/report_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/report_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="131dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
-                android:text="Report"
+                android:text="Report Host"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/host_name"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--            <Button-->
+<!--                android:id="@+id/report_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:text="Report Host"-->
+<!--                android:textSize="10dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl2"

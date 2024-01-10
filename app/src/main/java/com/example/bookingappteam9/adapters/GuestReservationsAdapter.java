@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.fragments.AdapterClickListener;
 import com.example.bookingappteam9.fragments.ReviewDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
 import com.example.bookingappteam9.model.ReservationStatus;
@@ -24,6 +25,7 @@ import java.util.List;
 
 public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder> {
     private List<Reservation> reservations;
+    private AdapterClickListener listener;
     private View view;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,8 +84,9 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         }
     }
 
-    public GuestReservationsAdapter(List<Reservation> reservations) {
+    public GuestReservationsAdapter(List<Reservation> reservations, AdapterClickListener listener) {
         this.reservations = reservations;
+        this.listener = listener;
     }
 
     @NonNull
@@ -100,7 +103,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         holder.getHostEmail().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                listener.onClick(reservations.get(holder.getBindingAdapterPosition()).getHostId());
             }
         });
         DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM dd");

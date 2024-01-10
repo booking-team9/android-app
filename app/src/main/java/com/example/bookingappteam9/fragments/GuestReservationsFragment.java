@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.adapters.GuestReservationsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentGuestReservationsBinding;
@@ -74,8 +77,16 @@ public class GuestReservationsFragment extends Fragment {
         binding = FragmentGuestReservationsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        AdapterClickListener adapterClickListener = new AdapterClickListener() {
+            @Override
+            public void onClick(Long id) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("hostId", id);
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_guest_reservations_to_hostWithReviewsFragment, bundle);
+            }
+        };
         ArrayList<Reservation> reservations = new ArrayList<>();
-        adapter = new GuestReservationsAdapter(reservations);
+        adapter = new GuestReservationsAdapter(reservations, adapterClickListener);
         binding.guestReservationList.setAdapter(adapter);
         binding.guestReservationList.setLayoutManager(new LinearLayoutManager(getActivity()));
 

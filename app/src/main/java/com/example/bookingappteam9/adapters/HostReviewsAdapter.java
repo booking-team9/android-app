@@ -69,10 +69,10 @@ public class HostReviewsAdapter extends RecyclerView.Adapter<HostReviewsAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User author = reviews.get(position).getAuthor();
         holder.getReporterName().setText(author.getFirstName() + " " + author.getLastName());
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM - dd - yyyy");
         holder.getReportDate().setText(reviews.get(position).getDate().format(formater));
         holder.getDescription().setText(reviews.get(position).getComment());
-        holder.getReviewRating().setText(reviews.get(position).getGrade());
+        holder.getReviewRating().setText(String.valueOf(reviews.get(position).getGrade()));
     }
 
     @Override
