@@ -9,7 +9,12 @@
     <item
         android:id="@+id/navigation_admin_accommodations"
         android:icon="@drawable/baseline_domain_24"
-        android:title="Accommodations" />
+        android:title="@string/accommodations" />
+    <item
+        android:id="@+id/adminReviewsFragment"
+        android:icon="@drawable/baseline_comment_24"
+        android:title="@string/reviews" />
+
 
     <item
         android:id="@+id/adminProfileFragment"

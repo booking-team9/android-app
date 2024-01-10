@@ -6,4 +6,10 @@
         <item>Hotel</item>
         <item>Villa</item>
     </string-array>
+    <string-array name="reviews_types">
+        <item>All</item>
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Reported</item>
+    </string-array>
 </resources>
