@@ -174,5 +174,7 @@
     <string name="author">Author</string>
     <string name="timestamp">Timestamp</string>
     <string name="review">Review</string>
+    <string name="date">Date</string>
+    <string name="host_name">Host Name</string>
 
 </resources>

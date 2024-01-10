@@ -11,11 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.bookingappteam9.adapters.HostRequestsAdapter;
+import com.example.bookingappteam9.adapters.HostReviewsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
-import com.example.bookingappteam9.databinding.FragmentHostRequestsBinding;
-import com.example.bookingappteam9.model.Reservation;
-import com.example.bookingappteam9.utils.PrefUtils;
+import com.example.bookingappteam9.databinding.FragmentHostWithReviewsBinding;
+import com.example.bookingappteam9.model.Review;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +23,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HostRequestsFragment extends Fragment {
-    private HostRequestsAdapter adapter;
-    private FragmentHostRequestsBinding binding;
+public class HostWithReviewsFragment extends Fragment {
+    private HostReviewsAdapter adapter;
+    private FragmentHostWithReviewsBinding binding;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -34,12 +33,12 @@ public class HostRequestsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HostRequestsFragment() {
+    public HostWithReviewsFragment() {
         // Required empty public constructor
     }
 
-    public static HostRequestsFragment newInstance(String param1, String param2) {
-        HostRequestsFragment fragment = new HostRequestsFragment();
+    public static HostWithReviewsFragment newInstance(String param1, String param2) {
+        HostWithReviewsFragment fragment = new HostWithReviewsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,36 +70,30 @@ public class HostRequestsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHostRequestsBinding.inflate(inflater,container,false);
+        binding = FragmentHostWithReviewsBinding.inflate(inflater,container,false);
         View root = binding.getRoot();
-        PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
-        ArrayList<Reservation> reservations = new ArrayList<>();
-        adapter = new HostRequestsAdapter(reservations);
-        binding.hostRequestsList.setAdapter(adapter);
-        binding.hostRequestsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ArrayList<Review> reviews = new ArrayList<>();
+        adapter = new HostReviewsAdapter(reviews);
+        binding.hostReviewsList.setAdapter(adapter);
+        binding.hostReviewsList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getRequestsByHostId(userInfo.getId());
-        call.enqueue(new Callback<ArrayList<Reservation>>() {
+        Call<ArrayList<Review>> call = ClientUtils.reviewService.getByHostId(1L);
+        call.enqueue(new Callback<ArrayList<Review>>() {
             @Override
-            public void onResponse(Call<ArrayList<Reservation>> call, Response<ArrayList<Reservation>> response) {
-                if (response.code()==200){
-                    List<Reservation> reservatonsRaw = response.body();
-                    adapter.addReservations(reservatonsRaw);
+            public void onResponse(Call<ArrayList<Review>> call, Response<ArrayList<Review>> response) {
+                if(response.code()==200){
+                    List<Review> revievsRaw = response.body();
+                    adapter.addReviews(revievsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderHostRequests.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    Log.d("QM","Meesage recieved: "+response.code());
+                    binding.progressLoaderHostReviews.setVisibility(View.INVISIBLE);
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Reservation>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Review>> call, Throwable t) {
                 Log.d("QM", t.getMessage() != null?t.getMessage():"error");
             }
         });
-
-
 
         return root;
     }

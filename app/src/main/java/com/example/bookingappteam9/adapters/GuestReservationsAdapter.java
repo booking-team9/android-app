@@ -97,6 +97,12 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
     public void onBindViewHolder(@NonNull GuestReservationsAdapter.ViewHolder holder, int position) {
         holder.getAccommodationName().setText(reservations.get(position).getAccommodationName());
         holder.getHostEmail().setText(reservations.get(position).getHostEmail());
+        holder.getHostEmail().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM dd");
         String range = reservations.get(position).getStartDate().format(formater) + " - " + reservations.get(position).getEndDate().format(formater);
         holder.getDates().setText(range);

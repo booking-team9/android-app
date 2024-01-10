@@ -123,7 +123,11 @@
         android:id="@+id/navigation_guest_reservations"
         android:name="com.example.bookingappteam9.fragments.GuestReservationsFragment"
         android:label="fragment_guest_reservations"
-        tools:layout="@layout/fragment_guest_reservations" />
+        tools:layout="@layout/fragment_guest_reservations" >
+        <action
+            android:id="@+id/action_navigation_guest_reservations_to_hostWithReviewsFragment"
+            app:destination="@id/hostWithReviewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_host_reservations"
         android:name="com.example.bookingappteam9.fragments.HostReservationsFragment"
@@ -144,5 +148,10 @@
         android:name="com.example.bookingappteam9.fragments.AdminReviewsFragment"
         android:label="fragment_admin_reviews"
         tools:layout="@layout/fragment_admin_reviews" />
+    <fragment
+        android:id="@+id/hostWithReviewsFragment"
+        android:name="com.example.bookingappteam9.fragments.HostWithReviewsFragment"
+        android:label="HostWithReviewsFragment"
+        tools:layout="@layout/fragment_host_with_reviews"/>
 
 </navigation>
