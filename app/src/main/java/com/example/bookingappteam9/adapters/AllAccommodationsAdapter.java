@@ -1,29 +1,43 @@
 package com.example.bookingappteam9.adapters;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.fragments.AccommodationDetailsFragment;
+import com.example.bookingappteam9.fragments.AdapterClickListener;
+import com.example.bookingappteam9.fragments.FragmentTransition;
+import com.example.bookingappteam9.fragments.ReviewDialogFragment;
 import com.example.bookingappteam9.model.AccommodationShort;
 import com.example.bookingappteam9.model.HostAccommodation;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
 public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodationsAdapter.ViewHolder> {
 
     private List<AccommodationShort> accommodationList;
+    private AdapterClickListener listener;
 
     private View view;
-    public AllAccommodationsAdapter(List<AccommodationShort> accommodations){
+    public AllAccommodationsAdapter(List<AccommodationShort> accommodations, AdapterClickListener listener){
         this.accommodationList = accommodations;
+        this.listener = listener;
     }
 
 
@@ -43,6 +57,13 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
         holder.getPriceTag().setVisibility(View.INVISIBLE);
         holder.getDescription().setText(accommodationList.get(position).getDescription());
         Glide.with(view).load(ClientUtils.getPhotoPath(accommodationList.get(position).getImages().get(0))).into(holder.getImage());
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(accommodationList.get(holder.getBindingAdapterPosition()).getId());
+            }
+        });
+
 
     }
 
@@ -57,6 +78,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final MaterialCardView layout;
         private final TextView name;
         private final TextView address;
         private final TextView description;
@@ -68,7 +90,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-
+            layout = view.findViewById(R.id.card_layout_accommodation);
             name = (TextView) view.findViewById(R.id.accommodation_name);
             address = (TextView) view.findViewById(R.id.accommodation_address);
             description = (TextView) view.findViewById(R.id.accommodation_description);
@@ -101,6 +123,10 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
 
         public ImageView getImage() {
             return image;
+        }
+
+        public MaterialCardView getLayout() {
+            return layout;
         }
     }
 }

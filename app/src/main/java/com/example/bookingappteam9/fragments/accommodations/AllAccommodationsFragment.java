@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.fragments.accommodations;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.adapters.AllAccommodationsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAllAccommodationsBinding;
+import com.example.bookingappteam9.fragments.AdapterClickListener;
 import com.example.bookingappteam9.model.AccommodationShort;
 import com.example.bookingappteam9.model.HostAccommodation;
 
@@ -60,7 +64,15 @@ public class AllAccommodationsFragment extends Fragment {
         binding = FragmentAllAccommodationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         ArrayList<AccommodationShort> accommodations = new ArrayList<>();
-        adapter = new AllAccommodationsAdapter(accommodations);
+        AdapterClickListener listener = new AdapterClickListener() {
+            @Override
+            public void onClick(Long id) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("accommodationId", id);
+                findNavController(getParentFragment()).navigate(R.id.action_allAccommodationsFragment_to_accommodationDetailsFragment, bundle);
+            }
+        };
+        adapter = new AllAccommodationsAdapter(accommodations, listener);
         binding.allAccommodationsList.setAdapter(adapter);
         binding.allAccommodationsList.setLayoutManager(new LinearLayoutManager(getActivity()));
         Call<ArrayList<AccommodationShort>> call = ClientUtils.accommodationService.getAllShort();

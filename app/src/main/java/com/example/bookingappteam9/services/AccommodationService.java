@@ -19,6 +19,9 @@ public interface AccommodationService {
     @GET("accommodations/host/{id}")
     Call<ArrayList<HostAccommodation>> getByHostId(@Path("id") Long id);
 
+    @GET("accommodations/get/{id}")
+    Call<Accommodation> getById(@Path("id") Long id);
+
     @GET("accommodations/all")
     Call<ArrayList<Accommodation>> getAll();
 
