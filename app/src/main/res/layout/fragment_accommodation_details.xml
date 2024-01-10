@@ -113,6 +113,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/star2" />
 
             <TextView
+                android:id="@+id/accommodation_details_cancellation_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/cancellation_deadline"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorTertiary"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_amenities"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities" />
+
+            <TextView
+                android:id="@+id/accommodation_details_cancellation_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/border_background"
+                android:padding="7dp"
+                android:text="3 days"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="@color/md_theme_light_secondary"
+                android:textSize="17sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/accommodation_details_cancellation_about"
+                app:layout_constraintStart_toEndOf="@+id/accommodation_details_cancellation_about" />
+
+            <TextView
                 android:id="@+id/accommodation_details_host"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,12 +178,12 @@
                 android:id="@+id/star2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_corner"
                 android:padding="5dp"
                 android:src="@drawable/baseline_person_24"
                 app:layout_constraintStart_toStartOf="@+id/accommodation_details_description"
-                app:layout_constraintTop_toBottomOf="@+id/space" />
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_description" />
 
             <TextView
                 android:id="@+id/accommodation_details_description"
@@ -185,18 +212,7 @@
                 android:padding="3dp"
                 app:layout_constraintEnd_toEndOf="@+id/accommodation_details_description"
                 app:layout_constraintStart_toStartOf="@+id/star2"
-                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities_about"
-                tools:listitem="@layout/amenity_row" />
-
-            <androidx.legacy.widget.Space
-                android:id="@+id/space"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/quantum_grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_description" />
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities_about" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/accommodation_details_map"
@@ -206,9 +222,63 @@
                 android:layout_margin="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities"
-                tools:context=".MapsActivity" />
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_availability" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/accommodation_details_reviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:minHeight="80dp"
+                android:padding="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_description"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/star2"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_map" />
+
+            <Button
+                android:id="@+id/accommodation_details_availability"
+                style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/availability"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_amenities"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_amenities"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_cancellation_about" />
+
+            <Button
+                android:id="@+id/accommodation_details_reserve"
+                style="@style/Widget.Material3.ExtendedFloatingActionButton.Primary"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/reserve"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_reviews"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_reviews" />
+
+            <TextView
+                android:id="@+id/priceTag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/price"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_reviews"
+                app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
+
+            <TextView
+                android:id="@+id/accommodation_details_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:layout_marginTop="8dp"
+                android:text="200$"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_reviews"
+                app:layout_constraintTop_toBottomOf="@+id/priceTag2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
