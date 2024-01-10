@@ -1,5 +1,6 @@
 package com.example.bookingappteam9.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +104,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         holder.getHostEmail().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.getHostEmail().setTextColor(Color.BLACK);
                 listener.onClick(reservations.get(holder.getBindingAdapterPosition()).getHostId());
             }
         });
