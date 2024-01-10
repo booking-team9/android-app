@@ -24,7 +24,9 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView navView;
     private boolean mKeyboardVisible;
 
-
+    public BottomNavigationView getNavView(){
+        return this.navView;
+    }
 
 
 
@@ -34,11 +36,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //getSupportActionBar().hide();
 
         navView = findViewById(R.id.nav_view);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
        /* AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

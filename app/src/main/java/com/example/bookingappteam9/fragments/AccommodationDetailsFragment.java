@@ -1,6 +1,8 @@
 package com.example.bookingappteam9.fragments;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.os.Parcel;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.activities.HomeActivity;
 import com.example.bookingappteam9.adapters.AmenityAdapter;
 import com.example.bookingappteam9.adapters.DetailsPhotosAdapter;
 import com.example.bookingappteam9.adapters.ReviewsAdapter;
@@ -25,19 +29,35 @@ import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAccommodationDetailsBinding;
 import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.Photo;
+import com.example.bookingappteam9.model.PriceRequest;
+import com.example.bookingappteam9.model.PriceResponse;
 import com.example.bookingappteam9.model.Review;
+import com.example.bookingappteam9.model.Role;
+import com.example.bookingappteam9.model.TimeSlot;
+import com.example.bookingappteam9.utils.PrefUtils;
+import com.example.bookingappteam9.utils.Round;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.carousel.CarouselLayoutManager;
 import com.google.android.material.carousel.CarouselSnapHelper;
 import com.google.android.material.carousel.HeroCarouselStrategy;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +74,12 @@ public class AccommodationDetailsFragment extends Fragment {
     private Boolean isFavorite = false;
     private Accommodation accommodation;
     private SupportMapFragment mapFragment;
+    private MaterialDatePicker datePicker;
+    private String picked_date;
+    private TimeSlot slot = new TimeSlot();
+    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
+    private PrefUtils.UserInfo user;
+
 
     public static AccommodationDetailsFragment newInstance() {
         return new AccommodationDetailsFragment();
@@ -101,18 +127,72 @@ public class AccommodationDetailsFragment extends Fragment {
 
             }
         });
+        user = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+        if (user.getRole().equals(Role.Guest)){
+            binding.topAppBar.getMenu().getItem(0).setVisible(true);
+            ClientUtils.guestService.checkFavorite(user.getId(), accommodationId).enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    if (response.isSuccessful()){
+                        isFavorite = response.body();
+                        if (isFavorite)
+                            binding.topAppBar.getMenu().getItem(0).setIcon(R.drawable.baseline_favorite_24_red);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Boolean> call, Throwable t) {
+                    Log.d("QM", t.getMessage() != null ? t.getMessage() : "error");
+
+                }
+            });
+
+        }
         binding.topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().onBackPressed();
+
             }
         });
+
         binding.topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.favorite){
                     isFavorite = !isFavorite;
                     binding.topAppBar.getMenu().getItem(0).setIcon(isFavorite ? R.drawable.baseline_favorite_24_red : R.drawable.baseline_favorite_24);
+                    if (isFavorite){
+                        ClientUtils.guestService.addFavorite(user.getId(), accommodationId).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()){
+                                    Log.d("QM","Favorite successfully added!");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.d("QM", t.getMessage() != null ? t.getMessage() : "error");
+
+                            }
+                        });
+                    }else{
+                        ClientUtils.guestService.removeFavorite(user.getId(), accommodationId).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()){
+                                    Log.d("QM","Favorite successfully removed!");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.d("QM", t.getMessage() != null ? t.getMessage() : "error");
+
+                            }
+                        });
+                    }
                     return true;
                 }
                 return false;
@@ -131,6 +211,72 @@ public class AccommodationDetailsFragment extends Fragment {
         StringBuilder host = new StringBuilder();
         host.append(accommodation.getHost().getFirstName()).append(" ").append(accommodation.getHost().getLastName());
         binding.accommodationDetailsHost.setText(host);
+        CalendarConstraints.DateValidator validator = new CalendarConstraints.DateValidator() {
+            @Override
+            public boolean isValid(long date) {
+                for (TimeSlot s: accommodation.getAvailability()){
+                    long start = s.getStartDate().toEpochSecond(ZoneOffset.UTC)*1000;
+                    long end = s.getEndDate().toEpochSecond(ZoneOffset.UTC)*1000;
+                    if (date >= start && date <= end - 86400000){
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+            }
+        };
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+        calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+        long dec = calendar.getTimeInMillis();
+        CalendarConstraints constraints = new CalendarConstraints.Builder().setValidator(validator).setStart(today).setEnd(dec).build();
+        datePicker = MaterialDatePicker.Builder.dateRangePicker().setSelection(new Pair<>(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.thisMonthInUtcMilliseconds())).setCalendarConstraints(constraints).build();
+        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                Pair<Long, Long> dates = (Pair<Long, Long>) selection;
+                slot.setStartDate(LocalDateTime.ofInstant(Instant.ofEpochMilli(dates.first), ZoneId.of("GMT+1")));
+                slot.setEndDate(LocalDateTime.ofInstant(Instant.ofEpochMilli(dates.second), ZoneId.of("GMT+1")));
+                slot.setRangeString(datePicker.getHeaderText());
+                picked_date = datePicker.getHeaderText();
+                binding.accommodationDetailsPriceDates.setText(picked_date);
+                ClientUtils.accommodationService.getPrice(new PriceRequest(accommodationId, slot.getStartDate().toLocalDate(), slot.getEndDate().toLocalDate())).enqueue(new Callback<PriceResponse>() {
+                    @Override
+                    public void onResponse(Call<PriceResponse> call, Response<PriceResponse> response) {
+                        if (response.isSuccessful()){
+                            binding.accommodationDetailsPrice.setText(Round.round(response.body().getTotalPrice(), 2) + "€");
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PriceResponse> call, Throwable t) {
+                        Log.d("QM", t.getMessage() != null ? t.getMessage() : "error");
+
+                    }
+                });
+            }});
+        binding.accommodationDetailsAvailability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("date clicked");
+                datePicker.show(getChildFragmentManager(), "datepicker");
+            }
+        });
+        binding.accommodationDetailsReserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         ClientUtils.reviewService.getByAccommodationId(accommodationId).enqueue(new Callback<ArrayList<Review>>() {
             @Override
             public void onResponse(Call<ArrayList<Review>> call, Response<ArrayList<Review>> response) {
@@ -152,8 +298,29 @@ public class AccommodationDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((HomeActivity)getActivity()).getNavView().setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BottomNavigationView nav = ((HomeActivity)getActivity()).getNavView();
+        if (nav != null){
+            nav.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        BottomNavigationView nav = ((HomeActivity)getActivity()).getNavView();
+        if (nav != null){
+            nav.setVisibility(View.INVISIBLE);
+        }
+
         mViewModel = new ViewModelProvider(this).get(AccommodationDetailsViewModel.class);
         mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.accommodation_details_map);

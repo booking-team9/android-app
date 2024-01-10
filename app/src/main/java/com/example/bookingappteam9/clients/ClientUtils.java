@@ -8,10 +8,12 @@ import com.example.bookingappteam9.services.HostService;
 import com.example.bookingappteam9.services.ImageService;
 import com.example.bookingappteam9.services.ReservationService;
 import com.example.bookingappteam9.services.ReviewService;
+import com.example.bookingappteam9.utils.LocalDateSerializer;
 import com.example.bookingappteam9.utils.LocalDateTimeDeserializer;
 import com.example.bookingappteam9.utils.LocalDateTimeSerializer;
 import com.google.gson.GsonBuilder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +44,7 @@ public class ClientUtils {
 
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SERVICE_API_PATH)
-            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).setLenient().create()))
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).registerTypeAdapter(LocalDate.class, new LocalDateSerializer()).setLenient().create()))
             .client(test())
             .build();
     public static String getPhotoPath(String photo){

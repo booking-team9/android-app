@@ -78,7 +78,7 @@ public class AvailabilityFragment extends Fragment {
     private AvailabilityAdapter availabilityAdapter;
     private MaterialDatePicker datePicker;
     private String picked_date;
-    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
     private TimeSlot slot = new TimeSlot();
     private TextInputLayout cancellationDeadline;
     private SwitchCompat autoApproval;
