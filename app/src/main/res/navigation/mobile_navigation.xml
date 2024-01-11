@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_host_profile_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_host_profile_to_hostWithReviewsFragment"
+            app:destination="@id/hostWithReviewsFragment" />
     </fragment>
 
 
@@ -24,6 +27,9 @@
         <action
             android:id="@+id/action_navigation_host_properties_to_newPropertyFragment"
             app:destination="@id/newPropertyFragment" />
+        <action
+            android:id="@+id/action_navigation_host_properties_to_accommodationDetailsFragment"
+            app:destination="@id/accommodationDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

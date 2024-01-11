@@ -15,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.bookingappteam9.adapters.HostReviewsAdapter;
+import com.example.bookingappteam9.adapters.ReviewsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentHostWithReviewsBinding;
 import com.example.bookingappteam9.model.Host;
 import com.example.bookingappteam9.model.Review;
+import com.example.bookingappteam9.model.Role;
+import com.example.bookingappteam9.utils.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HostWithReviewsFragment extends Fragment {
-    private HostReviewsAdapter adapter;
+    private ReviewsAdapter adapter;
     private FragmentHostWithReviewsBinding binding;
     private Long hostId;
     private Host host;
@@ -107,9 +109,15 @@ public class HostWithReviewsFragment extends Fragment {
         hostNameText = binding.hostName;
         reportButton = binding.reportButton;
         ArrayList<Review> reviews = new ArrayList<>();
-        adapter = new HostReviewsAdapter(reviews);
+        boolean isHostOwnProfile = hostId.equals(PrefUtils.getUserInfo(getContext().getApplicationContext()).getId());
+        adapter = new ReviewsAdapter(reviews, isHostOwnProfile);
         binding.hostReviewsList.setAdapter(adapter);
-        binding.hostReviewsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.hostReviewsList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        if (!PrefUtils.getUserInfo(getContext().getApplicationContext()).getRole().equals(Role.Guest)){
+            binding.reportButton.setVisibility(View.GONE);
+        }else{
+            binding.reportButton.setVisibility(View.VISIBLE);
+        }
 
         binding.reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,9 +142,9 @@ public class HostWithReviewsFragment extends Fragment {
             public void onResponse(Call<ArrayList<Review>> call, Response<ArrayList<Review>> response) {
                 if(response.code()==200){
                     List<Review> revievsRaw = response.body();
-                    adapter.addReviews(revievsRaw);
-                    adapter.notifyDataSetChanged();
-                    binding.progressLoaderHostReviews.setVisibility(View.INVISIBLE);
+                    adapter.addAll(revievsRaw);
+                    if (binding != null)
+                        binding.progressLoaderHostReviews.setVisibility(View.INVISIBLE);
                 }
             }
 

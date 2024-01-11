@@ -98,6 +98,14 @@ public class HostProfileFragment extends Fragment {
                 findNavController(getParentFragment()).navigate(R.id.action_navigation_host_profile_to_editProfileFragment);
             }
         });
+        binding.viewReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("hostId", id);
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_host_profile_to_hostWithReviewsFragment, bundle);
+            }
+        });
 
         return view;
     }

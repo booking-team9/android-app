@@ -60,6 +60,9 @@ public interface ReviewService {
     @PATCH("reviews/{id}/approve")
     Call<Void> approveReview(@Path("id") Long reviewId);
 
+    @PATCH("reviews/{id}/report")
+    Call<Void> reportReview(@Path("id") Long reviewId);
+
 
     @Headers({
             "User-Agent: Mobile-Android",

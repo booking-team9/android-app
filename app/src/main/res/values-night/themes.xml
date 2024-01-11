@@ -28,6 +28,8 @@
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
         <item name="backgroundColor">@color/md_theme_dark_background</item>
+        <item name="cardBackgroundColor">#1C1813</item>
+
 
     </style>
 </resources>

@@ -183,5 +183,7 @@
     <string name="comment">Comment</string>
     <string name="cancellation_deadline">Cancellation deadline:</string>
     <string name="reserve">Reserve</string>
+    <string name="my_reviews">My reviews</string>
+    <string name="favorites">Favorites</string>
 
 </resources>
