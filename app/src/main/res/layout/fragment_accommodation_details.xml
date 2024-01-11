@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.AccommodationDetailsFragment">
+
+    <TextView
+        android:id="@+id/accommodation_details_price_dates2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="32dp"
+        android:text="Price for"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:menu="@menu/details_app_bar"
+            app:navigationIcon="@drawable/baseline_arrow_back_24" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/carousel_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/rounded_corner"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:minHeight="220dp"
+                android:padding="5dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/accommodation_details_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/name"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view" />
+
+            <TextView
+                android:id="@+id/accommodation_details_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/type"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_name"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_name" />
+
+            <TextView
+                android:id="@+id/accommodation_details_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/address"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_type"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_type" />
+
+            <TextView
+                android:id="@+id/accommodation_details_host_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/hosted_by"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorTertiary"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@+id/star2"
+                app:layout_constraintStart_toEndOf="@+id/star2"
+                app:layout_constraintTop_toTopOf="@+id/star2" />
+
+            <TextView
+                android:id="@+id/accommodation_details_amenities_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/what_this_place_offers"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorTertiary"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/star2"
+                app:layout_constraintTop_toBottomOf="@+id/star2" />
+
+            <TextView
+                android:id="@+id/accommodation_details_cancellation_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/cancellation_deadline"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorTertiary"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_amenities"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities" />
+
+            <TextView
+                android:id="@+id/accommodation_details_cancellation_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/border_background"
+                android:padding="7dp"
+                android:text="3 days"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                android:textColor="@color/md_theme_light_secondary"
+                android:textSize="17sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/accommodation_details_cancellation_about"
+                app:layout_constraintStart_toEndOf="@+id/accommodation_details_cancellation_about" />
+
+            <TextView
+                android:id="@+id/accommodation_details_host"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/hosted_by"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/accommodation_details_host_about"
+                app:layout_constraintStart_toEndOf="@+id/accommodation_details_host_about" />
+
+            <TextView
+                android:id="@+id/accommodation_details_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/rounded_corner"
+                android:padding="5dp"
+                android:text="4.5"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                app:layout_constraintBaseline_toBaselineOf="@+id/accommodation_details_type"
+                app:layout_constraintEnd_toStartOf="@+id/star" />
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/baseline_star_rate_24"
+                app:layout_constraintBottom_toBottomOf="@+id/accommodation_details_rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/accommodation_details_rating" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_corner"
+                android:padding="5dp"
+                android:src="@drawable/baseline_person_24"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_description"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_description" />
+
+            <TextView
+                android:id="@+id/accommodation_details_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/rounded_corner_gray"
+                android:ellipsize="end"
+                android:lines="5"
+                android:padding="10dp"
+                android:text="@string/description"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_address"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_address" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/accommodation_details_amenities"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="80dp"
+                android:padding="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_description"
+                app:layout_constraintStart_toStartOf="@+id/star2"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_amenities_about" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/accommodation_details_map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_margin="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_availability" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/accommodation_details_reviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="8dp"
+                android:minHeight="80dp"
+                android:padding="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_description"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/star2"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_map" />
+
+            <Button
+                android:id="@+id/accommodation_details_availability"
+                style="@style/Widget.Material3.ExtendedFloatingActionButton.Surface"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/availability"
+                app:layout_constraintEnd_toEndOf="@+id/accommodation_details_amenities"
+                app:layout_constraintStart_toStartOf="@+id/accommodation_details_amenities"
+                app:layout_constraintTop_toBottomOf="@+id/accommodation_details_cancellation_about" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/accommodation_details_reserve"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Primary"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/reserve"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/accommodation_details_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="200$"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/accommodation_details_price_dates2"
+        app:layout_constraintTop_toBottomOf="@+id/accommodation_details_price_dates" />
+
+    <TextView
+        android:id="@+id/accommodation_details_price_dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="8dp"
+        android:text="@string/dates"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        app:layout_constraintStart_toEndOf="@+id/accommodation_details_price_dates2"
+        app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

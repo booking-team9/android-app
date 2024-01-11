@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface GuestService {
     @Headers({
@@ -41,4 +42,11 @@ public interface GuestService {
     })
     @DELETE("guests/{id}")
     Call<ResponseBody> deleteGuest(@Path("id") Long id);
+
+    @GET("guests/add-favorite")
+    Call<Void> addFavorite(@Query("guestId") Long guestId, @Query("accommodationId") Long accommodationId);
+    @GET("guests/remove-favorite")
+    Call<Void> removeFavorite(@Query("guestId") Long guestId, @Query("accommodationId") Long accommodationId);
+    @GET("guests/check-favorite")
+    Call<Boolean> checkFavorite(@Query("guestId") Long guestId, @Query("accommodationId") Long accommodationId);
 }

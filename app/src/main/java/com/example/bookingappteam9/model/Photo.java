@@ -24,6 +24,10 @@ public class Photo {
         this.name = name;
     }
 
+    public Photo(){
+
+    }
+
     public Photo(Uri uri, String name, Bitmap image) {
         this.uri = uri;
         this.name = name;

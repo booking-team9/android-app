@@ -15,6 +15,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ReviewService {
 
@@ -53,5 +54,13 @@ public interface ReviewService {
 
     @PATCH("reviews/{id}/approve")
     Call<Void> approveReview(@Path("id") Long reviewId);
+
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("reviews/acc")
+    Call<ArrayList<Review>> getByAccommodationId(@Query("accommodationId") Long id);
 
 }

@@ -174,5 +174,13 @@
     <string name="author">Author</string>
     <string name="timestamp">Timestamp</string>
     <string name="review">Review</string>
+    <string name="favorite">Favorite</string>
+    <string name="type">Type</string>
+    <string name="hosted_by">Hosted by:</string>
+    <string name="what_this_place_offers">What this place offers:</string>
+    <string name="report">Report</string>
+    <string name="comment">Comment</string>
+    <string name="cancellation_deadline">Cancellation deadline:</string>
+    <string name="reserve">Reserve</string>
 
 </resources>

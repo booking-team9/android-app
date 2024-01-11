@@ -4,6 +4,8 @@ import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.AccommodationShort;
 import com.example.bookingappteam9.model.HostAccommodation;
 import com.example.bookingappteam9.model.NewAccommodation;
+import com.example.bookingappteam9.model.PriceRequest;
+import com.example.bookingappteam9.model.PriceResponse;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,9 @@ public interface AccommodationService {
 
     @GET("accommodations/host/{id}")
     Call<ArrayList<HostAccommodation>> getByHostId(@Path("id") Long id);
+
+    @GET("accommodations/get/{id}")
+    Call<Accommodation> getById(@Path("id") Long id);
 
     @GET("accommodations/all")
     Call<ArrayList<Accommodation>> getAll();
@@ -34,4 +39,8 @@ public interface AccommodationService {
     Call<HostAccommodation> denyAccommodation(@Path("id") Long id);
     @POST("accommodations")
     Call<NewAccommodation> createAccommodation(@Body NewAccommodation accommodation);
+    @POST("accommodations/get-availability-price")
+    Call<PriceResponse> getPrice(@Body PriceRequest priceRequest);
+
+
 }
