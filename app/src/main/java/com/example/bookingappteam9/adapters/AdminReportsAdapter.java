@@ -91,7 +91,7 @@ public class AdminReportsAdapter extends RecyclerView.Adapter<AdminReportsAdapte
         holder.getReportedUserName().setText(reports.get(position).getReportedUserEmail());
         holder.getAuthorName().setText(reports.get(position).getAuthorEmail());
         holder.getReportReason().setText(reports.get(position).getReason());
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM - dd - yyyy");
+        DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd MMM yyyy | HH:mm");
         holder.getDate().setText(reports.get(position).getDate().format(formater));
         holder.getBlockUser().setOnClickListener(new View.OnClickListener() {
             @Override
