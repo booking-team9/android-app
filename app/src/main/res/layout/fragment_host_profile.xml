@@ -227,16 +227,17 @@
                     android:text="@string/log_out"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
+
                 <Button
-                    android:id="@+id/view_accommodations_button"
+                    android:id="@+id/view_reviews"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:text="View Accommodations"
-                    android:backgroundTint="@color/md_theme_light_outlineVariant"
-                   
-                    android:textSize="10dp"
+                    android:layout_marginStart="8dp"
+
+                    android:text="@string/my_reviews"
+                    android:textSize="14sp"
                     tools:layout_editor_absoluteX="161dp"
                     tools:layout_editor_absoluteY="446dp;" />
 

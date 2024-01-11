@@ -3,6 +3,7 @@ package com.example.bookingappteam9.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.clients.ClientUtils;
+import com.example.bookingappteam9.fragments.AdapterClickListener;
 import com.example.bookingappteam9.model.HostAccommodation;
 import com.google.android.material.chip.Chip;
 
@@ -20,6 +22,8 @@ import java.util.List;
 public class HostPropertiesAdapter extends RecyclerView.Adapter<HostPropertiesAdapter.ViewHolder> {
 
     private List<HostAccommodation> cards;
+    private AdapterClickListener viewClick;
+    private AdapterClickListener editClick;
     private View view;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -28,6 +32,8 @@ public class HostPropertiesAdapter extends RecyclerView.Adapter<HostPropertiesAd
         private final TextView description;
         private final ImageView image;
         private final Chip status;
+        private final Button viewProperty;
+        private final Button editProperty;
 
         public ViewHolder(View view) {
             super(view);
@@ -38,6 +44,8 @@ public class HostPropertiesAdapter extends RecyclerView.Adapter<HostPropertiesAd
             description = (TextView) view.findViewById(R.id.accommodation_description_host);
             status = (Chip) view.findViewById(R.id.accommodation_status_host);
             image = (ImageView) view.findViewById(R.id.host_accommodation_image);
+            viewProperty = view.findViewById(R.id.accommodation_view_host);
+            editProperty = view.findViewById(R.id.accommodation_edit_host);
         }
 
         public TextView getName() {
@@ -59,10 +67,20 @@ public class HostPropertiesAdapter extends RecyclerView.Adapter<HostPropertiesAd
         public ImageView getImage() {
             return image;
         }
+
+        public Button getViewProperty() {
+            return viewProperty;
+        }
+
+        public Button getEditProperty() {
+            return editProperty;
+        }
     }
 
-    public HostPropertiesAdapter(List<HostAccommodation> accommodations) {
+    public HostPropertiesAdapter(List<HostAccommodation> accommodations, AdapterClickListener viewClick, AdapterClickListener editClick) {
         this.cards = accommodations;
+        this.viewClick = viewClick;
+        this.editClick = editClick;
     }
 
     @NonNull
@@ -79,6 +97,18 @@ public class HostPropertiesAdapter extends RecyclerView.Adapter<HostPropertiesAd
         holder.getDescription().setText(cards.get(position).getDescription());
         holder.getStatus().setText(cards.get(position).getStatus().toString());
         Glide.with(view).load(ClientUtils.getPhotoPath(cards.get(position).getPhotos().get(0))).into(holder.getImage());
+        holder.getViewProperty().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewClick.onClick(cards.get(holder.getBindingAdapterPosition()).getId());
+            }
+        });
+        holder.getEditProperty().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editClick.onClick(cards.get(holder.getBindingAdapterPosition()).getId());
+            }
+        });
 
     }
 

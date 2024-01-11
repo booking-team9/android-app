@@ -120,7 +120,7 @@ public class AvailabilityFragment extends Fragment {
                 for (TimeSlot s: availabilityAdapter.getSlots()){
                     long start = s.getStartDate().toEpochSecond(ZoneOffset.UTC)*1000;
                     long end = s.getEndDate().toEpochSecond(ZoneOffset.UTC)*1000;
-                    if (date >= start && date <= end - 86400000){
+                    if (date >= start && date <= end - 86400000 && date >= Instant.now().toEpochMilli()){
                         return false;
                     }
                 }

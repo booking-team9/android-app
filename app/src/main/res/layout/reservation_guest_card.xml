@@ -45,12 +45,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border_background"
+                    android:clickable="true"
+                    android:padding="8dp"
                     android:text="@string/guest_email"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
-                    android:clickable="true"
-                    android:background="@drawable/border_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_name_reservation" />
 
@@ -60,9 +61,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Review"
-                    android:visibility="gone"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/prices_reservation" />
@@ -72,38 +73,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/dates"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/host_reservation" />
+                    app:layout_constraintBottom_toTopOf="@+id/prices_reservation"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/prices_reservation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
 
                     android:layout_marginEnd="32dp"
                     android:text="Price"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     android:textColor="?android:attr/textColorSecondary"
                     android:textSize="26dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/date_reservation" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/reservations_status"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/reservations_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="@string/active"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/host_reservation"
                     app:layout_constraintTop_toBottomOf="@+id/host_reservation"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -113,9 +113,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:visibility="gone"
                     android:text="@string/host"
                     android:textSize="12dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/add_review_accommodation"
@@ -128,8 +128,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:visibility="gone"
                     android:text="Accommodation"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/add_review_host"
                     app:layout_constraintHorizontal_bias="0.5"

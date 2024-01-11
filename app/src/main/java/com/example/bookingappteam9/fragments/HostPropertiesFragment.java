@@ -78,7 +78,23 @@ public class HostPropertiesFragment extends ListFragment {
         View root = binding.getRoot();
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         ArrayList<HostAccommodation> accommodations = new ArrayList<>();
-        adapter = new HostPropertiesAdapter(accommodations);
+        AdapterClickListener viewClick = new AdapterClickListener() {
+            @Override
+            public void onClick(Long id) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("accommodationId", id);
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_host_properties_to_accommodationDetailsFragment, bundle);
+            }
+        };
+        AdapterClickListener editClick = new AdapterClickListener() {
+            @Override
+            public void onClick(Long id) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("accommodationId", id);
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_host_properties_to_accommodationDetailsFragment, bundle);
+            }
+        };
+        adapter = new HostPropertiesAdapter(accommodations, viewClick, editClick);
         binding.hostPropertiesList.setAdapter(adapter);
         binding.hostPropertiesList.setLayoutManager(new LinearLayoutManager(getActivity()));
         Call<ArrayList<HostAccommodation>> call = ClientUtils.accommodationService.getByHostId(userInfo.getId());

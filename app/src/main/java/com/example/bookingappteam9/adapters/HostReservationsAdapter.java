@@ -77,8 +77,7 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getAccommodationName().setText(reservations.get(position).getAccommodationName());
-        String guestInfo = reservations.get(position).getGuestEmail() + "\n (times canceled: " + String.valueOf( reservations.get(position).getGuestTimesCancelled()) + ")";
-        holder.getGuestEmail().setText(guestInfo);
+        holder.getGuestEmail().setText(reservations.get(position).getGuestEmail());
         holder.getGuestEmail().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
