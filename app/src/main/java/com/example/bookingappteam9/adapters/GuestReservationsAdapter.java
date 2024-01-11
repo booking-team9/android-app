@@ -23,11 +23,14 @@ import com.google.android.material.chip.Chip;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder> {
     private List<Reservation> reservations;
+    private final List<Reservation> allReservations;
     private AdapterClickListener listener;
     private View view;
+    private ReservationStatus status;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView accommodationName;
@@ -87,6 +90,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
 
     public GuestReservationsAdapter(List<Reservation> reservations, AdapterClickListener listener) {
         this.reservations = reservations;
+        this.allReservations = reservations;
         this.listener = listener;
     }
 
@@ -159,5 +163,17 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
 
     public void addReservations(List<Reservation> reservationss) {
         this.reservations.addAll(reservationss);
+        this.allReservations.addAll(reservationss);
+    }
+
+    public void filterReservations(ReservationStatus status){
+        this.status = status;
+        this.reservations = this.allReservations.stream().filter(reservation -> reservation.getReservationStatus().equals(status)).collect(Collectors.toList());
+        notifyDataSetChanged();
+    }
+    public void showALl(){
+        this.status = null;
+        this.reservations = this.allReservations;
+        notifyDataSetChanged();
     }
 }

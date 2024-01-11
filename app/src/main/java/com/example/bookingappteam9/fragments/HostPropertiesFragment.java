@@ -89,7 +89,8 @@ public class HostPropertiesFragment extends ListFragment {
                     List<HostAccommodation> accommodationsRaw = response.body();
                     adapter.addCards(accommodationsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderHostProperties.setVisibility(View.INVISIBLE);
+                    if(binding!=null)
+                        binding.progressLoaderHostProperties.setVisibility(View.INVISIBLE);
 
                 }else{
                     Log.d("QM","Meesage recieved: "+response.code());

@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.bookingappteam9.R;
@@ -19,7 +19,6 @@ import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAllAccommodationsBinding;
 import com.example.bookingappteam9.fragments.AdapterClickListener;
 import com.example.bookingappteam9.model.AccommodationShort;
-import com.example.bookingappteam9.model.HostAccommodation;
 
 import java.util.ArrayList;
 
@@ -82,7 +81,8 @@ public class AllAccommodationsFragment extends Fragment {
             public void onResponse(Call<ArrayList<AccommodationShort>> call, Response<ArrayList<AccommodationShort>> response) {
                 if (response.code() == 200){
                     adapter.addAll(response.body());
-                    binding.progressLoaderAllAccommodations.setVisibility(View.INVISIBLE);
+                    if(binding!=null)
+                        binding.progressLoaderAllAccommodations.setVisibility(View.INVISIBLE);
                 }else{
                     Log.d("QM","Meesage recieved: "+response.code());
 

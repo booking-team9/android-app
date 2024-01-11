@@ -1,12 +1,6 @@
 package com.example.bookingappteam9.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 
-import com.example.bookingappteam9.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.bookingappteam9.adapters.AdminReviewsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAdminReviewsBinding;
 import com.example.bookingappteam9.model.Review;
 import com.example.bookingappteam9.model.ReviewStatus;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
@@ -71,8 +68,8 @@ public class AdminReviewsFragment extends Fragment {
                 if (response.isSuccessful()){
                     adapter.addAll(response.body());
                     Log.d("QM", "Reviews successfully loaded!");
-                    binding.progressLoaderAdminReviews.setVisibility(View.GONE);
-
+                    if(binding!=null)
+                        binding.progressLoaderAdminReviews.setVisibility(View.GONE);
                 }
             }
 

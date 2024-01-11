@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import com.example.bookingappteam9.adapters.GuestReservationsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentGuestReservationsBinding;
 import com.example.bookingappteam9.model.Reservation;
+import com.example.bookingappteam9.model.ReservationStatus;
 import com.example.bookingappteam9.utils.PrefUtils;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ import retrofit2.Response;
 public class GuestReservationsFragment extends Fragment {
     private GuestReservationsAdapter adapter;
     private FragmentGuestReservationsBinding binding;
+    private AutoCompleteTextView reservationFilter;
+    private final String[] statuses = {"All", "Approved", "Done", "Active", "Denied","Cancelled"};
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -58,6 +63,16 @@ public class GuestReservationsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        reservationFilter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0){
+                    adapter.showALl();
+                }else{
+                    adapter.filterReservations(ReservationStatus.valueOf(statuses[position]));
+                }
+            }
+        });
     }
 
     @Override
@@ -89,6 +104,7 @@ public class GuestReservationsFragment extends Fragment {
         adapter = new GuestReservationsAdapter(reservations, adapterClickListener);
         binding.guestReservationList.setAdapter(adapter);
         binding.guestReservationList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        reservationFilter = binding.reservationsFilter;
 
         Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getDecidedReservationsByGuestId(userInfo.getId());
         call.enqueue(new Callback<ArrayList<Reservation>>() {
@@ -98,7 +114,8 @@ public class GuestReservationsFragment extends Fragment {
                     List<Reservation> reservatonsRaw = response.body();
                     adapter.addReservations(reservatonsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderGuestReservations.setVisibility(View.INVISIBLE);
+                    if(binding!=null)
+                        binding.progressLoaderGuestReservations.setVisibility(View.INVISIBLE);
                 }
                 else {
                     Log.d("QM","Meesage recieved: "+response.code());

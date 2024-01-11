@@ -87,7 +87,8 @@ public class GuestRequestsFragment extends Fragment {
                     List<Reservation> reservatonsRaw = response.body();
                     adapter.addReservations(reservatonsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderGuestRequests.setVisibility(View.INVISIBLE);
+                    if(binding!=null)
+                        binding.progressLoaderGuestRequests.setVisibility(View.INVISIBLE);
                 }
                 else {
                     Log.d("QM","Meesage recieved: "+response.code());

@@ -15,14 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.fragments.ReportDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
+import com.example.bookingappteam9.model.ReservationStatus;
 import com.google.android.material.chip.Chip;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservationsAdapter.ViewHolder>{
     private List<Reservation> reservations;
+    private final List<Reservation> allReservations;
     private View view;
+    private ReservationStatus status;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView accommodationName;
@@ -65,6 +69,7 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
 
     public HostReservationsAdapter(List<Reservation> reservations){
         this.reservations = reservations;
+        this.allReservations = reservations;
     }
 
     @NonNull
@@ -110,6 +115,18 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
 
     public void addReservations(List<Reservation> reservationss){
         this.reservations.addAll(reservationss);
+        this.allReservations.addAll(reservationss);
+    }
+
+    public void filterReservations(ReservationStatus status){
+        this.status = status;
+        this.reservations = this.allReservations.stream().filter(reservation -> reservation.getReservationStatus().equals(status)).collect(Collectors.toList());
+        notifyDataSetChanged();
+    }
+    public void showALl(){
+        this.status = null;
+        this.reservations = this.allReservations;
+        notifyDataSetChanged();
     }
 
 
