@@ -170,5 +170,10 @@
             android:name="accommodationId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/adminReportsFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminReportsFragment"
+        android:label="fragment_admin_reports"
+        tools:layout="@layout/fragment_admin_reports" />
 
 </navigation>

@@ -100,8 +100,6 @@ public class HostRequestsFragment extends Fragment {
             }
         });
 
-
-
         return root;
     }
 }

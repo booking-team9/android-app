@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -69,6 +70,13 @@ public interface AccountService {
     })
     @GET("register/confirm")
     Call<String> registerConfirm(@Query("token")String token);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json",
+    })
+    @PATCH("accounts/{id}/block")
+    Call<Void> blockAccount(@Path("id") Long id);
 
 
 /*
