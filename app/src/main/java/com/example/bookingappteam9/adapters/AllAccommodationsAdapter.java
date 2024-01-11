@@ -25,6 +25,7 @@ import com.example.bookingappteam9.fragments.FragmentTransition;
 import com.example.bookingappteam9.fragments.ReviewDialogFragment;
 import com.example.bookingappteam9.model.AccommodationShort;
 import com.example.bookingappteam9.model.HostAccommodation;
+import com.example.bookingappteam9.utils.Round;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class AllAccommodationsAdapter extends RecyclerView.Adapter<AllAccommodat
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getName().setText(accommodationList.get(position).getName());
         holder.getAddress().setText(accommodationList.get(position).getLocation());
-        holder.getRating().setText(String.valueOf(accommodationList.get(position).getAverageGrade()));
+        holder.getRating().setText(Round.round(accommodationList.get(position).getAverageGrade(), 1));
         holder.getPrice().setVisibility(View.INVISIBLE);
         holder.getPriceTag().setVisibility(View.INVISIBLE);
         holder.getDescription().setText(accommodationList.get(position).getDescription());

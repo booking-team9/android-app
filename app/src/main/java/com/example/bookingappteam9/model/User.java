@@ -1,5 +1,7 @@
 package com.example.bookingappteam9.model;
 
+import androidx.annotation.NonNull;
+
 public class User {
     private Long accountId;
     private String firstName;
@@ -46,5 +48,11 @@ public class User {
     }
     public User(Long accountId){
         this.accountId = accountId;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

@@ -60,4 +60,12 @@ public interface ReviewService {
     @PATCH("reviews/{id}/approve")
     Call<Void> approveReview(@Path("id") Long reviewId);
 
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("reviews/acc")
+    Call<ArrayList<Review>> getByAccommodationId(@Query("accommodationId") Long id);
+
 }
