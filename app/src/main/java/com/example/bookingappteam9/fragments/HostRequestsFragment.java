@@ -24,11 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HostRequestsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HostRequestsFragment extends Fragment {
     private HostRequestsAdapter adapter;
     private FragmentHostRequestsBinding binding;
@@ -104,8 +99,6 @@ public class HostRequestsFragment extends Fragment {
                 Log.d("QM", t.getMessage() != null?t.getMessage():"error");
             }
         });
-
-
 
         return root;
     }

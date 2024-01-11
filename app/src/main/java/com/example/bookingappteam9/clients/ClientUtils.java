@@ -6,6 +6,7 @@ import com.example.bookingappteam9.services.AccountService;
 import com.example.bookingappteam9.services.GuestService;
 import com.example.bookingappteam9.services.HostService;
 import com.example.bookingappteam9.services.ImageService;
+import com.example.bookingappteam9.services.ReportService;
 import com.example.bookingappteam9.services.ReservationService;
 import com.example.bookingappteam9.services.ReviewService;
 import com.example.bookingappteam9.utils.LocalDateSerializer;
@@ -57,6 +58,7 @@ public class ClientUtils {
     public static ImageService imageService = retrofit.create(ImageService.class);
     public static ReservationService reservationService = retrofit.create(ReservationService.class);
     public static ReviewService reviewService = retrofit.create(ReviewService.class);
+    public static ReportService reportService = retrofit.create(ReportService.class);
 
 
 }

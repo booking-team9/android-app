@@ -49,6 +49,8 @@
                     android:text="@string/guest_email"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?android:attr/textColorSecondary"
+                    android:clickable="true"
+                    android:background="@drawable/border_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_name_reservation" />
 

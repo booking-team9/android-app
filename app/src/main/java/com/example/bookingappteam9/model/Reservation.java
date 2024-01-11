@@ -10,6 +10,7 @@ public class Reservation {
     private String accommodationName;
     private String guestEmail;
     private String hostEmail;
+    private Long guestId;
     private Long hostId;
     private ReservationStatus reservationStatus;
     private Integer numberOfGuests;
@@ -20,7 +21,7 @@ public class Reservation {
 
     }
 
-    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, String accommodationName, String guestEmail, String hostEmail, Long hostId, ReservationStatus reservationStatus, Integer numberOfGuests, Integer guestTimesCancelled, Long accommodationId) {
+    public Reservation(Long id, LocalDateTime startDate, LocalDateTime endDate, double price, String accommodationName, String guestEmail, String hostEmail, Long guestId, Long hostId, ReservationStatus reservationStatus, Integer numberOfGuests, Integer guestTimesCancelled, Long accommodationId) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -28,6 +29,7 @@ public class Reservation {
         this.accommodationName = accommodationName;
         this.guestEmail = guestEmail;
         this.hostEmail = hostEmail;
+        this.guestId = guestId;
         this.hostId = hostId;
         this.reservationStatus = reservationStatus;
         this.numberOfGuests = numberOfGuests;
@@ -69,6 +71,14 @@ public class Reservation {
 
     public String getAccommodationName() {
         return accommodationName;
+    }
+
+    public Long getGuestId() {
+        return guestId;
+    }
+
+    public void setGuestId(Long guestId) {
+        this.guestId = guestId;
     }
 
     public void setAccommodationName(String accommodationName) {

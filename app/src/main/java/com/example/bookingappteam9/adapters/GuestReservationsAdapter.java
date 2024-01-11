@@ -1,5 +1,6 @@
 package com.example.bookingappteam9.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.fragments.AdapterClickListener;
 import com.example.bookingappteam9.fragments.ReviewDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
 import com.example.bookingappteam9.model.ReservationStatus;
@@ -24,6 +26,7 @@ import java.util.List;
 
 public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder> {
     private List<Reservation> reservations;
+    private AdapterClickListener listener;
     private View view;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,8 +85,9 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         }
     }
 
-    public GuestReservationsAdapter(List<Reservation> reservations) {
+    public GuestReservationsAdapter(List<Reservation> reservations, AdapterClickListener listener) {
         this.reservations = reservations;
+        this.listener = listener;
     }
 
     @NonNull
@@ -97,6 +101,13 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
     public void onBindViewHolder(@NonNull GuestReservationsAdapter.ViewHolder holder, int position) {
         holder.getAccommodationName().setText(reservations.get(position).getAccommodationName());
         holder.getHostEmail().setText(reservations.get(position).getHostEmail());
+        holder.getHostEmail().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.getHostEmail().setTextColor(Color.BLACK);
+                listener.onClick(reservations.get(holder.getBindingAdapterPosition()).getHostId());
+            }
+        });
         DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM dd");
         String range = reservations.get(position).getStartDate().format(formater) + " - " + reservations.get(position).getEndDate().format(formater);
         holder.getDates().setText(range);

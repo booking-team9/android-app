@@ -1,9 +1,6 @@
 package com.example.bookingappteam9.services;
 
-import com.example.bookingappteam9.model.Accommodation;
-import com.example.bookingappteam9.model.Login;
 import com.example.bookingappteam9.model.Review;
-import com.example.bookingappteam9.model.Token;
 
 import java.util.ArrayList;
 
@@ -31,6 +28,14 @@ public interface ReviewService {
     })
     @GET("reviews/all")
     Call<ArrayList<Review>> getAll();
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("reviews/host")
+    Call<ArrayList<Review>> getByHostId(@Query("hostId") Long id);
+
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"

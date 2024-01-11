@@ -1,13 +1,6 @@
 package com.example.bookingappteam9.fragments;
 
-import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +10,15 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import com.example.bookingappteam9.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentReviewDialogBinding;
 import com.example.bookingappteam9.model.Review;
 import com.example.bookingappteam9.model.ReviewStatus;
-import com.example.bookingappteam9.model.Token;
 import com.example.bookingappteam9.model.User;
 import com.example.bookingappteam9.utils.PrefUtils;
 
@@ -53,15 +49,6 @@ public class ReviewDialogFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReviewDialogFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReviewDialogFragment newInstance(String param1, String param2, Long id) {
         ReviewDialogFragment fragment = new ReviewDialogFragment();
         dialogTitle = param1;

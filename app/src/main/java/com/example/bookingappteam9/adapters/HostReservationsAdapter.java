@@ -1,14 +1,19 @@
 package com.example.bookingappteam9.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookingappteam9.R;
+import com.example.bookingappteam9.fragments.ReportDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
 import com.google.android.material.chip.Chip;
 
@@ -74,6 +79,22 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
         holder.getAccommodationName().setText(reservations.get(position).getAccommodationName());
         String guestInfo = reservations.get(position).getGuestEmail() + "\n (times canceled: " + String.valueOf( reservations.get(position).getGuestTimesCancelled()) + ")";
         holder.getGuestEmail().setText(guestInfo);
+        holder.getGuestEmail().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.getGuestEmail().setTextColor(Color.BLACK);
+                ReportDialogFragment dialogFragment = ReportDialogFragment.newInstance(reservations.get(holder.getBindingAdapterPosition()).getGuestId());
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                dialogFragment.show(ft, "dialog");
+            }
+        });
         DateTimeFormatter formater = DateTimeFormatter.ofPattern("MMM dd");
         String range = reservations.get(position).getStartDate().format(formater) + " - " + reservations.get(position).getEndDate().format(formater);
         holder.getDates().setText(range);
