@@ -28,6 +28,7 @@ import com.example.bookingappteam9.adapters.ReviewsAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAccommodationDetailsBinding;
 import com.example.bookingappteam9.model.Accommodation;
+import com.example.bookingappteam9.model.Host;
 import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.PriceRequest;
 import com.example.bookingappteam9.model.PriceResponse;
@@ -77,6 +78,8 @@ public class AccommodationDetailsFragment extends Fragment {
     private MaterialDatePicker datePicker;
     private String picked_date;
     private TimeSlot slot = new TimeSlot();
+
+    private boolean isHostOwner = false;
     private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+1"));
     private PrefUtils.UserInfo user;
 
@@ -98,11 +101,9 @@ public class AccommodationDetailsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentAccommodationDetailsBinding.inflate(inflater, container, false);
         List<String> photos = new ArrayList<>();
+        user = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         photoAdapter = new DetailsPhotosAdapter(photos);
         amenityAdapter = new AmenityAdapter(new ArrayList<>());
-        reviewsAdapter = new ReviewsAdapter(new ArrayList<>());
-        binding.accommodationDetailsReviews.setAdapter(reviewsAdapter);
-        binding.accommodationDetailsReviews.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.carouselRecyclerView.setAdapter(photoAdapter);
         binding.carouselRecyclerView.setLayoutManager(new CarouselLayoutManager(new HeroCarouselStrategy()));
         binding.accommodationDetailsAmenities.setAdapter(amenityAdapter);
@@ -127,7 +128,7 @@ public class AccommodationDetailsFragment extends Fragment {
 
             }
         });
-        user = PrefUtils.getUserInfo(getActivity().getApplicationContext());
+
         if (user.getRole().equals(Role.Guest)){
             binding.topAppBar.getMenu().getItem(0).setVisible(true);
             ClientUtils.guestService.checkFavorite(user.getId(), accommodationId).enqueue(new Callback<Boolean>() {
@@ -146,6 +147,10 @@ public class AccommodationDetailsFragment extends Fragment {
 
                 }
             });
+
+        }
+        if (user.getRole().equals(Role.Host)){
+            binding.guestGroup.setVisibility(View.GONE);
 
         }
         binding.topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -203,6 +208,12 @@ public class AccommodationDetailsFragment extends Fragment {
         return root;
     }
     private void loadData(){
+        if (user.getId().equals(accommodation.getHost().getId())){
+            isHostOwner = true;
+        }
+        reviewsAdapter = new ReviewsAdapter(new ArrayList<>(), isHostOwner);
+        binding.accommodationDetailsReviews.setAdapter(reviewsAdapter);
+        binding.accommodationDetailsReviews.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.accommodationDetailsName.setText(accommodation.getName());
         binding.accommodationDetailsAddress.setText(accommodation.getAddress().toString());
         binding.accommodationDetailsType.setText(accommodation.getAccommodationType());
@@ -217,7 +228,7 @@ public class AccommodationDetailsFragment extends Fragment {
                 for (TimeSlot s: accommodation.getAvailability()){
                     long start = s.getStartDate().toEpochSecond(ZoneOffset.UTC)*1000;
                     long end = s.getEndDate().toEpochSecond(ZoneOffset.UTC)*1000;
-                    if (date >= start && date <= end - 86400000){
+                    if (date >= start && date <= end - 86400000 && date >= Instant.now().toEpochMilli()){
                         return true;
                     }
                 }
