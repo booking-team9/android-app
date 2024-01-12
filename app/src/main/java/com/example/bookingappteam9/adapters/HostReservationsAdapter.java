@@ -27,6 +27,7 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
     private final List<Reservation> allReservations;
     private View view;
     private ReservationStatus status;
+    private String searchText = "";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView accommodationName;
@@ -120,11 +121,29 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
     public void filterReservations(ReservationStatus status){
         this.status = status;
         this.reservations = this.allReservations.stream().filter(reservation -> reservation.getReservationStatus().equals(status)).collect(Collectors.toList());
+        searchReservations(this.searchText);
         notifyDataSetChanged();
     }
-    public void showALl(){
+    public void showALlStatuses(){
         this.status = null;
         this.reservations = this.allReservations;
+        searchReservations(this.searchText);
+        notifyDataSetChanged();
+    }
+
+    public void showALl(){
+        this.reservations = this.allReservations;
+        this.searchText = "";
+        filterReservations(this.status);
+        notifyDataSetChanged();
+    }
+
+    public void searchReservations(String text){
+        this.searchText = text;
+        this.reservations = this.allReservations
+                .stream()
+                .filter(reservation -> reservation.getAccommodationName().toLowerCase().contains(text.toLowerCase()) && (this.status==null || reservation.getReservationStatus().equals(this.status)))
+                .collect(Collectors.toList());
         notifyDataSetChanged();
     }
 

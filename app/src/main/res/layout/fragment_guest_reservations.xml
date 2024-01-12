@@ -19,7 +19,7 @@
 <!--        tools:layout_editor_absoluteY="16dp" />-->
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reviewsFilterlayout"
+        android:id="@+id/reservationsFilterlayout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -37,6 +37,20 @@
             app:simpleItems="@array/guest_reservation_types"
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/search_view_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationsFilterlayout"
+        app:queryHint="Search"
+        app:iconifiedByDefault="false">
+    </androidx.appcompat.widget.SearchView>
 
     <ProgressBar
         android:id="@+id/progress_loader_guest_reservations"
@@ -66,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reviewsFilterlayout" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
 
 

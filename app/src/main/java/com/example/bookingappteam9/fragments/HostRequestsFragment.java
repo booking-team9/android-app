@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -27,6 +28,7 @@ import retrofit2.Response;
 public class HostRequestsFragment extends Fragment {
     private HostRequestsAdapter adapter;
     private FragmentHostRequestsBinding binding;
+    private SearchView searchView;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -55,11 +57,29 @@ public class HostRequestsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals(""))
+                    adapter.showALl();
+                else{
+                    adapter.searchReservations(newText);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        searchView.setQuery("", false);
+        adapter.showALl();
     }
 
     @Override
@@ -78,6 +98,8 @@ public class HostRequestsFragment extends Fragment {
         adapter = new HostRequestsAdapter(reservations);
         binding.hostRequestsList.setAdapter(adapter);
         binding.hostRequestsList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        searchView = binding.searchView;
+        searchView.clearFocus();
 
         Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getRequestsByHostId(userInfo.getId());
         call.enqueue(new Callback<ArrayList<Reservation>>() {

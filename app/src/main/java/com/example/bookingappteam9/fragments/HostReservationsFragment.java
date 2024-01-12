@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -32,6 +33,7 @@ public class HostReservationsFragment extends Fragment {
     private HostReservationsAdapter adapter;
     private FragmentHostReservationsBinding binding;
     private AutoCompleteTextView reservationFilter;
+    private SearchView searchView;
     private final String[] statuses = {"All", "Approved", "Done", "Active"};
 
     private static final String ARG_PARAM1 = "param1";
@@ -65,17 +67,37 @@ public class HostReservationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0){
-                    adapter.showALl();
+                    adapter.showALlStatuses();
                 }else{
                     adapter.filterReservations(ReservationStatus.valueOf(statuses[position]));
                 }
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals(""))
+                    adapter.showALl();
+                else{
+                    adapter.searchReservations(newText);
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        reservationFilter.setText("");
+        searchView.setQuery("", false);
+        adapter.showALl();
     }
 
     @Override
@@ -95,6 +117,8 @@ public class HostReservationsFragment extends Fragment {
         binding.hostReservationList.setAdapter(adapter);
         binding.hostReservationList.setLayoutManager(new LinearLayoutManager(getActivity()));
         reservationFilter = binding.reservationsFilter;
+        searchView = binding.searchView;
+        searchView.clearFocus();
 
         Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getDecidedReservationsByHostId(userInfo.getId());
         call.enqueue(new Callback<ArrayList<Reservation>>() {

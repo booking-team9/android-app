@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -34,6 +35,7 @@ public class GuestReservationsFragment extends Fragment {
     private GuestReservationsAdapter adapter;
     private FragmentGuestReservationsBinding binding;
     private AutoCompleteTextView reservationFilter;
+    private SearchView searchView;
     private final String[] statuses = {"All", "Approved", "Done", "Active", "Denied","Cancelled"};
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -73,11 +75,30 @@ public class GuestReservationsFragment extends Fragment {
                 }
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.equals(""))
+                    adapter.showALl();
+                else{
+                    adapter.searchReservations(newText);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        reservationFilter.setText("");
+        searchView.setQuery("", false);
+        adapter.showALl();
     }
 
     @Override
@@ -105,6 +126,8 @@ public class GuestReservationsFragment extends Fragment {
         binding.guestReservationList.setAdapter(adapter);
         binding.guestReservationList.setLayoutManager(new LinearLayoutManager(getActivity()));
         reservationFilter = binding.reservationsFilter;
+        searchView = binding.searchView;
+        searchView.clearFocus();
 
         Call<ArrayList<Reservation>> call = ClientUtils.reservationService.getDecidedReservationsByGuestId(userInfo.getId());
         call.enqueue(new Callback<ArrayList<Reservation>>() {
