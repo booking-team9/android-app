@@ -19,6 +19,7 @@ import com.example.bookingappteam9.model.ReservationStatus;
 import com.google.android.material.chip.Chip;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,7 +71,7 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
 
     public HostReservationsAdapter(List<Reservation> reservations){
         this.reservations = reservations;
-        this.allReservations = reservations;
+        this.allReservations = new ArrayList<>(reservations);
     }
 
     @NonNull
@@ -126,13 +127,13 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
     }
     public void showALlStatuses(){
         this.status = null;
-        this.reservations = this.allReservations;
+        this.reservations = new ArrayList<>(this.allReservations);
         searchReservations(this.searchText);
         notifyDataSetChanged();
     }
 
     public void showALl(){
-        this.reservations = this.allReservations;
+        this.reservations = new ArrayList<>(this.allReservations);
         this.searchText = "";
         filterReservations(this.status);
         notifyDataSetChanged();

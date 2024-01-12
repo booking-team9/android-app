@@ -22,6 +22,7 @@ import com.google.android.material.chip.Chip;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,7 +92,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
 
     public GuestReservationsAdapter(List<Reservation> reservations, AdapterClickListener listener) {
         this.reservations = reservations;
-        this.allReservations = reservations;
+        this.allReservations = new ArrayList<>(reservations);
         this.listener = listener;
     }
 
@@ -175,13 +176,13 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
     }
     public void showALlStatuses(){
         this.status = null;
-        this.reservations = this.allReservations;
+        this.reservations = new ArrayList<>(this.allReservations);
         searchReservations(this.searchText);
         notifyDataSetChanged();
     }
 
     public void showALl(){
-        this.reservations = this.allReservations;
+        this.reservations = new ArrayList<>(this.allReservations);
         this.searchText = "";
         filterReservations(this.status);
         notifyDataSetChanged();
