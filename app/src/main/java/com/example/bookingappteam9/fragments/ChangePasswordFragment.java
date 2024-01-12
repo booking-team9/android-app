@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -95,6 +96,12 @@ public class ChangePasswordFragment extends Fragment {
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String newPassswordText = String.valueOf(newPasssword.getText());
+                String confirmedPasswordText = String.valueOf(confirmedPasssword.getText());
+                if (!newPassswordText.equals(confirmedPasswordText)){
+                    Toast.makeText(getContext(), "Bad confirm password!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Log.d("email", email);
                 Call<ResponseBody> call;
                 Log.d("Booking", "Changing password");
