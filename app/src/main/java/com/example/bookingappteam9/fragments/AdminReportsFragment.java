@@ -78,7 +78,8 @@ public class AdminReportsFragment extends Fragment {
                     List<AdminReport> reportsRaw = response.body();
                     adapter.addReports(reportsRaw);
                     adapter.notifyDataSetChanged();
-                    binding.progressLoaderAdminReports.setVisibility(View.INVISIBLE);
+                    if(binding!=null)
+                        binding.progressLoaderAdminReports.setVisibility(View.INVISIBLE);
                 }
                 else {
                     Log.d("QM","Meesage recieved: "+response.code());

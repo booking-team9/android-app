@@ -22,12 +22,17 @@ import com.google.android.material.chip.Chip;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservationsAdapter.ViewHolder> {
     private List<Reservation> reservations;
+    private final List<Reservation> allReservations;
     private AdapterClickListener listener;
     private View view;
+    private ReservationStatus status;
+    private String searchText = "";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView accommodationName;
@@ -87,6 +92,7 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
 
     public GuestReservationsAdapter(List<Reservation> reservations, AdapterClickListener listener) {
         this.reservations = reservations;
+        this.allReservations = new ArrayList<>(reservations);
         this.listener = listener;
     }
 
@@ -159,5 +165,35 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
 
     public void addReservations(List<Reservation> reservationss) {
         this.reservations.addAll(reservationss);
+        this.allReservations.addAll(reservationss);
+    }
+
+    public void filterReservations(ReservationStatus status){
+        this.status = status;
+        this.reservations = this.allReservations.stream().filter(reservation -> reservation.getReservationStatus().equals(status)).collect(Collectors.toList());
+        searchReservations(this.searchText);
+        notifyDataSetChanged();
+    }
+    public void showALlStatuses(){
+        this.status = null;
+        this.reservations = new ArrayList<>(this.allReservations);
+        searchReservations(this.searchText);
+        notifyDataSetChanged();
+    }
+
+    public void showALl(){
+        this.reservations = new ArrayList<>(this.allReservations);
+        this.searchText = "";
+        filterReservations(this.status);
+        notifyDataSetChanged();
+    }
+
+    public void searchReservations(String text){
+        this.searchText = text;
+        this.reservations = this.allReservations
+                .stream()
+                .filter(reservation -> reservation.getAccommodationName().toLowerCase().contains(text.toLowerCase()) && (this.status==null || reservation.getReservationStatus().equals(this.status)))
+                .collect(Collectors.toList());
+        notifyDataSetChanged();
     }
 }

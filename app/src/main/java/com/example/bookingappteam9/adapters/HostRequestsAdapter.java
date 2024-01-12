@@ -18,7 +18,9 @@ import com.example.bookingappteam9.model.ReservationStatus;
 import com.google.android.material.chip.Chip;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +28,8 @@ import retrofit2.Response;
 
 public class HostRequestsAdapter extends RecyclerView.Adapter<HostRequestsAdapter.ViewHolder>{
     private List<Reservation> reservations;
+    private final List<Reservation> allReservations;
+    private String searchText = "";
     private View view;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,6 +84,7 @@ public class HostRequestsAdapter extends RecyclerView.Adapter<HostRequestsAdapte
 
     public HostRequestsAdapter(List<Reservation> reservations){
         this.reservations = reservations;
+        this.allReservations = new ArrayList<>(reservations);
     }
 
     @NonNull
@@ -197,6 +202,22 @@ public class HostRequestsAdapter extends RecyclerView.Adapter<HostRequestsAdapte
 
     public void addReservations(List<Reservation> reservationss){
         this.reservations.addAll(reservationss);
+        this.allReservations.addAll(reservationss);
+    }
+
+    public void showALl(){
+        this.reservations = new ArrayList<>(this.allReservations);
+        this.searchText = "";
+        notifyDataSetChanged();
+    }
+
+    public void searchReservations(String text){
+        this.searchText = text;
+        this.reservations = this.allReservations
+                .stream()
+                .filter(reservation -> reservation.getAccommodationName().toLowerCase().contains(text.toLowerCase()))
+                .collect(Collectors.toList());
+        notifyDataSetChanged();
     }
 
 }

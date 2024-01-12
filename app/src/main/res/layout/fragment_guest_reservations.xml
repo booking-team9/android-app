@@ -8,18 +8,49 @@
     android:layout_marginBottom="80dp"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/titleView"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="My Reservations"
-        android:textSize="26sp"
+    <!--    <AutoCompleteTextView-->
+<!--        android:id="@+id/reservationsFilter"-->
+<!--        android:layout_width="177dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:inputType="none"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:simpleItems="@array/reviews_types"-->
+<!--        tools:ignore="LabelFor"-->
+<!--        tools:layout_editor_absoluteY="16dp" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/reservationsFilterlayout"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="My reservations:"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:textAlignment="gravity" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/reservationsFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            app:simpleItems="@array/guest_reservation_types"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="300dp"
+        android:layout_height="57dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/search_view_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reservationsFilterlayout"
+        app:queryHint="Search"
+        app:iconifiedByDefault="false">
+    </androidx.appcompat.widget.SearchView>
 
     <ProgressBar
         android:id="@+id/progress_loader_guest_reservations"
@@ -49,6 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

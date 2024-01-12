@@ -15,14 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.fragments.ReportDialogFragment;
 import com.example.bookingappteam9.model.Reservation;
+import com.example.bookingappteam9.model.ReservationStatus;
 import com.google.android.material.chip.Chip;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservationsAdapter.ViewHolder>{
     private List<Reservation> reservations;
+    private final List<Reservation> allReservations;
     private View view;
+    private ReservationStatus status;
+    private String searchText = "";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView accommodationName;
@@ -65,6 +71,7 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
 
     public HostReservationsAdapter(List<Reservation> reservations){
         this.reservations = reservations;
+        this.allReservations = new ArrayList<>(reservations);
     }
 
     @NonNull
@@ -109,6 +116,36 @@ public class HostReservationsAdapter extends RecyclerView.Adapter<HostReservatio
 
     public void addReservations(List<Reservation> reservationss){
         this.reservations.addAll(reservationss);
+        this.allReservations.addAll(reservationss);
+    }
+
+    public void filterReservations(ReservationStatus status){
+        this.status = status;
+        this.reservations = this.allReservations.stream().filter(reservation -> reservation.getReservationStatus().equals(status)).collect(Collectors.toList());
+        searchReservations(this.searchText);
+        notifyDataSetChanged();
+    }
+    public void showALlStatuses(){
+        this.status = null;
+        this.reservations = new ArrayList<>(this.allReservations);
+        searchReservations(this.searchText);
+        notifyDataSetChanged();
+    }
+
+    public void showALl(){
+        this.reservations = new ArrayList<>(this.allReservations);
+        this.searchText = "";
+        filterReservations(this.status);
+        notifyDataSetChanged();
+    }
+
+    public void searchReservations(String text){
+        this.searchText = text;
+        this.reservations = this.allReservations
+                .stream()
+                .filter(reservation -> reservation.getAccommodationName().toLowerCase().contains(text.toLowerCase()) && (this.status==null || reservation.getReservationStatus().equals(this.status)))
+                .collect(Collectors.toList());
+        notifyDataSetChanged();
     }
 
 
