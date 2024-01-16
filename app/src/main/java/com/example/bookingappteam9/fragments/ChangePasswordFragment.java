@@ -23,6 +23,7 @@ import com.example.bookingappteam9.activities.HomeActivity;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentChangePasswordBinding;
 import com.example.bookingappteam9.model.PasswordChange;
+import com.example.bookingappteam9.model.Role;
 import com.example.bookingappteam9.utils.PrefUtils;
 
 import okhttp3.ResponseBody;
@@ -38,6 +39,7 @@ public class ChangePasswordFragment extends Fragment {
     private EditText newPasssword;
     private EditText confirmedPasssword;
     private String email;
+    private Role role;
     private Long id;
     private static HomeActivity ARG_PARAM1 = new HomeActivity();
     private static final String ARG_PARAM2 = "param2";
@@ -73,6 +75,7 @@ public class ChangePasswordFragment extends Fragment {
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         id = userInfo.getId();
         email = userInfo.getEmail();
+        role = userInfo.getRole();
         ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +167,9 @@ public class ChangePasswordFragment extends Fragment {
     }
 
     private void backToEdit(){
-        findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_editProfileFragment);
+        if (role==Role.Admin)
+            findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_adminProfileFragment);
+        else
+            findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_editProfileFragment);
     }
 }
