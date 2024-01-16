@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,7 +22,9 @@ import com.example.bookingappteam9.activities.HomeActivity;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentChangePasswordBinding;
 import com.example.bookingappteam9.model.PasswordChange;
+import com.example.bookingappteam9.model.Role;
 import com.example.bookingappteam9.utils.PrefUtils;
+import com.google.android.material.textfield.TextInputLayout;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,10 +35,11 @@ public class ChangePasswordFragment extends Fragment {
     private FragmentChangePasswordBinding binding;
     private PasswordChange passwordChange;
     private Button changeButton;
-    private EditText oldPasssword;
-    private EditText newPasssword;
-    private EditText confirmedPasssword;
+    private TextInputLayout oldPasssword;
+    private TextInputLayout newPasssword;
+    private TextInputLayout confirmedPasssword;
     private String email;
+    private Role role;
     private Long id;
     private static HomeActivity ARG_PARAM1 = new HomeActivity();
     private static final String ARG_PARAM2 = "param2";
@@ -73,6 +75,7 @@ public class ChangePasswordFragment extends Fragment {
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         id = userInfo.getId();
         email = userInfo.getEmail();
+        role = userInfo.getRole();
         ImageView backButton = (ImageView) view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +99,8 @@ public class ChangePasswordFragment extends Fragment {
         changeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newPassswordText = String.valueOf(newPasssword.getText());
-                String confirmedPasswordText = String.valueOf(confirmedPasssword.getText());
+                String newPassswordText = String.valueOf(newPasssword.getEditText().getText().toString());
+                String confirmedPasswordText = String.valueOf(confirmedPasssword.getEditText().getText().toString());
                 if (!newPassswordText.equals(confirmedPasswordText)){
                     Toast.makeText(getContext(), "Bad confirm password!", Toast.LENGTH_SHORT).show();
                     return;
@@ -158,12 +161,15 @@ public class ChangePasswordFragment extends Fragment {
 
     private void collectData(){
         passwordChange.setEmail(email);
-        passwordChange.setOldPassword(String.valueOf(oldPasssword.getText()));
-        passwordChange.setNewPassword(String.valueOf(newPasssword.getText()));
-        passwordChange.setConfirmedPassword(String.valueOf(confirmedPasssword.getText()));
+        passwordChange.setOldPassword(String.valueOf(oldPasssword.getEditText().getText().toString()));
+        passwordChange.setNewPassword(String.valueOf(newPasssword.getEditText().getText().toString()));
+        passwordChange.setConfirmedPassword(String.valueOf(confirmedPasssword.getEditText().getText().toString()));
     }
 
     private void backToEdit(){
-        findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_editProfileFragment);
+        if (role==Role.Admin)
+            findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_adminProfileFragment);
+        else
+            findNavController(getParentFragment()).navigate(R.id.action_changePasswordFragment_to_editProfileFragment);
     }
 }
