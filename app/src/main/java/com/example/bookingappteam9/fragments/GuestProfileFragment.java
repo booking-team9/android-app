@@ -84,6 +84,14 @@ public class GuestProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        binding.notificationsButtonGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_guest_profile_to_notificationsFragment);
+
+            }
+        });
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
         id = userInfo.getId();
         ImageView editImage = (ImageView) view.findViewById(R.id.edit_button);

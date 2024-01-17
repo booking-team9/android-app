@@ -187,5 +187,7 @@
     <string name="favorites">Favorites</string>
     <string name="my_reservations">My Reservations</string>
     <string name="new_password">New Password</string>
+    <string name="my_notifications">My notifications</string>
+    <string name="dismiss">Dismiss</string>
 
 </resources>
