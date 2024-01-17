@@ -10,10 +10,25 @@
     tools:context=".fragments.NotificationsFragment">
 
 
+    <ImageView
+        android:id="@+id/notification_settings"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginEnd="24dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_settings_24"
+        app:layout_constraintBottom_toBottomOf="@+id/notifications_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notifications_text" />
+
     <TextView
         android:id="@+id/notifications_text"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/my_notifications"

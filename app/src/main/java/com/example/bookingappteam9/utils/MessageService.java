@@ -50,7 +50,7 @@ public class MessageService extends FirebaseMessagingService {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Subscribed";
+                        String msg = "Subscribed to " + topic ;
                         if (!task.isSuccessful()) {
                             msg = "Subscribe failed";
                         }

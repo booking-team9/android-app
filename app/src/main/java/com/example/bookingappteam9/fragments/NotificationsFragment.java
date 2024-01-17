@@ -2,7 +2,9 @@ package com.example.bookingappteam9.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -59,6 +61,21 @@ public class NotificationsFragment extends Fragment {
         adapter = new NotificationsAdapter(new ArrayList<>());
         binding.notificationsList.setAdapter(adapter);
         binding.notificationsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.notificationSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationSettingsDialog dialogFragment = NotificationSettingsDialog.newInstance();
+                AppCompatActivity activity = (AppCompatActivity) getActivity();
+                FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("settings");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                dialogFragment.show(ft, "settings");
+            }
+        });
 
         Long userId = PrefUtils.getUserInfo(getContext().getApplicationContext()).getId();
 
