@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AccommodationDetailsFragment">
 
-    <TextView
-        android:id="@+id/accommodation_details_price_dates2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="32dp"
-        android:text="Price for"
-        android:textAppearance="?attr/textAppearanceBody1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -270,7 +259,7 @@
         android:id="@+id/guest_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="accommodation_details_price_dates2,accommodation_details_reserve,accommodation_details_price,accommodation_details_price_dates"
+        app:constraint_referenced_ids="accommodation_details_reserve,accommodation_details_price,accommodation_details_price_dates,accommodation_details_price_dates2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -305,6 +294,17 @@
         android:text="@string/dates"
         android:textAppearance="?attr/textAppearanceTitleMedium"
         app:layout_constraintStart_toEndOf="@+id/accommodation_details_price_dates2"
+        app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
+
+    <TextView
+        android:id="@+id/accommodation_details_price_dates2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="32dp"
+        android:text="Price for"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/accommodation_details_reserve" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,6 +80,7 @@ public class GuestProfileFragment extends Fragment {
             public void onClick(View v) {
                 PrefUtils.clearUserInfo(getActivity().getApplicationContext());
                 Intent intent = new Intent(getActivity(), SplashActivity.class);
+                getActivity().finish();
                 startActivity(intent);
             }
         });
