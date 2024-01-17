@@ -3,6 +3,7 @@ package com.example.bookingappteam9.viewmodels;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.TimeSlot;
@@ -23,6 +24,7 @@ public class NewAccommodationViewModel extends ViewModel {
     private Boolean secondStepEmpty = true;
     private Boolean thirdStepEmpty = true;
     private Boolean fourthStepEmpty = true;
+    private Boolean isEdit = false;
     private MutableLiveData<String> name = new MutableLiveData<>();
     private MutableLiveData<String> type = new MutableLiveData<>();
     private MutableLiveData<String> description = new MutableLiveData<>();
@@ -137,6 +139,9 @@ public class NewAccommodationViewModel extends ViewModel {
     public void setThirdStepEmpty(Boolean thirdStepEmpty) {
         this.thirdStepEmpty = thirdStepEmpty;
     }
+    public Boolean getIsEdit() {
+        return isEdit;
+    }
 
     public MutableLiveData<List<Photo>> getRawPhotos() {
         return rawPhotos;
@@ -152,5 +157,25 @@ public class NewAccommodationViewModel extends ViewModel {
 
     public void setFourthStepEmpty(Boolean fourthStepEmpty) {
         this.fourthStepEmpty = fourthStepEmpty;
+    }
+
+    public void loadData(Accommodation accommodation){
+        setName(accommodation.getName());
+        setDescription(accommodation.getDescription());
+        setAmenities(accommodation.getAmenities());
+        setType(accommodation.getAccommodationType().toString());
+        setMinGuests(accommodation.getMinGuests());
+        setMaxGuests(accommodation.getMaxGuests());
+        setPhotos(accommodation.getPhotos());
+        setPricePerGuest(accommodation.getPricePerGuest());
+        setCancellationDeadline(accommodation.getCancellationDeadline());
+        setAutoApproval(accommodation.getAutoApproval());
+        setAddress(accommodation.getAddress());
+        setAvailability(accommodation.getAvailability());
+        firstStepEmpty=false;
+        secondStepEmpty=false;
+        thirdStepEmpty=false;
+        fourthStepEmpty=false;
+        isEdit = true;
     }
 }
