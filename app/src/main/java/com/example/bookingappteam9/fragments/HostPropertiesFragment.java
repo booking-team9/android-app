@@ -12,14 +12,17 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.adapters.HostPropertiesAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentHostPropertiesBinding;
+import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.HostAccommodation;
 import com.example.bookingappteam9.utils.PrefUtils;
+import com.example.bookingappteam9.viewmodels.NewAccommodationViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,7 @@ import retrofit2.Response;
 public class HostPropertiesFragment extends ListFragment {
     private HostPropertiesAdapter adapter;
     private FragmentHostPropertiesBinding binding;
+    private NewAccommodationViewModel viewModel;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
@@ -91,7 +95,22 @@ public class HostPropertiesFragment extends ListFragment {
             public void onClick(Long id) {
                 Bundle bundle = new Bundle();
                 bundle.putLong("accommodationId", id);
-                findNavController(getParentFragment()).navigate(R.id.action_navigation_host_properties_to_accommodationDetailsFragment, bundle);
+                ClientUtils.accommodationService.getById(id).enqueue(new Callback<Accommodation>() {
+                    @Override
+                    public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                        if (response.isSuccessful()) {
+                            viewModel = new ViewModelProvider(requireActivity()).get(NewAccommodationViewModel.class);
+                            viewModel.loadData(response.body());
+                            findNavController(getParentFragment()).navigate(R.id.action_navigation_host_properties_to_newPropertyFragment);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Accommodation> call, Throwable t) {
+                        Log.d("QM", t.getMessage() != null ? t.getMessage() : "error");
+
+                    }
+                });
             }
         };
         adapter = new HostPropertiesAdapter(accommodations, viewClick, editClick);
