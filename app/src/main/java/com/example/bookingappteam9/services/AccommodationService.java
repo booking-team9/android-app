@@ -14,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface AccommodationService {
@@ -41,6 +42,8 @@ public interface AccommodationService {
     Call<NewAccommodation> createAccommodation(@Body NewAccommodation accommodation);
     @POST("accommodations/get-availability-price")
     Call<PriceResponse> getPrice(@Body PriceRequest priceRequest);
+    @PUT("accommodations/update")
+    Call<NewAccommodation> updateAccommodation(@Body NewAccommodation accommodation);
 
 
 }
