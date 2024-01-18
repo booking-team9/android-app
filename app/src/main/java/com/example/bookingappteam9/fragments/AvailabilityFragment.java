@@ -117,10 +117,13 @@ public class AvailabilityFragment extends Fragment {
         CalendarConstraints.DateValidator validator = new CalendarConstraints.DateValidator() {
             @Override
             public boolean isValid(long date) {
+                if (date <= Instant.now().toEpochMilli())
+                    return false;
+
                 for (TimeSlot s: availabilityAdapter.getSlots()){
                     long start = s.getStartDate().toEpochSecond(ZoneOffset.UTC)*1000;
                     long end = s.getEndDate().toEpochSecond(ZoneOffset.UTC)*1000;
-                    if (date >= start && date <= end - 86400000 && date >= Instant.now().toEpochMilli()){
+                    if ((date >= start + 86400000 && date <= end - 86400000 )){
                         return false;
                     }
                 }
