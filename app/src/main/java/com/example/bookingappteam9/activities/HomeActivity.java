@@ -4,7 +4,9 @@ import static android.app.PendingIntent.getActivity;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -30,6 +32,7 @@ import com.example.bookingappteam9.model.Role;
 import com.example.bookingappteam9.utils.MessageService;
 import com.example.bookingappteam9.utils.PrefUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -38,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private BottomNavigationView navView;
     private boolean mKeyboardVisible;
+    private FirebaseMessaging firebaseMessaging;
+    private String topic;
 
     public BottomNavigationView getNavView(){
         return this.navView;
@@ -114,7 +119,26 @@ public class HomeActivity extends AppCompatActivity {
         }
         askNotificationPermission();
         createNotificationChannel();
+        subscribeToNotifications();
         startService(new Intent(this, MessageService.class));
+    }
+
+    private void subscribeToNotifications(){
+        firebaseMessaging = FirebaseMessaging.getInstance();
+        topic = PrefUtils.getUserInfo(getApplicationContext()).getId().toString();
+        System.out.println(topic);
+        firebaseMessaging.subscribeToTopic(topic)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Subscribed to " + topic ;
+                        if (!task.isSuccessful()) {
+                            msg = "Subscribe failed";
+                        }
+                        Log.d("Notification", msg);
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void createNotificationChannel() {
@@ -175,6 +199,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        firebaseMessaging.unsubscribeFromTopic(topic);
     }
 
     private void onKeyboardShown() {

@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.Random;
 
 public class MessageService extends FirebaseMessagingService {
-    private FirebaseMessaging firebaseMessaging;
+
 
     private String[] permissions = {Manifest.permission.POST_NOTIFICATIONS};
     private NotificationManagerCompat notificationManagerCompat;
@@ -38,30 +38,17 @@ public class MessageService extends FirebaseMessagingService {
 
     public MessageService() {
     }
-
     @Override
     public void onCreate() {
-        super.onCreate();
-        firebaseMessaging = FirebaseMessaging.getInstance();
-         topic = PrefUtils.getUserInfo(getApplicationContext()).getId().toString();
-        System.out.println(topic);
         notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        firebaseMessaging.subscribeToTopic(topic)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Subscribed to " + topic ;
-                        if (!task.isSuccessful()) {
-                            msg = "Subscribe failed";
-                        }
-                        Log.d("Notification", msg);
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+        super.onCreate();
+
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
         Log.d("NOTIFICATION", "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
@@ -72,7 +59,7 @@ public class MessageService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         remoteMessage.getData();
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "STAYAT")
-                .setSmallIcon(R.drawable.staylogo)
+                .setSmallIcon(R.mipmap.ic_launcher_foreground)
                 .setContentTitle("Stay At")
                 .setContentText(remoteMessage.getData().get("message"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -92,6 +79,6 @@ public class MessageService extends FirebaseMessagingService {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        firebaseMessaging.unsubscribeFromTopic(topic);
+
     }
 }
