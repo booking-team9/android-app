@@ -3,6 +3,7 @@ package com.example.bookingappteam9.model;
 import java.util.List;
 
 public class NewAccommodation {
+    private Long id;
     private String name;
     private String description;
     private Address address;
@@ -128,5 +129,13 @@ public class NewAccommodation {
 
     public void setHost(Host host) {
         this.host = host;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

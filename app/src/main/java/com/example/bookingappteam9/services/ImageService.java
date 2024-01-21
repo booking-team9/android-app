@@ -17,7 +17,7 @@ public interface ImageService {
     Call<byte[]> getPhoto(@Path("name") String name);
 
     @Multipart
-    @POST("/upload")
+    @POST("upload")
     Call<ResponseBody> uploadPhoto(@Part MultipartBody.Part[] file);
 
 }

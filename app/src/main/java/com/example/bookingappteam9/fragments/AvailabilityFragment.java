@@ -6,6 +6,12 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,35 +23,23 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.os.Parcel;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.example.bookingappteam9.R;
 import com.example.bookingappteam9.adapters.AvailabilityAdapter;
 import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentAvailabilityBinding;
 import com.example.bookingappteam9.model.AccommodationStatus;
 import com.example.bookingappteam9.model.Host;
-import com.example.bookingappteam9.model.HostAccommodation;
 import com.example.bookingappteam9.model.NewAccommodation;
 import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.TimeSlot;
 import com.example.bookingappteam9.utils.PrefUtils;
 import com.example.bookingappteam9.viewmodels.NewAccommodationViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.CompositeDateValidator;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -56,8 +50,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
-
-import javax.xml.validation.Validator;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -253,6 +245,11 @@ public class AvailabilityFragment extends Fragment {
         accommodation.setAvailability(viewModel.getAvailability().getValue());
         accommodation.setCancellationDeadline(viewModel.getCancellationDeadline().getValue());
         accommodation.setAutoApproval(viewModel.getAutoApproval().getValue());
+        if (viewModel.getIsEdit()){
+            accommodation.setId(viewModel.getId().getValue());
+        }else{
+            accommodation.setId(null);
+        }
         Call<Host> call = ClientUtils.hostService.getById(PrefUtils.getUserInfo(getActivity().getApplicationContext()).getId());
         call.enqueue(new Callback<Host>() {
             @Override
@@ -266,32 +263,61 @@ public class AvailabilityFragment extends Fragment {
                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                if (response.code() == 201){
                                    Log.d("upload", "success!");
-                                   Call<NewAccommodation> call3 = ClientUtils.accommodationService.createAccommodation(accommodation);
-                                   call3.enqueue(new Callback<NewAccommodation>() {
-                                       @Override
-                                       public void onResponse(Call<NewAccommodation> call, Response<NewAccommodation> response) {
-                                           if (response.isSuccessful()){
-                                               Log.d("upload", "accommodation created successfully!");
-                                               AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                               builder.setMessage("Accommodation succesfully created!").setTitle("Success");
-                                               builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                                   @Override
-                                                   public void onClick(DialogInterface dialog, int which) {
-                                                       findNavController(getParentFragment()).navigate(R.id.action_availabilityFragment_to_navigation_host_properties);
-                                                       getActivity().getViewModelStore().clear();
-                                                   }
-                                               });
-                                               AlertDialog dialog = builder.create();
-                                               dialog.show();
+                                   if (viewModel.getIsEdit()){
+                                        Call<NewAccommodation> call3 = ClientUtils.accommodationService.updateAccommodation(accommodation);
+                                        call3.enqueue(new Callback<NewAccommodation>() {
+                                            @Override
+                                            public void onResponse(Call<NewAccommodation> call, Response<NewAccommodation> response) {
+                                                Log.d("upload", "accommodation updated successfully!");
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                                builder.setMessage("Accommodation updated!!").setTitle("Success");
+                                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        findNavController(getParentFragment()).navigate(R.id.action_availabilityFragment_to_navigation_host_properties);
+                                                        getActivity().getViewModelStore().clear();
+                                                    }
+                                                });
+                                                AlertDialog dialog = builder.create();
+                                                dialog.show();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<NewAccommodation> call, Throwable t) {
+                                                Log.d("QM", t.getMessage() != null?t.getMessage():"error");
+
+                                            }
+                                        });
+                                   }
+                                   else {
+                                       Call<NewAccommodation> call3 = ClientUtils.accommodationService.createAccommodation(accommodation);
+                                       call3.enqueue(new Callback<NewAccommodation>() {
+                                           @Override
+                                           public void onResponse(Call<NewAccommodation> call, Response<NewAccommodation> response) {
+                                               if (response.isSuccessful()){
+                                                   Log.d("upload", "accommodation created successfully!");
+                                                   AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                                   builder.setMessage("Accommodation succesfully created!").setTitle("Success");
+                                                   builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                       @Override
+                                                       public void onClick(DialogInterface dialog, int which) {
+                                                           findNavController(getParentFragment()).navigate(R.id.action_availabilityFragment_to_navigation_host_properties);
+                                                           getActivity().getViewModelStore().clear();
+                                                       }
+                                                   });
+                                                   AlertDialog dialog = builder.create();
+                                                   dialog.show();
+                                               }
                                            }
-                                       }
 
-                                       @Override
-                                       public void onFailure(Call<NewAccommodation> call, Throwable t) {
-                                           Log.d("QM", t.getMessage() != null?t.getMessage():"error");
+                                           @Override
+                                           public void onFailure(Call<NewAccommodation> call, Throwable t) {
+                                               Log.d("QM", t.getMessage() != null?t.getMessage():"error");
 
-                                       }
-                                   });
+                                           }
+                                       });
+                                   }
+
                                }
                            }
 
@@ -316,10 +342,6 @@ public class AvailabilityFragment extends Fragment {
 
             }
         });
-
-
-
-
 
     }
     private Call<ResponseBody> uploadImages(){
@@ -365,10 +387,11 @@ public class AvailabilityFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(NewAccommodationViewModel.class);
         if (!viewModel.getFourthStepEmpty()){
             viewModel.getAvailability().observe(getViewLifecycleOwner(), av -> {
-                availabilityAdapter.addSlots(av);
+                if (av != null)
+                    availabilityAdapter.addSlots(av);
             });
             viewModel.getCancellationDeadline().observe(getViewLifecycleOwner(), cd->{
-                cancellationDeadline.getEditText().setText(cd);
+                cancellationDeadline.getEditText().setText(String.valueOf(cd));
             });
             viewModel.getAutoApproval().observe(getViewLifecycleOwner(), ap->{
                 autoApproval.setChecked(ap);
