@@ -1,17 +1,10 @@
 package com.example.bookingappteam9.utils;
 
 public class AccountValidator {
-    public Boolean ValidateUserName(String username){
-        if (username.equals("user")){
-            return true;
-        }
-        return false;
-    }
+    private String loggedUser;
 
-    public Boolean ValidatePassword(String password){
-        if (password.equals("123")){
-            return true;
-        }
+    public Boolean validateCredentials(String username, String password){
+
         return false;
     }
 }

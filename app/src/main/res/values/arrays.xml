@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="types">
+        <item>Room</item>
+        <item>Apartment</item>
+        <item>Hotel</item>
+    </string-array>
+    <string-array name="reviews_types">
+        <item>All</item>
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Reported</item>
+    </string-array>
+    <string-array name="guest_reservation_types">
+        <item>All</item>
+        <item>Approved</item>
+        <item>Done</item>
+        <item>Active</item>
+        <item>Denied</item>
+        <item>Cancelled</item>
+    </string-array>
+    <string-array name="host_reservation_types">
+        <item>All</item>
+        <item>Approved</item>
+        <item>Done</item>
+        <item>Active</item>
+    </string-array>
+</resources>

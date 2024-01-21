@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/allAccommodationsFragment">
+
+    <fragment
+        android:id="@+id/navigation_host_profile"
+        android:name="com.example.bookingappteam9.fragments.HostProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_host_profile" >
+        <action
+            android:id="@+id/action_navigation_host_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_host_profile_to_hostWithReviewsFragment"
+            app:destination="@id/hostWithReviewsFragment" />
+        <action
+            android:id="@+id/action_navigation_host_profile_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_host_properties"
+        android:name="com.example.bookingappteam9.fragments.HostPropertiesFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_host_properties" >
+        <action
+            android:id="@+id/action_navigation_host_properties_to_newPropertyFragment"
+            app:destination="@id/newPropertyFragment" />
+        <action
+            android:id="@+id/action_navigation_host_properties_to_accommodationDetailsFragment"
+            app:destination="@id/accommodationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.bookingappteam9.fragments.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_host_profile"
+            app:destination="@id/navigation_host_profile" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_guest_profile"
+            app:destination="@id/navigation_guest_profile" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_guestProfileFragment"
+            app:destination="@id/navigation_guest_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.bookingappteam9.fragments.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_changePasswordFragment_to_adminProfileFragment"
+            app:destination="@id/adminProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_admin_accommodations"
+        android:name="com.example.bookingappteam9.fragments.AdminAccommodationsFragment"
+        android:label="fragment_admin_accommodations"
+        tools:layout="@layout/fragment_admin_accommodations" >
+        <action
+            android:id="@+id/action_navigation_admin_accommodations_self"
+            app:destination="@id/navigation_admin_accommodations" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPropertyFragment"
+        android:name="com.example.bookingappteam9.fragments.NewPropertyFragment"
+        android:label="fragment_new_property"
+        tools:layout="@layout/fragment_new_property" >
+        <action
+            android:id="@+id/action_newPropertyFragment_to_accomodationAddressFragment"
+            app:destination="@id/accomodationAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accomodationAddressFragment"
+        android:name="com.example.bookingappteam9.fragments.AccomodationAddressFragment"
+        android:label="fragment_accomodation_address"
+        tools:layout="@layout/fragment_accomodation_address" >
+        <action
+            android:id="@+id/action_accomodationAddressFragment_to_accommodationPhotosFragment"
+            app:destination="@id/accommodationPhotosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/availabilityFragment"
+        android:name="com.example.bookingappteam9.fragments.AvailabilityFragment"
+        android:label="fragment_availability"
+        tools:layout="@layout/fragment_availability" >
+        <action
+            android:id="@+id/action_availabilityFragment_to_navigation_host_properties"
+            app:destination="@id/navigation_host_properties" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_guest_profile"
+        android:name="com.example.bookingappteam9.fragments.GuestProfileFragment"
+        android:label="GuestProfileFragment"
+        tools:layout="@layout/fragment_guest_profile">
+        <action
+            android:id="@+id/action_guestProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_guest_profile_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allAccommodationsFragment"
+        android:name="com.example.bookingappteam9.fragments.accommodations.AllAccommodationsFragment"
+        android:label="fragment_all_accommodations"
+        tools:layout="@layout/fragment_all_accommodations" >
+        <action
+            android:id="@+id/action_allAccommodationsFragment_to_accommodationDetailsFragment"
+            app:destination="@id/accommodationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accommodationPhotosFragment"
+        android:name="com.example.bookingappteam9.fragments.AccommodationPhotosFragment"
+        android:label="fragment_accommodation_photos"
+        tools:layout="@layout/fragment_accommodation_photos" >
+        <action
+            android:id="@+id/action_accommodationPhotosFragment_to_availabilityFragment"
+            app:destination="@id/availabilityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminProfileFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminProfileFragment"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" >
+        <action
+            android:id="@+id/action_adminProfileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_guest_reservations"
+        android:name="com.example.bookingappteam9.fragments.GuestReservationsFragment"
+        android:label="fragment_guest_reservations"
+        tools:layout="@layout/fragment_guest_reservations" >
+        <action
+            android:id="@+id/action_navigation_guest_reservations_to_hostWithReviewsFragment"
+            app:destination="@id/hostWithReviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_host_reservations"
+        android:name="com.example.bookingappteam9.fragments.HostReservationsFragment"
+        android:label="fragment_host_reservations"
+        tools:layout="@layout/fragment_host_reservations" />
+    <fragment
+        android:id="@+id/navigation_host_requests"
+        android:name="com.example.bookingappteam9.fragments.HostRequestsFragment"
+        android:label="fragment_host_requests"
+        tools:layout="@layout/fragment_host_requests" />
+    <fragment
+        android:id="@+id/navigation_guest_requests"
+        android:name="com.example.bookingappteam9.fragments.GuestRequestsFragment"
+        android:label="fragment_guest_requests"
+        tools:layout="@layout/fragment_guest_requests" />
+    <fragment
+        android:id="@+id/adminReviewsFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminReviewsFragment"
+        android:label="fragment_admin_reviews"
+        tools:layout="@layout/fragment_admin_reviews" />
+    <fragment
+        android:id="@+id/hostWithReviewsFragment"
+        android:name="com.example.bookingappteam9.fragments.HostWithReviewsFragment"
+        android:label="HostWithReviewsFragment"
+        tools:layout="@layout/fragment_host_with_reviews">
+        <argument
+            android:name="hostId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/accommodationDetailsFragment"
+        android:name="com.example.bookingappteam9.fragments.AccommodationDetailsFragment"
+        android:label="fragment_accommodation_details"
+        tools:layout="@layout/fragment_accommodation_details" >
+        <argument
+            android:name="accommodationId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminReportsFragment"
+        android:name="com.example.bookingappteam9.fragments.AdminReportsFragment"
+        android:label="fragment_admin_reports"
+        tools:layout="@layout/fragment_admin_reports" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.bookingappteam9.fragments.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+</navigation>

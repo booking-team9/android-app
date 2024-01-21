@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context=".fragments.AdminProfileFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_theme_light_inversePrimary"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/cardview_shadow_start_color">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                app:cardCornerRadius="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                >
+
+                <ImageView
+                    android:id="@+id/roundedimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@color/md_theme_light_outlineVariant"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/person_svgrepo_com" />
+            </androidx.cardview.widget.CardView>
+
+            <!--            <ImageView-->
+            <!--                android:layout_width="132dp"-->
+            <!--                android:layout_height="132dp"-->
+            <!--                android:layout_marginStart="9dp"-->
+            <!--                android:layout_marginTop="9dp"-->
+            <!--                android:layout_marginEnd="9dp"-->
+            <!--                android:layout_marginBottom="9dp"-->
+            <!--                android:adjustViewBounds="true"-->
+            <!--                android:padding="3dp"-->
+            <!--                android:scaleType="centerInside"-->
+            <!--                android:src="@drawable/roki" />-->
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/admin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgUser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15sp"
+            android:fontFamily="sans-serif-light"
+
+            android:textSize="32sp" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/logoutButtonAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/log_out"
+        app:layout_constraintEnd_toStartOf="@+id/changePasswordButtonAdmin"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topView" />
+
+    <Button
+        android:id="@+id/changePasswordButtonAdmin"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:text="Change password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

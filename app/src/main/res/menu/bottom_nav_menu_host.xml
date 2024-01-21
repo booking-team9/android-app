@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allAccommodationsFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_host_properties"
+        android:icon="@drawable/baseline_domain_24"
+        android:title="@string/properties" />
+    <item
+        android:id="@+id/navigation_host_requests"
+        android:icon="@drawable/care_request_reviewer_svgrepo_com"
+        android:title="@string/requests" />
+    <item
+        android:id="@+id/navigation_host_reservations"
+        android:icon="@drawable/baseline_hotel_24"
+        android:title="@string/reservations" />
+
+    <item
+        android:id="@+id/navigation_host_profile"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/profile" />
+
+</menu>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allAccommodationsFragment"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_admin_accommodations"
+        android:icon="@drawable/baseline_domain_24"
+        android:title="@string/accommodations" />
+    <item
+        android:id="@+id/adminReviewsFragment"
+        android:icon="@drawable/baseline_comment_24"
+        android:title="@string/reviews" />
+    <item
+        android:id="@+id/adminReportsFragment"
+        android:icon="@drawable/baseline_report_24"
+        android:title="@string/reports" />
+    <item
+        android:id="@+id/adminProfileFragment"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/profile" />
+
+
+</menu>
