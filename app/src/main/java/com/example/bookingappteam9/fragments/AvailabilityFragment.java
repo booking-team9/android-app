@@ -245,6 +245,11 @@ public class AvailabilityFragment extends Fragment {
         accommodation.setAvailability(viewModel.getAvailability().getValue());
         accommodation.setCancellationDeadline(viewModel.getCancellationDeadline().getValue());
         accommodation.setAutoApproval(viewModel.getAutoApproval().getValue());
+        if (viewModel.getIsEdit()){
+            accommodation.setId(viewModel.getId().getValue());
+        }else{
+            accommodation.setId(null);
+        }
         Call<Host> call = ClientUtils.hostService.getById(PrefUtils.getUserInfo(getActivity().getApplicationContext()).getId());
         call.enqueue(new Callback<Host>() {
             @Override
@@ -263,9 +268,9 @@ public class AvailabilityFragment extends Fragment {
                                         call3.enqueue(new Callback<NewAccommodation>() {
                                             @Override
                                             public void onResponse(Call<NewAccommodation> call, Response<NewAccommodation> response) {
-                                                Log.d("upload", "accommodation created successfully!");
+                                                Log.d("upload", "accommodation updated successfully!");
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                                builder.setMessage("Accommodation updated created!").setTitle("Success");
+                                                builder.setMessage("Accommodation updated!!").setTitle("Success");
                                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
@@ -382,7 +387,8 @@ public class AvailabilityFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(NewAccommodationViewModel.class);
         if (!viewModel.getFourthStepEmpty()){
             viewModel.getAvailability().observe(getViewLifecycleOwner(), av -> {
-                availabilityAdapter.addSlots(av);
+                if (av != null)
+                    availabilityAdapter.addSlots(av);
             });
             viewModel.getCancellationDeadline().observe(getViewLifecycleOwner(), cd->{
                 cancellationDeadline.getEditText().setText(String.valueOf(cd));

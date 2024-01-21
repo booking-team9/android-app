@@ -21,11 +21,15 @@ import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.databinding.FragmentHostPropertiesBinding;
 import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.HostAccommodation;
+import com.example.bookingappteam9.model.Photo;
+import com.example.bookingappteam9.utils.ImageLoaderTask;
 import com.example.bookingappteam9.utils.PrefUtils;
 import com.example.bookingappteam9.viewmodels.NewAccommodationViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -100,7 +104,17 @@ public class HostPropertiesFragment extends ListFragment {
                     public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                         if (response.isSuccessful()) {
                             viewModel = new ViewModelProvider(requireActivity()).get(NewAccommodationViewModel.class);
-                            viewModel.loadData(response.body());
+                            try {
+                                viewModel.loadData(response.body(), getContext());
+                                ImageLoaderTask task = new ImageLoaderTask();
+                                String[] files = viewModel.getPhotos().getValue().toArray(new String[0]);
+                                List<Photo> photos = task.executeOnExecutor(Executors.newSingleThreadExecutor(), files).get();
+                                viewModel.setRawPhotos(photos);
+                            } catch (ExecutionException e) {
+                                throw new RuntimeException(e);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
                             findNavController(getParentFragment()).navigate(R.id.action_navigation_host_properties_to_newPropertyFragment);
                         }
                     }
