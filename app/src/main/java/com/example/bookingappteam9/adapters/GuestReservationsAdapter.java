@@ -120,10 +120,15 @@ public class GuestReservationsAdapter extends RecyclerView.Adapter<GuestReservat
         String priceInfo = Double.toString(reservations.get(position).getPrice()) + " €";
         holder.getPrice().setText(priceInfo);
         holder.getStatus().setText(reservations.get(position).getReservationStatus().toString());
-        if (reservations.get(position).getReservationStatus().equals(ReservationStatus.Done) && reservations.get(position).getEndDate().plusDays(7).isBefore(LocalDateTime.now())) {
-            holder.reviewText.setVisibility(View.VISIBLE);
+        if (reservations.get(position).getReservationStatus().equals(ReservationStatus.Done)){
             holder.reviewHost.setVisibility(View.VISIBLE);
-            holder.reviewAccommodation.setVisibility(View.VISIBLE);
+
+            if (reservations.get(position).getEndDate().plusDays(7).isBefore(LocalDateTime.now())) {
+                holder.reviewAccommodation.setVisibility(View.VISIBLE);
+
+            }
+
+            holder.reviewText.setVisibility(View.VISIBLE);
             holder.reviewAccommodation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

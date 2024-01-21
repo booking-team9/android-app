@@ -4,7 +4,6 @@
         <item>Room</item>
         <item>Apartment</item>
         <item>Hotel</item>
-        <item>Villa</item>
     </string-array>
     <string-array name="reviews_types">
         <item>All</item>

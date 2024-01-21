@@ -40,13 +40,11 @@ public class EditProfileFragment extends Fragment {
     private Host host;
     private Long id;
     private Role role;
-    private String email;
     private Button confirmButton;
     private Button deleteAccountButton;
     private Button changePasswordButton;
     private EditText firstNameText;
     private EditText lastNameText;
-    private EditText emailText;
     private EditText phoneText;
     private EditText streetText;
     private EditText numberText;
@@ -85,7 +83,6 @@ public class EditProfileFragment extends Fragment {
         View view = binding.getRoot();
         firstNameText = binding.editFirstName;
         lastNameText = binding.editLastName;
-        emailText = binding.editEmail;
         phoneText = binding.editPhone;
         streetText = binding.editStreet;
         numberText = binding.editNumber;
@@ -397,7 +394,6 @@ public class EditProfileFragment extends Fragment {
     private void setHostData(){
         firstNameText.setText(host.getFirstName());
         lastNameText.setText(host.getLastName());
-        emailText.setText(host.getEmail());
         phoneText.setText(host.getPhone());
         streetText.setText(host.getAddress().getStreet());
         numberText.setText(host.getAddress().getNumber());
@@ -407,7 +403,6 @@ public class EditProfileFragment extends Fragment {
     private void setGuestData(){
         firstNameText.setText(guest.getFirstName());
         lastNameText.setText(guest.getLastName());
-        emailText.setText(guest.getEmail());
         phoneText.setText(guest.getPhone());
         streetText.setText(guest.getAddress().getStreet());
         numberText.setText(guest.getAddress().getNumber());
@@ -418,7 +413,6 @@ public class EditProfileFragment extends Fragment {
     private void editHostAccout(){
         host.setFirstName(String.valueOf(firstNameText.getText()));
         host.setLastName(String.valueOf(lastNameText.getText()));
-        host.setEmail(String.valueOf(emailText.getText()));
         host.setPhone(String.valueOf(phoneText.getText()));
         Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()), "");
         host.setAddress(address);
@@ -426,7 +420,6 @@ public class EditProfileFragment extends Fragment {
     private void editGuestAccout(){
         guest.setFirstName(String.valueOf(firstNameText.getText()));
         guest.setLastName(String.valueOf(lastNameText.getText()));
-        guest.setEmail(String.valueOf(emailText.getText()));
         guest.setPhone(String.valueOf(phoneText.getText()));
         Address address = new Address(String.valueOf(streetText.getText()), String.valueOf(numberText.getText()),String.valueOf(cityText.getText()), "");
         guest.setAddress(address);

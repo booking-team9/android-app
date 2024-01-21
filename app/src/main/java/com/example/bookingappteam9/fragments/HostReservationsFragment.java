@@ -1,5 +1,10 @@
 package com.example.bookingappteam9.fragments;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,13 +33,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HostReservationsFragment extends Fragment {
+public class HostReservationsFragment extends Fragment implements SensorEventListener{
 
     private HostReservationsAdapter adapter;
     private FragmentHostReservationsBinding binding;
     private AutoCompleteTextView reservationFilter;
     private SearchView searchView;
     private final String[] statuses = {"All", "Approved", "Done", "Active"};
+    private SensorManager sensorManager;
+    private long lastUpdate;
+    private float last_x;
+    private float last_y;
+    private float last_z;
+    private static final float SHAKE_THRESHOLD = 800;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -98,12 +110,17 @@ public class HostReservationsFragment extends Fragment {
         reservationFilter.setText("");
         searchView.setQuery("", false);
         adapter.showALl();
+        sensorManager = (SensorManager) requireActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener( this,
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        sensorManager.unregisterListener(this);
     }
 
     @Override
@@ -145,5 +162,42 @@ public class HostReservationsFragment extends Fragment {
 
 
         return root;
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+            long curTime = System.currentTimeMillis();
+            // only allow one update every 100ms.
+            if ((curTime - lastUpdate) > 200) {
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
+
+                float[] values = sensorEvent.values;
+                float x = values[0];
+                float y = values[1];
+                float z = values[2];
+
+                float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                if (speed > SHAKE_THRESHOLD) {
+
+//                    reservationFilter.setSelection(1);
+                    adapter.showALlStatuses();
+                    reservationFilter.setText("All", false);
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        if(sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            Log.i("REZ_ACCELEROMETER", String.valueOf(accuracy));
+        }
     }
 }
