@@ -181,7 +181,6 @@ public class HostReservationsFragment extends Fragment implements SensorEventLis
                 float z = values[2];
 
                 float speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
-                Log.d("KUMARAAA", Float.toString(speed));
                 if (speed > SHAKE_THRESHOLD) {
 
 //                    reservationFilter.setSelection(1);
