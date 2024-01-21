@@ -101,4 +101,11 @@ public class AdminReviewsFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        reviewFilter.setText("");
+        adapter.showALl();
+    }
 }
