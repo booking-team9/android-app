@@ -48,6 +48,12 @@ public class ClientUtils {
             .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).registerTypeAdapter(LocalDate.class, new LocalDateSerializer()).setLenient().create()))
             .client(test())
             .build();
+
+    public static Retrofit rawRetrofit = new Retrofit.Builder()
+            .baseUrl(SERVICE_PATH_RAW)
+            .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer()).registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer()).registerTypeAdapter(LocalDate.class, new LocalDateSerializer()).setLenient().create()))
+            .client(test())
+            .build();
     public static String getPhotoPath(String photo){
         return SERVICE_PATH_RAW + "files/"+photo;
     }
@@ -55,7 +61,7 @@ public class ClientUtils {
     public static HostService hostService = retrofit.create(HostService.class);
     public static GuestService guestService = retrofit.create(GuestService.class);
     public static AccommodationService accommodationService = retrofit.create(AccommodationService.class);
-    public static ImageService imageService = retrofit.create(ImageService.class);
+    public static ImageService imageService = rawRetrofit.create(ImageService.class);
     public static ReservationService reservationService = retrofit.create(ReservationService.class);
     public static ReviewService reviewService = retrofit.create(ReviewService.class);
     public static ReportService reportService = retrofit.create(ReportService.class);

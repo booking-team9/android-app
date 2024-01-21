@@ -2,13 +2,19 @@ package com.example.bookingappteam9.activities;
 
 import static android.app.PendingIntent.getActivity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -27,6 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     public BottomNavigationView getNavView(){
         return this.navView;
     }
+
+
 
 
 

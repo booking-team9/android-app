@@ -2,13 +2,16 @@ package com.example.bookingappteam9.fragments;
 
 import static androidx.navigation.fragment.FragmentKt.findNavController;
 
+import android.Manifest;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -16,7 +19,9 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +40,7 @@ import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.viewmodels.NewAccommodationViewModel;
 import com.google.android.material.chip.Chip;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,6 +58,32 @@ public class AccommodationPhotosFragment extends Fragment {
     private NewAccommodationViewModel viewModel;
     private FragmentAccommodationPhotosBinding binding;
 
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // FCM SDK (and your app) can post notifications.
+                } else {
+                    // TODO: Inform user that that your app will not show notifications.
+                }
+            });
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private void askStoragePermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.READ_MEDIA_IMAGES) ==
+                PackageManager.PERMISSION_GRANTED) {
+            // FCM SDK (and your app) can post notifications.
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_MEDIA_IMAGES)) {
+            // TODO: display an educational UI explaining to the user the features that will be enabled
+            //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+            //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+            //       If the user selects "No thanks," allow the user to continue without notifications.
+        } else {
+            // Directly ask for the permission
+            requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES);
+        }
+    }
+
     ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
             registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(7), uris -> {
                 // Callback is invoked after the user selects media items or closes the
@@ -64,6 +96,7 @@ public class AccommodationPhotosFragment extends Fragment {
                             @Override
                             public void run() {
                                 Photo newPhoto = new Photo(uris.get(finalI), "image1", getBitmapFromUri(uris.get(finalI)));
+                                newPhoto.setFile(new File(uris.get(finalI).getPath()));
                                 Cursor returnCursor =
                                         getContext().getContentResolver().query(uris.get(finalI), null, null, null, null);
                                 returnCursor.moveToFirst();
@@ -124,6 +157,9 @@ public class AccommodationPhotosFragment extends Fragment {
         binding.addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    askStoragePermission();
+                }
                 pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
                         .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                         .build());

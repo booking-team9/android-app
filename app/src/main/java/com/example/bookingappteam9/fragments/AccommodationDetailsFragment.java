@@ -346,7 +346,6 @@ public class AccommodationDetailsFragment extends Fragment {
             LatLng apartment = new LatLng(accommodation.getAddress().getLatitude(), accommodation.getAddress().getLongitude());
             googleMap.addMarker(new MarkerOptions().position(apartment).title(accommodation.getName()));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(apartment, 12));
-
         }
     };
 

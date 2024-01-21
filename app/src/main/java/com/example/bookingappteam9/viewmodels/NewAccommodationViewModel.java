@@ -1,15 +1,34 @@
 package com.example.bookingappteam9.viewmodels;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.bookingappteam9.clients.ClientUtils;
 import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.TimeSlot;
 
+import java.io.File;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ExecutionException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewAccommodationViewModel extends ViewModel {
     private Boolean firstStepEmpty = true;
@@ -27,6 +46,7 @@ public class NewAccommodationViewModel extends ViewModel {
     private Boolean fourthStepEmpty = true;
     private Boolean isEdit = false;
     private MutableLiveData<String> name = new MutableLiveData<>();
+    private MutableLiveData<Long> id = new MutableLiveData<>();
     private MutableLiveData<String> type = new MutableLiveData<>();
     private MutableLiveData<String> description = new MutableLiveData<>();
     private MutableLiveData<Integer> minGuests = new MutableLiveData<>();
@@ -39,6 +59,9 @@ public class NewAccommodationViewModel extends ViewModel {
     private MutableLiveData<Boolean> pricePerGuest = new MutableLiveData<>();
     private MutableLiveData<Boolean> autoApproval = new MutableLiveData<>();
     private MutableLiveData<Integer> cancellationDeadline = new MutableLiveData<>();
+
+
+    public void setId(Long id){ this.id.setValue(id);}
 
     public void setName(String name) {
         this.name.setValue(name);
@@ -76,6 +99,7 @@ public class NewAccommodationViewModel extends ViewModel {
     public void setCancellationDeadline(Integer cancellationDeadline){
         this.cancellationDeadline.setValue(cancellationDeadline);
     }
+    public MutableLiveData<Long> getId() {return id;}
 
     public MutableLiveData<String> getName() {
         return name;
@@ -160,8 +184,9 @@ public class NewAccommodationViewModel extends ViewModel {
         this.fourthStepEmpty = fourthStepEmpty;
     }
 
-    public void loadData(Accommodation accommodation){
+    public void loadData(Accommodation accommodation, Context context) throws ExecutionException, InterruptedException {
         setName(accommodation.getName());
+        setId(accommodation.getId());
         setDescription(accommodation.getDescription());
         setAmenities(accommodation.getAmenities());
         setType(accommodation.getAccommodationType().toString());
@@ -177,9 +202,6 @@ public class NewAccommodationViewModel extends ViewModel {
             slot.setRangeString(slot.getStartDate().format(formater) + " - " + slot.getEndDate().format(formater));
         }
         setAvailability(accommodation.getAvailability());
-        for (String photoName: accommodation.getPhotos()) {
-            //create photo
-        }
         firstStepEmpty=false;
         secondStepEmpty=false;
         thirdStepEmpty=false;
