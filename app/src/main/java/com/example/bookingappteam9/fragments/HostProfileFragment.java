@@ -86,7 +86,16 @@ public class HostProfileFragment extends Fragment {
             public void onClick(View v) {
                 PrefUtils.clearUserInfo(getActivity().getApplicationContext());
                 Intent intent = new Intent(getActivity(), SplashActivity.class);
+                getActivity().finish();
+
                 startActivity(intent);
+            }
+        });
+        binding.notificationsButtonHost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(getParentFragment()).navigate(R.id.action_navigation_host_profile_to_notificationsFragment);
+
             }
         });
         PrefUtils.UserInfo userInfo = PrefUtils.getUserInfo(getActivity().getApplicationContext());
