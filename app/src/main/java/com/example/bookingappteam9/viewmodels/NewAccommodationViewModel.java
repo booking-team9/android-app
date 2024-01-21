@@ -10,15 +10,19 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.bookingappteam9.clients.ClientUtils;
+
 import com.example.bookingappteam9.model.Accommodation;
 import com.example.bookingappteam9.model.Address;
 import com.example.bookingappteam9.model.Photo;
 import com.example.bookingappteam9.model.TimeSlot;
 
+
+import java.time.format.DateTimeFormatter;
 import java.io.File;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -183,6 +187,7 @@ public class NewAccommodationViewModel extends ViewModel {
     public void setFourthStepEmpty(Boolean fourthStepEmpty) {
         this.fourthStepEmpty = fourthStepEmpty;
     }
+
 
     public void loadData(Accommodation accommodation, Context context) throws ExecutionException, InterruptedException {
         setName(accommodation.getName());

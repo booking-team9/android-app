@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }else{
                         role = "Host";
                     }
-                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(cityText, streetText, numberText, countryText)));
+                    Call<Token> call = ClientUtils.accountService.register(new Register(emailText, passwordText, firstNameText, lastNameText, phoneText, Role.valueOf(role), new Address(streetText, numberText,cityText, countryText)));
                     call.enqueue(new Callback<Token>() {
                         @Override
                         public void onResponse(Call<Token> call, Response<Token> response) {
